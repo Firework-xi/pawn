@@ -8,8 +8,18 @@ const routes = [
   {
     path: '/',
     name: 'Home',
-    component: Home
+    component: Home,
+    children: [
+      {
+        path: '/particulars',
+        name: 'particulars',
+        component: () => import('../views/book/particulars.vue')
+
+      } // 二级书本详情路由
+    ]
+
   }
+
   // {
   //   path: '/about',
   //   name: 'About',
