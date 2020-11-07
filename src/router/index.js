@@ -7,15 +7,23 @@ Vue.use(VueRouter)
 
 const routes = [
   {
+    component: Home,
     path: '/',
-    name: 'Home',
-    component: Home
-  },
-  {
-    path: '/bookrack',
-    name: 'Bookrack',
-    component: Bookrack
+    redirect: '/bookrack',
+    children: [
+      {
+        path: '/particulars',
+        name: 'particulars',
+        component: () => import('../views/book/particulars.vue')
+      }, // 二级书本详情路由
+      {
+        path: '/bookrack',
+        name: 'Bookrack',
+        component: Bookrack
+      }
+    ]
   }
+
   // {
   //   path: '/about',
   //   name: 'About',
