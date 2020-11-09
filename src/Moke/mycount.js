@@ -1,6 +1,7 @@
 export default {
   MOckurl: [
     {
+      // 请求个人用户信息
       url: 'http://yuedu/myuser', // 请求地址
       request: 'get', // 请求类型
       manage: options => {
