@@ -38,7 +38,7 @@
   created () {
     console.log(window.localStorage.getItem('choice'))
     if (window.localStorage.getItem('choice')) {
-      this.$router.push('/name')
+      this.$router.push('/my')
     }
   },
   mounted () {},
@@ -63,7 +63,7 @@
         })
         this.index = index
          window.localStorage.setItem('choice', index)
-        this.$router.push('/loginland')
+        this.$router.push('/my')
         this.$toast.success('进入首页')
     }
   //  async onclick() {

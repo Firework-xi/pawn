@@ -104,8 +104,7 @@
        duration: 0
       })
       this.$toast.success('进入首页')
-       this.$router.push('/name')
-      console.log('submit', values)
+       this.$router.push('/my')
     },
     // 去注册
     toRegister() {
