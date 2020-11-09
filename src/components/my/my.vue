@@ -4,7 +4,7 @@
     <div class="my-heard">
       <div class="login-btn">
         <van-image width="100" height="100" fit="cover" round src="https://img.yzcdn.cn/vant/cat.jpeg" />
-        <span class="text"> wode </span>
+        <span class="text"> {{ user.name }} </span>
       </div>
     </div>
     <!-- <div class="my-heard">
@@ -15,13 +15,13 @@
     </div> -->
     <!-- 表格 -->
     <van-cell-group class="cell-group">
-      <van-cell title="我的账户" icon="label-o" is-link><van-button type="default" round size="mini" @click="$router.push('/my-count')">立即充值</van-button></van-cell>
+      <van-cell title="我的账户" icon="label-o" is-link><van-button type="default" round size="mini" @click="onclick">立即充值</van-button></van-cell>
       <van-cell title="我的阅历" icon="label-o" is-link />
       <van-cell title="充值记录" icon="label-o" is-link />
       <van-cell title="购买记录" icon="label-o" is-link />
       <van-cell title="浏览历史" icon="label-o" is-link />
       <van-cell title="我的阅读基因" icon="label-o" is-link />
-      <van-cell title="设置" icon="label-o" is-link />
+      <van-cell title="设置" icon="label-o" is-link to="my-set"> </van-cell>
     </van-cell-group>
   </div>
 </template>
@@ -32,13 +32,26 @@ export default {
   components: {},
   props: {},
   data() {
-    return {}
+    return {
+      user: {}
+    }
   },
   computed: {},
   watch: {},
-  created() {},
+  created() {
+    this.userInfo()
+  },
   mounted() {},
-  methods: {}
+  methods: {
+    onclick() {
+      this.$router.push('/my-count')
+    },
+    async userInfo() {
+      const data = await this.$http.get('http://yuedu/myuser')
+      console.log(data)
+      this.user = data.data
+    }
+  }
 }
 </script>
 

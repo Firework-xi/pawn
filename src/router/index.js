@@ -19,6 +19,12 @@ const routes = [
       }
     ]
   },
+
+  {
+    path: '/particulars',
+    name: 'particulars',
+    component: () => import('../views/book/particulars.vue')
+  },
   {
     path: '/read',
     name: 'read',
@@ -37,9 +43,9 @@ const routes = [
     component: () => import('@/components/my/my-count')
   },
   {
-    path: '/particulars',
-    name: 'particulars',
-    component: () => import('../views/book/particulars.vue')
+    path: '/my-set',
+    name: 'my-set',
+    component: () => import('@/components/my/my-set')
   } // 二级书本详情路由
 
   // {
