@@ -3,7 +3,7 @@
     <div class="search">
       <div class="left">春暖书城</div>
       <div class="right">
-        <van-icon name="search" />
+        <van-icon name="search" @click="onBooksSearch" />
         <van-icon name="ellipsis" @click="onclick" />
       </div>
     </div>
@@ -53,7 +53,7 @@
     <!-- 弹出层 -->
     <van-popup v-model="classifyShow" position="bottom" :style="{ height: '100%' }">
       <!-- 顶部导航栏 -->
-      <van-nav-bar title="全部分类" left-text left-arrow @click-left="classifyShow = false">
+      <van-nav-bar title="全部分类" left-text left-arrow @click-left="classifyShow = false" @click-right="searchRight">
         <template #right>
           <van-icon name="search" size="18" />
         </template>
@@ -87,9 +87,25 @@
         </van-grid-item>
       </van-grid>
     </van-popup>
+    <!-- 搜索栏 -->
+    <van-popup v-model="searchShow" position="right" :style="{ width: '100%', height: '100%' }">
+      <form action="/" class="formBottom">
+        <van-search v-model="searchValue" show-action placeholder="请输入搜索关键词" clearable action-text="搜索">
+          <span slot="left" @click="returnLeft"><van-icon name="arrow-left" class="return-icon"/></span>
+        </van-search>
+      </form>
+      <!-- 推荐搜索 -->
+      <div class="recommend">
+        <div class="character">大家都在搜</div>
+        <div class="buttonText"><span class="iconfont icon-shuaxin"></span>换一批</div>
+      </div>
+      <van-grid :gutter="10">
+        <van-grid-item v-for="value in 8" :key="value" text="诡道传人"  />
+      </van-grid>
+    </van-popup>
   </div>
 </template>
-
+-
 <script>
 // import { BookClassify } from './Book-classify'
 export default {
@@ -108,7 +124,9 @@ export default {
       // 获取到的男生频道的数据
       boychannel: [],
       // 获取到的女生频道的数据
-      girlchannel: []
+      girlchannel: [],
+      searchShow: false, // 控制搜索界面的显示状态
+      searchValue: '' // 搜索框的数据
     }
   },
   computed: {},
@@ -127,14 +145,12 @@ export default {
       // 获取男生频道数据
       const { data } = await this.$http.get('http://yuedu/boyBook')
       this.boychannel = data.data
-      console.log(data)
       this.getGirlBook()
     },
     // 获取女生频道数据
     async getGirlBook() {
       // 获取女生频道数据
       const { data } = await this.$http.get('http://yuedu/girlBook')
-      console.log(data)
       this.girlchannel = data.data
     },
     // 获取轮播图图片
@@ -157,6 +173,20 @@ export default {
     async getInformation() {
       const { data } = await this.$http.get(`http://yuedu/book/${this.active}`)
       this.information = data.data
+    },
+    // 点击弹出搜索界面
+    onBooksSearch() {
+      this.searchShow = true
+    },
+    // 点击取消
+    returnLeft() {
+      this.searchShow = false
+      this.classifyShow = false
+    },
+    // 从分类页面到搜索页面
+    searchRight() {
+      this.classifyShow = false
+      this.searchShow = true
     }
   }
 }
@@ -260,6 +290,27 @@ export default {
   .Classification-books span:nth-child(2) {
     color: #d1d3d8;
     font-size: 24px;
+  }
+  .return-icon {
+    font-size: 40px;
+    color: #8e8e8e;
+    margin-right: 10px;
+    margin-left: 0;
+  }
+  .formBottom {
+    border-bottom: 1px solid #dfdfdf;
+  }
+  .recommend {
+    margin-top: 5px;
+    padding: 0 20px;
+    height: 90px;
+    font-size: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    justify-content: space-between;
+    .character {
+    }
   }
 }
 </style>
