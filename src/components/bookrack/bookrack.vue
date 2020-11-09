@@ -1,20 +1,30 @@
 <template>
-  <div class="bookrack-container">
+  <div class="bookrack-container"
+       @click="menuClose">
     <!-- 导航 -->
     <div class="bookrack-nav">
       <div class="nav">
-        <div>
+        <div v-if="!isSelectShow">
           <span class="nav-t1">春暖阅读</span>
           <span class="nav-t2">面朝大海，春暖花开</span>
           <span class="nav-more iconfont iconmore-horizontal"
-                @click="showNavMenu">
+                @click.stop="showNavMenu">
           </span>
           <div class="nav-menu"
                :style="{display:menuIsShow?'block':'none'}">
             <div class="nav-menu-t1"><i class="iconfont iconsousuo"></i>搜索</div>
             <div class="nav-menu-t2"
-                 @click="isSelectShow=!isSelectShow"><i class="iconfont iconzuopin"></i>整理书架</div>
+                 @click.stop="isSelectShow=!isSelectShow"><i class="iconfont iconzuopin"></i>整理书架</div>
           </div>
+        </div>
+        <!-- 整理书架时展示的顶部 -->
+        <div v-else
+             class="arrangement">
+          <span class="arrangement-t1"
+                @click="selectAll">全选</span>
+          <span class="arrangement-t2">最近阅读↑↓</span>
+          <span class="arrangement-t3"
+                @click="isSelectShow=false">完成</span>
         </div>
       </div>
       <div class="det">
@@ -61,8 +71,20 @@
     <!-- 底部 -->
     <div class="foot"
          v-if="isFootShow"
-         @click="selectBook">
+         @click="isSelectDelShow=true">
       删除所选 ({{selectList.length}})
+    </div>
+    <!-- 确认栏 -->
+    <div v-if="isSelectDelShow"
+         class="selectDel">
+      <h4>从书架删除</h4>
+      <h5>确定要删除所选的这{{selectList.length}}本书籍吗？</h5>
+      <van-button class="jgbtn"
+                  type="danger"
+                  @click="selectBook">删除</van-button>
+      <van-button class="qxbtn"
+                  type="default"
+                  @click="isSelectDelShow=false">取消</van-button>
     </div>
   </div>
 </template>
@@ -87,7 +109,9 @@ import axios from 'axios'
         menuIsShow: false,
         isSelectShow: false,
         selectList: [],
-        isFootShow: false
+        isFootShow: false,
+        isSelectDelShow: false
+        
        
       }
     },
@@ -113,18 +137,33 @@ import axios from 'axios'
           }
         }
       },
-      showNavMenu() {
+      showNavMenu() {       
         this.menuIsShow = !this.menuIsShow
         this.isSelectShow = false
+        console.log(1)
+      },
+      menuClose() {
+        if (this.menuIsShow) {
+          this.menuIsShow = false
+        }
+        console.log(2)
       },
       selectBook() {
+        let aaa = this.selectList[0]
         this.selectList.forEach(i => {
-          console.log(i)
-          this.bookList.splice(i, 1)
+          console.log(i)        
+          this.bookList.splice(aaa, 1)
+          aaa = aaa - 1
         })
         this.selectList = []
+        this.isSelectDelShow = false
+      },
+      selectAll() {
+        for (var i = 0; i < this.bookList.length; i++) {
+          this.selectList.push(i)
+        }
       }
-      
+     
     },
     watch: {
        isSelectShow() {
@@ -147,6 +186,25 @@ import axios from 'axios'
     background-color: #666;
     height: 550px;
     margin-bottom: 5px;
+  }
+  .arrangement {
+    position: absolute;
+    left: 30px;
+    top: 50px;
+    .arrangement-t1 {
+      font-size: 35px;
+      color: #fff;
+    }
+    .arrangement-t2 {
+      font-size: 35px;
+      color: #fff;
+      margin-left: 185px;
+    }
+    .arrangement-t3 {
+      font-size: 35px;
+      color: #fff;
+      margin-left: 185px;
+    }
   }
   .nav {
     position: relative;
@@ -181,6 +239,9 @@ import axios from 'axios'
         font-weight: 100;
         padding-left: 20px;
         line-height: 75px;
+      }
+      .nav-more {
+        z-index: 3;
       }
     }
     .nav-menu::after {
@@ -315,6 +376,44 @@ import axios from 'axios'
     font-size: 35px;
     background-color: #ffffff;
     z-index: 2;
+  }
+  .selectDel {
+    position: absolute;
+    bottom: 0px;
+    width: 750px;
+    height: 300px;
+    background-color: #ffffff;
+    border-top: 1px solid #eaeaea;
+    z-index: 3;
+    padding-top: 0px;
+    h4 {
+      font-size: 40px;
+      font-weight: 350;
+      text-align: center;
+      margin-top: 20px;
+    }
+    h5 {
+      font-size: 30px;
+      font-weight: 400;
+      text-align: center;
+      margin-top: -30px;
+      margin-bottom: 40px;
+    }
+    .jgbtn {
+      margin-left: 100px;
+      width: 250px;
+      height: 80px;
+      background-color: #ff6666;
+      border: 1px solid #ff6666;
+      font-size: 30px;
+    }
+    .qxbtn {
+      margin-left: 20px;
+      width: 250px;
+      height: 80px;
+      border: 1px solid #cccccc;
+      font-size: 30px;
+    }
   }
 }
 </style>
