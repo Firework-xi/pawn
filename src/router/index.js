@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Bookrack from '@/components/bookrack/bookrack.vue'
+import Search from '@/components/search/index.vue'
 
 Vue.use(VueRouter)
 
@@ -22,6 +23,11 @@ const routes = [
         component: Bookrack
       }
     ]
+  },
+  {
+    path: '/search',
+    name: 'Search',
+    component: Search
   }
 
   // {

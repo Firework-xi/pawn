@@ -12,7 +12,8 @@
           </span>
           <div class="nav-menu"
                :style="{display:menuIsShow?'block':'none'}">
-            <div class="nav-menu-t1"><i class="iconfont iconsousuo"></i>搜索</div>
+            <div class="nav-menu-t1"
+                 @click="$router.push({path:'/search'})"><i class="iconfont iconsousuo"></i>搜索</div>
             <div class="nav-menu-t2"
                  @click.stop="isSelectShow=!isSelectShow"><i class="iconfont iconzuopin"></i>整理书架</div>
           </div>
@@ -22,7 +23,12 @@
              class="arrangement">
           <span class="arrangement-t1"
                 @click="selectAll">全选</span>
-          <span class="arrangement-t2">最近阅读↑↓</span>
+          <span v-if="newOrLast"
+                class="arrangement-t2"
+                @click="newOrLast=!newOrLast">最近阅读↑↓</span>
+          <span class="arrangement-tt2"
+                v-else
+                @click="newOrLast=!newOrLast">加入书架时间↑↓</span>
           <span class="arrangement-t3"
                 @click="isSelectShow=false">完成</span>
         </div>
@@ -46,7 +52,7 @@
       <van-grid :column-num="3"
                 :border="false"
                 :gutter="0">
-        <van-grid-item v-for="(item,index) in bookList"
+        <van-grid-item v-for="(item,index) in showBookList"
                        :key="index"
                        @click="showThis(item,index)">
           <span slot="icon"><img :src="item.img.image"
@@ -110,8 +116,14 @@ import axios from 'axios'
         isSelectShow: false,
         selectList: [],
         isFootShow: false,
-        isSelectDelShow: false
-        
+        isSelectDelShow: false,
+        lastReading: [{
+            title: '见过没，熙熙有点骚',
+            img: { image: require('@/assets/dcfee6c6962a1e68.jpg') },
+            id: 0
+          }],
+        showBookList: [],
+        newOrLast: false
        
       }
     },
@@ -121,13 +133,17 @@ import axios from 'axios'
         url: 'http://123/bookrack'
       })
       
-      this.bookList.push(...data.list)  
+      this.bookList.push(...data.list)
+      this.lastReading.push(...data.list)
+      this.showBookList = this.lastReading
     },
     methods: {
       showThis(item, index) {
         if (!this.isSelectShow) {
         this.showBook.title = item.title
         this.showBook.img = item.img.image
+        this.lastReading.splice(index, 1)
+        this.lastReading.unshift(item)
         } else {
           const aa = this.selectList.indexOf(index)
           if (aa === -1) {
@@ -155,6 +171,7 @@ import axios from 'axios'
             aaa = item - index
           }   
           this.bookList.splice(aaa, 1)
+          this.lastReading.splice(aaa, 1)
         })
         this.selectList = []
         this.isSelectDelShow = false
@@ -173,6 +190,13 @@ import axios from 'axios'
            this.isFootShow = false
          } else {
            this.isFootShow = true
+         }
+       },
+       newOrLast() {
+         if (this.newOrLast) {
+           this.showBookList = this.bookList
+         } else {
+           this.showBookList = this.lastReading
          }
        }
     }
@@ -199,12 +223,20 @@ import axios from 'axios'
     .arrangement-t2 {
       font-size: 35px;
       color: #fff;
-      margin-left: 185px;
+      margin: 0 185px;
+    }
+    .arrangement-tt2 {
+      // position: absolute;
+      // left: 50px;
+      // top: 20px;
+      // width: 500px;
+      font-size: 35px;
+      color: #fff;
+      margin: 0 150px;
     }
     .arrangement-t3 {
       font-size: 35px;
       color: #fff;
-      margin-left: 185px;
     }
   }
   .nav {
@@ -262,6 +294,7 @@ import axios from 'axios'
     left: 30px;
     top: 30px;
     color: #fff;
+    font-size: 50px;
     font-weight: 200;
   }
   .nav-t2 {
