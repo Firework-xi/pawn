@@ -80,7 +80,7 @@ this.$http.get('http://yuedu/details')
     detaile: details,
     basehandle: base
   }, 
-mounted () {
+mounted () { // 监听器头的事件
  const atraters = this.$refs['lost-gome']
     atraters.onscroll = debounce(() => {
        if (atraters.scrollTop > 80) {

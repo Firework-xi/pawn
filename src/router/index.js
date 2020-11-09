@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
+import read from '@/components/bookrack/read.vue'
+import bulkbuying from '@/components/bookrack/bulkbuying .vue'
 
 Vue.use(VueRouter)
 
@@ -26,12 +28,24 @@ const routes = [
     path: '/',
     name: 'Home',
     component: Home
-  }, {
+  },
+  {
+    path: '/read',
+    name: 'read',
+    component: read,
+    children: [
+      {
+        path: '/bulkbuying',
+        name: 'bulkbuying',
+        component: bulkbuying
+      }
+    ]
+  },
+  {
     path: '/particulars',
     name: 'particulars',
-    component: () => import('@/components/book/particulars.vue')
-  } // 二级书本详情路由
-
+    component: () => import('../views/book/particulars.vue')
+  } // 二
 
   // {
   //   path: '/about',
