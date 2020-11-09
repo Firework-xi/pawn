@@ -1,0 +1,29 @@
+@font-face {
+  font-family: "iconfont";
+  src: url('iconfont.eot?t=1604798336992');
+  /* IE9 */
+  src: url('iconfont.eot?t=1604798336992#iefix') format('embedded-opentype'),
+    /* IE6-IE8 */
+    url('data:application/x-font-woff2;charset=utf-8;base64,d09GMgABAAAAAAOgAAsAAAAAB4gAAANRAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHEIGVgCDBgqCaIJaATYCJAMMCwgABCAFhG0HQBuqBsiusCnDvUhAmkyjUblMvLBw8fnE4uHf/cr7ksxfAFC7ZdVTSWQB2dcCkEVVIWsMgWRHeuad+0x73COUOUQopEDp5ecQNlZAwgCR7xTR86Q2P3DIzS94kQC8eWBYIpBQN1VcM7UE5MP2eQ6XNkGicH7Lcplj6RqACQa2J0b1POACOSC/RXYRV8Qi7xNoNi4Ls7Slawj4K9CyQBzVFB74Z0xKQ3VoFKqKvUVcV9OYLiQX14Lfx2+zo5GklqG1K/c3S6Du28Pvp7y262z1CMTjOaAcImMWoBDbK10beUWpWbw0Wyrv5uJKEdJY0f8nENmaaqX/eImooMpWMI03JCclplyC7x6QQAZVj8whwDNB19vX39wxVEO01rbaBVvevxn++G7UbX77doRxX4+eA7lJxz7O3JPoB14/VCaou+DsZfFJKm7PcNXIVeFF+toaAyA19MNHI/r2mzeBnzb64S0PuEfD7feHmmPL8KW09bh66ErGenChqDfNnzqDk8mevOprvV1hMydus0742+Wrj5+09DNbllfGmdSlcQ/uvRs2ij378vY+i/keXzjL7gPnhyb+7St//7SQ+7lh1CVr914PZW/Dxm9LQ3X2+GVWF/migNUl+XMLh/ILRgXC9/MLexhNY3ow33vH2Nm607m1I7W5W3UnEzdN7JVtHh/PdjeOle09frH15y87oYV5IXuP+vl5zvxLf+OMOzt3hFb9RwGfUreDQP0C5gEa78Ed/BMxsK/YUmTOxRRRkZvNFuHu2KQ5Ef+JWuj2o7+mD1xJaNQnImkwhqzRBLFQZ6GmxRxUGi1As5laD7foQXiJ0oQZDnAInW4iafcKWac3xEL9jpp+f1DpjIxm6yPyzBZT4hDXSBBPkQSFFaiJ2JaJlXJh9QBSFkyepKUBYwQRjxaF+Tl5+WwrshEZY4NnUSmgVIYywRZs4R5DpomhQ7CORJqjUupU5ObKVS/KEbEFOEsQCI9CJJBgBaQRYTbZG01xhe8PQBQLTDzS0NTiHYEQHtr4UL4ceQBiq8oGNV3LMx6LFAUoSgbJCMwCtXAOxMQpDHKqZ+kQEZVD7ZFwVMgVhslQVc78Guv5ajzEFuj6HClyFI1Le5pmLSyhwCZ+hWoWSowAAAAAAA==') format('woff2'),
+    url('iconfont.woff?t=1604798336992') format('woff'),
+    url('iconfont.ttf?t=1604798336992') format('truetype'),
+    /* chrome, firefox, opera, Safari, Android, iOS 4.2+ */
+    url('iconfont.svg?t=1604798336992#iconfont') format('svg');
+  /* iOS 4.1- */
+}
+
+.iconfont {
+  font-family: "iconfont" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-DND_mode:before {
+  content: "\e69a";
+}
+
+.icon-Daytimemode:before {
+  content: "\e771";
+}
