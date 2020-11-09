@@ -27,7 +27,20 @@ const routes = [
   {
     path: '/',
     name: 'Home',
-    component: Home
+    component: Home,
+    children: [
+      {
+        path: '/my',
+        name: 'my',
+        component: () => import('@/components/my/my.vue')
+      }
+    ]
+  },
+
+  {
+    path: '/particulars',
+    name: 'particulars',
+    component: () => import('../views/book/particulars.vue')
   },
   {
     path: '/read',
@@ -42,10 +55,15 @@ const routes = [
     ]
   },
   {
-    path: '/particulars',
-    name: 'particulars',
-    component: () => import('../views/book/particulars.vue')
-  } // 二
+    path: '/my-count',
+    name: 'my-count',
+    component: () => import('@/components/my/my-count')
+  },
+  {
+    path: '/my-set',
+    name: 'my-set',
+    component: () => import('@/components/my/my-set')
+  } // 二级书本详情路由
 
   // {
   //   path: '/about',
@@ -56,6 +74,15 @@ const routes = [
   //   component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
   // }
 ]
+
+// {
+//   path: '/about',
+//   name: 'About',
+//   // route level code-splitting
+//   // this generates a separate chunk (about.[hash].js) for this route
+//   // which is lazy-loaded when the route is visited.
+//   component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
+// }
 
 const router = new VueRouter({
   routes
