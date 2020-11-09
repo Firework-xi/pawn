@@ -14,11 +14,20 @@ const routes = [
         path: '/particulars',
         name: 'particulars',
         component: () => import('../views/book/particulars.vue')
-
-      } // 二级书本详情路由
+      }, // 二级书本详情路由
+      {
+        path: '/booktown',
+        name: 'BookTown',
+        component: () => import('../components/booktown/booktown.vue')
+      } // 书城路由
     ]
-
   }
+  // ,
+  // {
+  //   path: '/bookClassify',
+  //   name: 'BookClassify',
+  //   component: () => import('../components/booktown/Book-classify.vue')
+  // }
 
   // {
   //   path: '/about',

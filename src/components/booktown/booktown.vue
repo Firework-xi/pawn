@@ -1,14 +1,265 @@
 <template>
-  <div>
-    <!-- 书城 -->
+  <div class="book-town">
+    <div class="search">
+      <div class="left">春暖书城</div>
+      <div class="right">
+        <van-icon name="search" />
+        <van-icon name="ellipsis" @click="onclick" />
+      </div>
+    </div>
+
+    <div class="slideshow">
+      <!-- <van-swipe :autoplay="3000" :height="300">
+        <van-swipe-item v-for="(image, index) in images" :key="index">
+          <img v-lazy="image" />
+        </van-swipe-item>
+      </van-swipe> -->
+    </div>
+    <div class="tab-bar">
+      <van-tabs v-model="active" animated @click="gethuoqu">
+        <van-tab v-for="(item, index) in title" :title="item" :key="index">
+          <!-- 轮播图 -->
+          <van-swipe class="my-swipe" :autoplay="3000" indicator-color="white" :lazy-render="true">
+            <van-swipe-item v-for="(image, index) in imageList" :key="index">
+              <img :src="image" />
+            </van-swipe-item>
+            <!-- <van-swipe-item>
+              <img src="../../assets/第一张.jpg" />
+            </van-swipe-item>
+            <van-swipe-item>
+              <img src="../../assets/第二张.jpg" />
+            </van-swipe-item>
+            <van-swipe-item>
+              <img src="../../assets/第三张.jpg" />
+            </van-swipe-item> -->
+          </van-swipe>
+          <!-- 内容 -->
+          <div class="box-botton">
+            <div class="box" v-for="(item, index) in information" :key="index">
+              <div class="book-cover">
+                <van-image width="100%" :src="item.img" />
+              </div>
+              <div class="character">
+                <div class="title">{{ item.book_name }}</div>
+                <div class="artor-name">{{ item.tor_name }}</div>
+                <div class="content van-multi-ellipsis--l3">{{ item.content }}</div>
+              </div>
+            </div>
+          </div>
+        </van-tab>
+      </van-tabs>
+    </div>
+    <!-- 分类搜索 -->
+    <!-- 弹出层 -->
+    <van-popup v-model="classifyShow" position="bottom" :style="{ height: '100%' }">
+      <!-- 顶部导航栏 -->
+      <van-nav-bar title="全部分类" left-text left-arrow @click-left="classifyShow = false">
+        <template #right>
+          <van-icon name="search" size="18" />
+        </template>
+      </van-nav-bar>
+      <!-- 性别男 -->
+      <div class="boy-icon">
+        <span class=" iconfont icon-xingbie-nan"></span>
+        <span>男生</span>
+      </div>
+      <!-- 主体 -->
+      <van-grid :gutter="10">
+        <van-grid-item v-for="item in boychannel" :key="item.id">
+          <div class="Classification-books">
+            <span>{{ item.booksName }}</span>
+            <span>{{ item.booksNumber }}</span>
+          </div>
+        </van-grid-item>
+      </van-grid>
+      <!-- 性别女 -->
+      <div class="girl-icon">
+        <span class=" iconfont icon-xingbie-nv"></span>
+        <span>女生</span>
+      </div>
+      <!-- 主体 -->
+      <van-grid :gutter="10">
+        <van-grid-item v-for="value in girlchannel" :key="value.id">
+          <div class="Classification-books">
+            <span>{{ value.booksName }}</span>
+            <span>{{ value.booksNumber }}</span>
+          </div>
+        </van-grid-item>
+      </van-grid>
+    </van-popup>
   </div>
 </template>
 
 <script>
-  export default {
-    
+// import { BookClassify } from './Book-classify'
+export default {
+  name: 'BookTown',
+  components: {
+    // BookClassify
+  },
+  props: {},
+  data() {
+    return {
+      imageList: [], // 获取到的数据
+      title: [], // 获取到的分类名称
+      information: [], // 获取到的书籍信息
+      active: 0,
+      classifyShow: false,
+      // 获取到的男生频道的数据
+      boychannel: [],
+      // 获取到的女生频道的数据
+      girlchannel: []
+    }
+  },
+  computed: {},
+  watch: {},
+  created() {
+    this.getPhoto()
+    this.getTitle()
+    this.getInformation()
+  },
+  mounted() {},
+  methods: {
+    // 点击弹出分类弹窗
+    async onclick() {
+      // this.$router.push('/bookClassify')
+      this.classifyShow = true
+      // 获取男生频道数据
+      const { data } = await this.$http.get('http://yuedu/boyBook')
+      this.boychannel = data.data
+      console.log(data)
+      this.getGirlBook()
+    },
+    // 获取女生频道数据
+    async getGirlBook() {
+      // 获取女生频道数据
+      const { data } = await this.$http.get('http://yuedu/girlBook')
+      console.log(data)
+      this.girlchannel = data.data
+    },
+    // 获取轮播图图片
+    async getPhoto() {
+      const { data } = await this.$http.get(`http://yuedu/slideshow/${this.active}`)
+
+      this.imageList = data.data.img
+    },
+    // 获取点击页的数据
+    gethuoqu() {
+      this.getPhoto()
+      this.getInformation()
+    },
+    // 获取title分类名称
+    async getTitle() {
+      const { data } = await this.$http.get('http://yuedu/title')
+      this.title = data.data
+    },
+    // 获取书籍信息
+    async getInformation() {
+      const { data } = await this.$http.get(`http://yuedu/book/${this.active}`)
+      this.information = data.data
+    }
   }
+}
 </script>
 
 <style lang="scss" scoped>
+.book-town {
+  .search {
+    height: 108px;
+    margin-top: 48px;
+    border-bottom: 4px solid rgb(242, 242, 242);
+    display: flex;
+    justify-content: space-between;
+
+    align-items: center;
+    .left {
+      margin-left: 40px;
+      font-size: 50px;
+      color: #726f6d;
+    }
+    .right {
+      width: 160px;
+      margin-right: 50px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 80px;
+      color: #726f6d;
+    }
+  }
+  .tab-bar {
+    height: 98px;
+  }
+
+  .my-swipe .van-swipe-item {
+    img {
+      width: 100%;
+      height: 260px;
+    }
+  }
+  .book-cover {
+    width: 194px;
+    height: 260px;
+    margin: 48px 20px 0 40px;
+  }
+  .box-botton {
+    margin-bottom: 90px;
+    .box {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 300px;
+
+      .character {
+        margin-top: 48px;
+        margin-right: 50px;
+        width: 450px;
+        height: 258px;
+
+        .title {
+          font-size: 40px;
+          font-weight: 900;
+        }
+        .artor-name {
+          margin: 10px 0;
+          font-size: 30px;
+        }
+        .content {
+          font-size: 30px;
+        }
+      }
+    }
+  }
+  .boy-icon {
+    height: 100px;
+    line-height: 100px;
+    font-size: 30px;
+  }
+  .boy-icon span:nth-child(1) {
+    color: #65b2fe;
+    margin-left: 20px;
+    margin-right: 10px;
+  }
+  .girl-icon {
+    height: 100px;
+    line-height: 100px;
+    font-size: 30px;
+  }
+  .girl-icon span:nth-child(1) {
+    color: #fe78a5;
+    margin-left: 20px;
+    margin-right: 10px;
+  }
+  .Classification-books {
+    font-size: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .Classification-books span:nth-child(2) {
+    color: #d1d3d8;
+    font-size: 24px;
+  }
+}
 </style>

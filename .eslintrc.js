@@ -15,6 +15,7 @@ module.exports = {
     'no-trailing-spaces': 0,
     'no-multiple-empty-lines': 0,
     'eol-last': 0,
-    indent: 0
+    indent: 0,
+    'comma-dangle': 0
   }
 }
