@@ -35,33 +35,36 @@
   },
   computed: {},
   watch: {},
-  created () {},
+  created () {
+    console.log(window.localStorage.getItem('choice'))
+    if (window.localStorage.getItem('choice')) {
+      this.$router.push('/name')
+    }
+  },
   mounted () {},
   methods: {
     // 立即体验事件
     LoginExperience() {
-      this.$toast.loading({
-        message: '加载中...',
-         forbidClick: true
-        })
+     this.LocalStorage(0)
     },
     // 男
     male() {
-      this.$toast.loading({
-        message: '加载中...',
-         forbidClick: true
-        })
-      this.index = 0
-      window.localStorage.setItem('choice', this.index)
+      this.LocalStorage(1)
     },
     // 女
     female() {
-      this.$toast.loading({
+      this.LocalStorage(2)
+    },
+    LocalStorage(index) {
+       this.$toast.loading({
         message: '加载中...',
-         forbidClick: true
+         forbidClick: true,
+         duration: 0
         })
-      this.index = 1
-      window.localStorage.setItem('choice', this.index)
+        this.index = index
+         window.localStorage.setItem('choice', index)
+        this.$router.push('/loginland')
+        this.$toast.success('进入首页')
     }
   //  async onclick() {
   //   //  判断是否选择的男或女
