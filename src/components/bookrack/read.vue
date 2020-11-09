@@ -28,7 +28,7 @@
         <van-grid-item icon="friends-o" text="夜间" />
       </van-grid>
     </div>
-    <div :style="`font-size:${fonts}`" class="nr" @click="gbs">
+    <div class="nr" @click="gbs">
       <h1>第一章 人造与天生</h1>
       <p>
         我被关闭在密不透气的玻璃小屋里。在这里，我吸入的是自己呼出的气体，不过，在风扇的吹动下，空气依然清新。由众多导管、线缆、植物和沼泽微生物构成的系统回收了我的尿液和粪便，并将其还原成水和食物供我食用。说真的，食物的味道不错，水也很好喝。
@@ -43,11 +43,31 @@
         在这个千年 临近结束的时候，发生在这个玻璃小屋里的事情，也正在地球上大规模地上演着，只不过不那么明晰。造化所生的自然王国和人类建造的人造国度正在融为一体。机器，正在生物化；而生物，正在工程化。
       </p>
     </div>
+    <!-- 目录 -->
     <van-popup v-model="catalog" @close="gb = false" position="left" :style="{ height: '100%', width: '70%' }">
       <van-cell-group>
-        <van-cell title="单元格" value="内容" />
-        <van-cell title="单元格" value="内容" label="描述信息" />
+        <van-cell type="text" class="biaoti">
+          <p>失控</p>
+          <span>完结 共24章</span>
+        </van-cell>
       </van-cell-group>
+      <van-collapse v-model="activeNames" v-for="(item, index) in list" :key="index">
+        <van-collapse-item :title="item.zhangjie" :name="index">
+          <van-cell-group v-for="(v, index) in item.children" :key="index">
+            <van-cell :title="v.erji" />
+          </van-cell-group>
+        </van-collapse-item>
+      </van-collapse>
+    </van-popup>
+    <!-- 购买章节 -->
+    <van-popup v-model="goumai" position="bottom" :style="{ height: '60%' }">
+      <div class="goumai">
+        <h3>需要购买后阅读！</h3>
+        <p><i>本节价格：10 春卷</i> 余额：100 春卷</p>
+        <van-button type="danger" round>购买本章</van-button>
+        <van-button class="pl" to="/bulkbuying ">批量购买章节</van-button>
+        <van-checkbox v-model="checked">自动购买下一章</van-checkbox>
+      </div>
     </van-popup>
   </div>
 </template>
@@ -59,7 +79,11 @@ export default {
       show: false,
       value: 50,
       fonts: 16,
-      catalog: false
+      catalog: false,
+      activeNames: ['1'],
+      list: [],
+      goumai: true,
+      checked: true
     }
   },
   methods: {
@@ -110,12 +134,15 @@ export default {
         p[i].style.fontSize = this.fonts + 'px'
       }
     },
-    catalogs() {
+    async catalogs() {
       if (this.catalog) {
-        this.catalog = false
+        return (this.catalog = false)
       } else {
         this.catalog = true
       }
+      const { data: res } = await this.$http.get('http://yuedu/read')
+      this.list = res.data
+      console.log('catalogs -> this.list', this.list)
     }
   }
 }
@@ -222,7 +249,49 @@ export default {
   p {
     line-height: 60px;
     text-indent: 0.7rem;
-    font-size: 30px;
+    font-size: 29px;
+  }
+}
+.biaoti {
+  padding: 25px 0 0 30px;
+  p {
+    font-size: 35px;
+    margin: 0;
+  }
+  span {
+    font-size: 24px;
+    color: #999;
+  }
+}
+.goumai {
+  font-size: 26px;
+  text-align: center;
+  i {
+    color: red;
+    font-style: normal;
+  }
+  h3 {
+    font-weight: 400;
+    margin-bottom: 60px;
+    color: #333;
+  }
+  .van-button {
+    width: 60%;
+    height: 70px;
+    font-size: 26px;
+  }
+  .van-checkbox {
+    position: absolute;
+    left: 50%;
+    margin-top: 20px;
+    transform: translateX(-50%);
+  }
+  .pl {
+    display: block;
+    left: 50%;
+    transform: translateX(-50%);
+    border: none;
+    width: 30%;
   }
 }
 </style>
