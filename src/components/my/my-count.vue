@@ -46,12 +46,14 @@
         5）读书充值卡充值不计入VIP等级，即用户通过读书充值卡充值书币，并不影响VIP状态.<br />
         6）用户可以在个人书房中，看到自己账户中的”读书卡余额.<br />
         7）读书充值卡充值不计入VIP等级，即用户通过读书充值卡充值书币，并不影响VIP状态.<br />
+        7）读书充值卡充值不计入VIP等级，即用户通过读书充值卡充值书币，并不影响VIP状态.<br />
       </span>
     </div>
     <!-- 购买金币弹出框模块 -->
-    <van-popup v-model="isPayshow" position="bottom" :style="{ height: '60%' }">
+    <van-popup v-model="isPayshow" closeable close-icon-position="top-left" position="bottom" :style="{ height: '60%' }" class="popup">
       <van-cell-group>
-        <van-icon name="cross" size="20px" />
+        <!-- <van-icon name="cross" size="20px" /> -->
+
         <van-cell title="订单信息" value="手机充值" />
         <van-cell title="付款方式" value="花呗" />
       </van-cell-group>
@@ -112,7 +114,7 @@ export default {
   /deep/.buyCoins {
     .van-grid-item {
       height: 240px;
-      .text {
+      /deep/ .text {
         font-size: 30px;
         margin-top: 20px;
       }
@@ -137,6 +139,11 @@ export default {
   .proup-btn {
     width: 100%;
     height: 100%;
+  }
+  .popup {
+    .van-cell-group {
+      margin-top: 250px;
+    }
   }
 }
 </style>
