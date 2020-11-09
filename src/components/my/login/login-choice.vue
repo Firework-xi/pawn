@@ -11,7 +11,7 @@
         <span class="gender">男生</span><span class="short-essay">热血爽文，酷帅狂拽</span>
       </div>
       <div class="login-img">
-        <van-image width="80" round fit="cover" height="80" @click="female" :src="require('../../../assets/e6149428815a8470ea55408fcc65d10.png')" />
+        <van-image width="80" round fit="cover" @click="female" height="80" :src="require('../../../assets//nv.png')" />
         <span class="gender">女生</span><span class="short-essay">总裁王爷，绝不将就</span>
       </div>
     </div>
@@ -56,11 +56,6 @@
     female() {
       this.index = 1
     }
-
-
-
-
-
   //  async onclick() {
   //   //  判断是否选择的男或女
   //     if (this.index === null) {
@@ -113,32 +108,36 @@
   flex-direction: column;
   margin-top: 140px;
   align-content: center;
-
   .login-Gender {
     color: #333;
+  }
+  .skip {
+    color: rgb(149, 149, 149);
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    font-size: 24px;
+  }
+  .login-Gender {
+    color: rgb(64, 63, 61);
     text-align: center;
     font-size: 60px;
   }
   .login-center {
     display: flex;
     margin: 260px 0;
-    // .van-image::after {
-    //   position: absolute;
-    //   top: -2px;
-    //   right: -2px;
-    //   content: '';
-    //   width: 200px;
-    //   height: 200px;
-    //   border-radius: 50%;
-    //   background-color: pink;
-    // }
+
     .login-img {
       width: 100;
       flex: 1;
       display: flex;
       flex-direction: column;
       align-items: center;
+      .van-image {
+        background-color: #fddd9b;
+      }
       .gender {
+        color: #ff9656;
         margin-top: 16px;
         font-size: 36px;
         color: #ff9656;
