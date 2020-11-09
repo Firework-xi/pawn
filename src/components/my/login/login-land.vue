@@ -1,5 +1,8 @@
 <template>
   <div class="login-land">
+    <!-- 导航栏 -->
+    <van-nav-bar left-arrow @click-left="onClickLeft" />
+    <!-- /导航栏 -->
     <!-- 春暖阅读 -->
     <div class="login-logo">
       <van-image width="90" round fit="cover" height="90" :src="require('../../../assets/logo.png.png')" />
@@ -22,21 +25,17 @@
     </van-form>
     <!-- /登陆 -->
     <!-- 去注册 -->
-    <van-form @submit="onSubmit" class="login-form">
+    <!-- <van-form @submit="toRegister" class="login-form">
       <van-field v-model="username" name="mobile" type="number" placeholder="请输入手机号" :rules="userFormRules.mobile" maxlength="11"
         ><template #left-icon> <van-icon name="friends-o" /></template
       ></van-field>
-
       <van-field v-model="password" type="password" name="password2" placeholder="请设置密码" :rules="userFormRules.password2" maxlength="6">
         <template #left-icon> <van-icon name="bag-o" /></template>
       </van-field>
-      <!-- /设置密码 -->
-      <!-- 按钮 -->
       <div style="margin: 20px 46px 10px">
         <van-button round block type="info" native-type="submit" color="#ffca4f"> 去登陆 </van-button>
       </div>
-      <!-- /按钮 -->
-    </van-form>
+    </van-form> -->
     <!-- /去注册 -->
 
     <!-- 一键登陆 -->
@@ -93,6 +92,7 @@
   created () {},
   mounted () {},
   methods: {
+    // 第三方登陆
      onSelect(option) {
        this.$toast.loading({
        message: '加载中...',
@@ -100,17 +100,31 @@
       })
       this.showShare = false
     },
+    // 登陆
      onSubmit(values) {
       console.log('submit', values)
+    },
+    // 去注册
+    toRegister() {},
+    // 返回
+    onClickLeft() {
+      console.log('返回')
     }
+
+
   }
   }
 </script>
 
 <style lang="scss" scoped>
 .login-land {
+  ::v-deep.van-nav-bar {
+    .van-icon-arrow-left::before {
+      color: #ffca4f;
+    }
+  }
   .login-logo {
-    margin-top: 200px;
+    margin-top: 160px;
     display: flex;
     flex-direction: column;
     align-items: center;

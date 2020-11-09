@@ -1,13 +1,12 @@
 <template>
   <div class="login-choice">
-    <div class="skip"><span>随便看看>></span></div>
     <!-- 标题 -->
     <div class="login-Gender">选择性别</div>
     <!-- /标题 -->
     <!-- 男女选择 -->
     <div class="login-center">
       <div class="login-img">
-        <van-image width="80" round fit="cover" height="80" @click="male" :src="require('../../../assets/d99dce9d81c02014d698ce04a63d59f.png')" />
+        <van-image width="80" round fit="cover" height="80" @click="male" :src="require('../../../assets/nan.png')" />
         <span class="gender">男生</span><span class="short-essay">热血爽文，酷帅狂拽</span>
       </div>
       <div class="login-img">
@@ -41,20 +40,28 @@
   methods: {
     // 立即体验事件
     LoginExperience() {
-      if (this.index === null) {
-        return this.$toast('请选择性别')
-      } 
       this.$toast.loading({
         message: '加载中...',
          forbidClick: true
         })
+    },
+    // 男
+    male() {
+      this.$toast.loading({
+        message: '加载中...',
+         forbidClick: true
+        })
+      this.index = 0
       window.localStorage.setItem('choice', this.index)
     },
-    male() {
-      this.index = 0
-    },
+    // 女
     female() {
+      this.$toast.loading({
+        message: '加载中...',
+         forbidClick: true
+        })
       this.index = 1
+      window.localStorage.setItem('choice', this.index)
     }
   //  async onclick() {
   //   //  判断是否选择的男或女
