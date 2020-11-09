@@ -10,5 +10,5 @@ files.keys().forEach(key => {
   arr.push(files(key).default)
 })
 arr[0].MOckurl.forEach(v => {
-  MockJS.mock(v.url, v.request, v.manage)
+  MockJS.mock(new RegExp(`^${v.url}`), v.request, v.manage)
 })
