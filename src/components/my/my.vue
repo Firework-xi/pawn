@@ -21,7 +21,7 @@
       <van-cell title="购买记录" icon="label-o" is-link />
       <van-cell title="浏览历史" icon="label-o" is-link />
       <van-cell title="我的阅读基因" icon="label-o" is-link />
-      <van-cell title="设置" icon="label-o" is-link />
+      <van-cell title="设置" icon="label-o" is-link to="my-set"> </van-cell>
     </van-cell-group>
   </div>
 </template>

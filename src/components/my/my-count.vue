@@ -12,27 +12,27 @@
       <van-grid column-num="3" :gutter="10">
         <van-grid-item
           ><van-icon name="star-o" color="#f6b53e" /><span class="text">600kk币</span
-          ><van-button type="default" size="mini" round class="coinsBtn" @click="isPayshow = true">¥6.00</van-button></van-grid-item
+          ><van-button type="default" size="mini" round class="coinsBtn" @click="Payshow('¥6.00')">¥6.00</van-button></van-grid-item
         >
         <van-grid-item
           ><van-icon name="star-o" color="#f6b53e" /><span class="text">1200kk币</span
-          ><van-button type="default" size="mini" round class="coinsBtn" @click="isPayshow = true">¥12.00</van-button></van-grid-item
+          ><van-button type="default" size="mini" round class="coinsBtn" @click="Payshow('¥12.00')">¥12.00</van-button></van-grid-item
         >
         <van-grid-item
           ><van-icon name="star-o" color="#f6b53e" /><span class="text">3000kk币</span
-          ><van-button type="default" size="mini" round class="coinsBtn" @click="isPayshow = true">¥30.00</van-button></van-grid-item
+          ><van-button type="default" size="mini" round class="coinsBtn" @click="Payshow('¥30.00')">¥30.00</van-button></van-grid-item
         >
         <van-grid-item
           ><van-icon name="star-o" color="#f6b53e" /><span class="text">5000kk币</span
-          ><van-button type="default" size="mini" round class="coinsBtn" @click="isPayshow = true">¥50.00</van-button></van-grid-item
+          ><van-button type="default" size="mini" round class="coinsBtn" @click="Payshow('¥50.00')">¥50.00</van-button></van-grid-item
         >
         <van-grid-item
           ><van-icon name="star-o" color="#f6b53e" /><span class="text">9800kk币</span
-          ><van-button type="default" size="mini" round class="coinsBtn" @click="isPayshow = true">¥98.00</van-button></van-grid-item
+          ><van-button type="default" size="mini" round class="coinsBtn" @click="Payshow('¥98.00')">¥98.00</van-button></van-grid-item
         >
         <van-grid-item
           ><van-icon name="star-o" color="#f6b53e" /><span class="text">18800kk币</span
-          ><van-button type="default" size="mini" round class="coinsBtn" @click="isPayshow = true">¥188.00</van-button></van-grid-item
+          ><van-button type="default" size="mini" round class="coinsBtn" @click="Payshow('¥188.00')">¥188.00</van-button></van-grid-item
         >
       </van-grid>
     </div>
@@ -51,12 +51,15 @@
     </div>
     <!-- 购买金币弹出框模块 -->
     <van-popup v-model="isPayshow" closeable close-icon-position="top-left" position="bottom" :style="{ height: '60%' }" class="popup">
+      <div class="price">{{ price }}</div>
       <van-cell-group>
         <!-- <van-icon name="cross" size="20px" /> -->
 
-        <van-cell title="订单信息" value="手机充值" />
-        <van-cell title="付款方式" value="花呗" />
+        <van-cell title="订单信息" value="手机充值" is-link />
+        <van-cell title="付款方式" value="花呗" is-link />
       </van-cell-group>
+      <!-- 提交按钮 -->
+      <van-button type="default" size="large" round class="confirmBtn">确认支付</van-button>
     </van-popup>
   </div>
 </template>
@@ -70,7 +73,8 @@ export default {
     return {
       // 用户信息
       user: {},
-      isPayshow: false
+      isPayshow: false,
+      price: 0
     }
   },
   computed: {},
@@ -85,8 +89,12 @@ export default {
       console.log(data)
       this.user = data.data
     },
-    showPopup() {
-      this.show = false
+
+    // 显示充值金额
+    Payshow(e) {
+      this.isPayshow = true
+      this.price = e
+      console.log(e)
     }
   }
 }
@@ -142,7 +150,17 @@ export default {
   }
   .popup {
     .van-cell-group {
-      margin-top: 250px;
+      margin-top: 80px;
+    }
+    .price {
+      margin-top: 100px;
+      margin-left: 280px;
+    }
+    .confirmBtn {
+      background-color: #1989fa;
+      color: #fff;
+      width: 500px;
+      margin: 80px 115px;
     }
   }
 }

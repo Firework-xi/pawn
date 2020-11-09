@@ -14,11 +14,6 @@ const routes = [
         path: '/my',
         name: 'my',
         component: () => import('@/components/my/my.vue')
-      },
-      {
-        path: '/my-count',
-        name: 'my-count',
-        component: () => import('@/components/my/my-count')
       }
     ]
   },
@@ -27,6 +22,16 @@ const routes = [
     path: '/particulars',
     name: 'particulars',
     component: () => import('../views/book/particulars.vue')
+  },
+  {
+    path: '/my-count',
+    name: 'my-count',
+    component: () => import('@/components/my/my-count')
+  },
+  {
+    path: '/my-set',
+    name: 'my-set',
+    component: () => import('@/components/my/my-set')
   } // 二级书本详情路由
 ]
 
