@@ -140,20 +140,21 @@ import axios from 'axios'
       showNavMenu() {       
         this.menuIsShow = !this.menuIsShow
         this.isSelectShow = false
-        console.log(1)
+        // console.log(1)
       },
       menuClose() {
         if (this.menuIsShow) {
           this.menuIsShow = false
         }
-        console.log(2)
+        // console.log(2)
       },
       selectBook() {
         let aaa = this.selectList[0]
-        this.selectList.forEach(i => {
-          console.log(i)        
+        this.selectList.forEach((item, index) => {
+          if (index !== 0) {
+            aaa = item - index
+          }   
           this.bookList.splice(aaa, 1)
-          aaa = aaa - 1
         })
         this.selectList = []
         this.isSelectDelShow = false
