@@ -7,15 +7,13 @@
 </template>
 
 <script>
-  export default {
-     name: 'name',
+export default {
+  name: 'name',
   components: {},
   props: {},
-  data () {
+  data() {
     return {
       isone: true
-      
-      
     }
   },
   computed: {},

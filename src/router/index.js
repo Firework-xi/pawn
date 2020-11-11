@@ -2,14 +2,14 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import read from '@/components/bookrack/read.vue'
-import bulkbuying from '@/components/bookrack/bulkbuying .vue'
+import bulkbuying from '@/components/bookrack/bulkbuying.vue'
 
 Vue.use(VueRouter)
 
 const routes = [
   {
     // 选择性别
-    path: '/choice',
+    path: '',
     name: 'choice',
     component: () => import('@/components/my/login/login-choice.vue')
   },
@@ -17,7 +17,10 @@ const routes = [
     // 春暖阅读
     path: '/loginland',
     name: 'loginland',
-    component: () => import('@/components/my/login/login-land.vue')
+    component: () => import('@/components/my/login/login-land.vue'),
+    meta: { index: 1 }
+
+
   },
   {
     path: '/name',
@@ -28,11 +31,19 @@ const routes = [
     path: '/',
     name: 'Home',
     component: Home,
+    meta: { index: 2 },
     children: [
       {
         path: '/my',
         name: 'my',
-        component: () => import('@/components/my/my.vue')
+        component: () => import('@/components/my/my.vue'),
+        meta: { index: 2 },
+      },
+      {
+        path: '/booktown',
+        name: 'booktown',
+        component: () => import('@/components/booktown/booktown'),
+        meta: { index: 1 }
       }
     ]
   },
@@ -40,30 +51,37 @@ const routes = [
   {
     path: '/particulars',
     name: 'particulars',
-    component: () => import('../views/book/particulars.vue')
+    component: () => import('@/components/book/particulars.vue'),
+    meta: { index: 3 },
   },
   {
+    // 阅读详情
     path: '/read',
     name: 'read',
     component: read,
-    children: [
-      {
-        path: '/bulkbuying',
-        name: 'bulkbuying',
-        component: bulkbuying
-      }
-    ]
+    meta: { index: 4 },
+  },
+  {
+    // 批量购买
+    path: '/bulkbuying',
+    name: 'bulkbuying',
+    component: bulkbuying,
+    meta: { index: 5 },
   },
   {
     path: '/my-count',
     name: 'my-count',
-    component: () => import('@/components/my/my-count')
+    component: () => import('@/components/my/my-count'),
+    meta: { index: 3 },
   },
   {
     path: '/my-set',
     name: 'my-set',
-    component: () => import('@/components/my/my-set')
-  } // 二级书本详情路由
+    component: () => import('@/components/my/my-set'),
+    meta: { index: 3 },
+  }
+
+  // 二级书本详情路由
 
   // {
   //   path: '/about',
