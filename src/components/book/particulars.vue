@@ -12,12 +12,12 @@
     <div class="box" ref="lost-gome">
       <div class="introduce">
         <div class="left">
-          <van-image fit="cover" src="https://img.yzcdn.cn/vant/cat.jpeg" />
+          <van-image fit="cover" src="https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=4255547098,2077529314&fm=11&gp=0.jpg" />
         </div>
         <div class="right">
           <div class="right-box">
             <div class="right-name">金瓶梅</div>
-            <van-rate class="right-evaluate" v-model="number" color="#999999" void-icon="star" void-color="#88888" /><span class="text">8.4</span>
+            <van-rate class="right-evaluate" v-model="number" color="#ffca4f" void-icon="star" void-color="#88888" /><span class="text">8.4</span>
             <div class="right-sort">猫腻 | 玄幻</div>
             <div class="right-number"><span>5春卷/千字</span><span>313万字</span></div>
           </div>
