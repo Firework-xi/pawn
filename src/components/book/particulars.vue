@@ -1,7 +1,6 @@
 <template>
   <div class="particulars">
-    <van-nav-bar left-arrow @click-right="onClickRight" fixed :class="{ borde: altitude }">
-      <!-- <template #title v-if="altitude"> 书籍详情</template> -->
+    <van-nav-bar left-arrow  fixed :class="{ borde: altitude }" @click-left="$router.back()">
       <template #title>
         <transition name="van-fade">
           <div v-show="altitude">书籍详情</div>
@@ -30,7 +29,7 @@
         <div class="van-multi-ellipsis--l3">
           <p>命里有时终须有，命里无时要强求。</p>
           <p class="texte-p">
-            这是一个长生果的故事。择是选择。这是一个关于选择的故事。三千世界，满天神魔，手握道卷，掌天下...<span> <van-icon name="arrow-down"/></span>
+            这是一个长生果的故事。择是选择。这是一个关于选择的故事。三千世界，满天神魔，手握道卷，掌天下...<span> <van-icon name="arrow-down" /></span>
           </p>
         </div>
       </div>
@@ -60,7 +59,6 @@ import base from './module/base' // btn按钮
 import { debounce } from 'lodash'
 export default {
   created() {
-    this.onindex()
   },
   data() {
     return {
@@ -69,14 +67,6 @@ export default {
     }
   },
   methods: {
-    async onindex() {
-      const res = await this.$http.get('http://yuedu/details')
-      console.log(res)
-    },
-    onClickRight() {
-      this.$http.get('http://yuedu/details')
-      // 书籍返回事件
-    }
   },
   components: {
     catalog,

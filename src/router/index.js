@@ -42,7 +42,8 @@ const routes = [
       {
         path: '/booktown',
         name: 'booktown',
-        component: () => import('@/components/booktown/booktown')
+        component: () => import('@/components/booktown/booktown'),
+        meta: { index: 1 }
       }
     ]
   },
@@ -50,29 +51,34 @@ const routes = [
   {
     path: '/particulars',
     name: 'particulars',
-    component: () => import('@/components/book/particulars.vue')
+    component: () => import('@/components/book/particulars.vue'),
+    meta: { index: 3 },
   },
   {
     // 阅读详情
     path: '/read',
     name: 'read',
-    component: read
+    component: read,
+    meta: { index: 4 },
   },
   {
     // 批量购买
     path: '/bulkbuying',
     name: 'bulkbuying',
-    component: bulkbuying
+    component: bulkbuying,
+    meta: { index: 5 },
   },
   {
     path: '/my-count',
     name: 'my-count',
-    component: () => import('@/components/my/my-count')
+    component: () => import('@/components/my/my-count'),
+    meta: { index: 3 },
   },
   {
     path: '/my-set',
     name: 'my-set',
-    component: () => import('@/components/my/my-set')
+    component: () => import('@/components/my/my-set'),
+    meta: { index: 3 },
   }
 
   // 二级书本详情路由
