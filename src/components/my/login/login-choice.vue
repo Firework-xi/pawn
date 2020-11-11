@@ -5,12 +5,12 @@
     <!-- /标题 -->
     <!-- 男女选择 -->
     <div class="login-center">
-      <div class="login-img">
-        <van-image width="80" round fit="cover" height="80" @click="male" :src="require('../../../assets/nan.png')" />
+      <div class="login-img" @click="isone = 1">
+        <van-image width="80" :class="isone === 1 ? 'bor' : ''" round fit="cover" height="80" @click="male" :src="require('../../../assets/nan.png')" />
         <span class="gender">男生</span><span class="short-essay">热血爽文，酷帅狂拽</span>
       </div>
-      <div class="login-img">
-        <van-image width="80" round fit="cover" @click="female" height="80" :src="require('../../../assets//nv.png')" />
+      <div class="login-img" @click="isone = 2">
+        <van-image width="80" :class="isone === 2 ? 'bor' : ''" round fit="cover" @click="female" height="80" :src="require('../../../assets//nv.png')" />
         <span class="gender">女生</span><span class="short-essay">总裁王爷，绝不将就</span>
       </div>
     </div>
@@ -30,41 +30,41 @@
   props: {},
   data () {
     return {
-      index: null
+      index: null,
+      isone: '0'
+
     }
   },
   computed: {},
   watch: {},
   created () {
-    console.log(window.localStorage.getItem('choice'))
     if (window.localStorage.getItem('choice')) {
-      this.$router.push('/my')
+      this.$router.push('/loginland')
     }
   },
   mounted () {},
   methods: {
     // 立即体验事件
     LoginExperience() {
-     this.LocalStorage(0)
-    },
-    // 男
-    male() {
-      this.LocalStorage(1)
-    },
-    // 女
-    female() {
-      this.LocalStorage(2)
-    },
-    LocalStorage(index) {
-       this.$toast.loading({
+      if (this.index === null) {
+        return this.$toast('请选择性别')
+      }
+      this.$toast.loading({
         message: '加载中...',
          forbidClick: true,
          duration: 0
         })
-        this.index = index
-         window.localStorage.setItem('choice', index)
-        this.$router.push('/my')
+         window.localStorage.setItem('choice', this.index)
+        this.$router.push('/loginland')
         this.$toast.success('进入首页')
+    },
+    // 男
+    male() {
+      this.index = 0
+    },
+    // 女
+    female() {
+      this.index = 1
     }
   //  async onclick() {
   //   //  判断是否选择的男或女
@@ -99,8 +99,15 @@
 .login-choice {
   .van-image {
     background-color: rgb(255, 238, 188);
+
     // border: 6px solid #eee;
   }
+  .bor {
+    border: 10px solid #d2d2d2;
+    opacity: 0.7;
+    // background: transparent;
+  }
+
   .skip {
     margin: 20px;
     margin-top: 30px;
