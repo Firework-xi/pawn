@@ -20,8 +20,9 @@ const routes = [
     component: () => import('@/components/my/login/login-land.vue')
   },
   {
-    path: '/name',
-    name: 'name',
+    // 未登录
+    path: '/Login',
+    name: 'Login',
      component: () => import('../components/my/login/login.vue')
   },
   {

@@ -39,7 +39,7 @@
   watch: {},
   created () {
     if (window.localStorage.getItem('choice')) {
-      this.$router.push('/loginland')
+      this.$router.push('/login')
     }
   },
   mounted () {},
@@ -55,7 +55,7 @@
          duration: 0
         })
          window.localStorage.setItem('choice', this.index)
-        this.$router.push('/loginland')
+        this.$router.push('/login')
         this.$toast.success('进入首页')
     },
     // 男
