@@ -3,7 +3,7 @@ import Mock from 'mockjs'
 const list = []
 var img
 
-for (var i = 0; i < 11; i++) {
+for (var i = 0; i < 6; i++) {
   img = Mock.mock({
     image: `@image('200x270', '#FCAFB7', '#FFF', '熙熙拉胯日技${i + 1}')`
   })

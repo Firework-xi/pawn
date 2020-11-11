@@ -13,7 +13,7 @@
           <div class="nav-menu"
                :style="{display:menuIsShow?'block':'none'}">
             <div class="nav-menu-t1"
-                 @click="$router.push({path:'/search'})"><i class="iconfont iconsousuo"></i>搜索</div>
+                 @click="$router.push('/search')"><i class="iconfont iconsousuo"></i>搜索</div>
             <div class="nav-menu-t2"
                  @click.stop="isSelectShow=!isSelectShow"><i class="iconfont iconzuopin"></i>整理书架</div>
           </div>
@@ -106,6 +106,30 @@ import axios from 'axios'
             title: '见过没，熙熙有点骚',
             img: { image: require('@/assets/dcfee6c6962a1e68.jpg') },
             id: 0
+          },
+          {
+            title: '熙熙被劈了',
+            img: { image: require('@/assets/300.jpg') },
+            id: 1
+          },
+          {
+            title: '熙熙出道了',
+            img: { image: require('@/assets/2.jpg') },
+            id: 2
+          },
+           {
+            title: '熙熙开挂了',
+            img: { image: require('@/assets/4.jpg') },
+            id: 3
+          },
+           {
+            title: '熙熙逛窑子了',
+            img: { image: require('@/assets/9.jpg') },
+            id: 4
+          }, {
+            title: '熙熙败了',
+            img: { image: require('@/assets/1.jpg') },
+            id: 5
           }
         ],
         showBook: {
@@ -117,11 +141,37 @@ import axios from 'axios'
         selectList: [],
         isFootShow: false,
         isSelectDelShow: false,
-        lastReading: [{
+        lastReading: [
+          {
             title: '见过没，熙熙有点骚',
             img: { image: require('@/assets/dcfee6c6962a1e68.jpg') },
             id: 0
-          }],
+          },
+          {
+            title: '熙熙被劈了',
+            img: { image: require('@/assets/300.jpg') },
+            id: 1
+          },
+          {
+            title: '熙熙出道了',
+            img: { image: require('@/assets/2.jpg') },
+            id: 2
+          },
+           {
+            title: '熙熙开挂了',
+            img: { image: require('@/assets/4.jpg') },
+            id: 3
+          },
+           {
+            title: '熙熙逛窑子了',
+            img: { image: require('@/assets/9.jpg') },
+            id: 4
+          }, {
+            title: '熙熙败了',
+            img: { image: require('@/assets/1.jpg') },
+            id: 5
+          }
+          ],
         showBookList: [],
         newOrLast: false
        
@@ -210,7 +260,7 @@ import axios from 'axios'
     position: relative;
     background-color: #666;
     height: 550px;
-    margin-bottom: 5px;
+    margin-bottom: 0px;
   }
   .arrangement {
     position: absolute;
