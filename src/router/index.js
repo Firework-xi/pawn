@@ -38,6 +38,11 @@ const routes = [
         path: '/booktown',
         name: 'booktown',
         component: () => import('@/components/booktown/booktown')
+      },
+      {
+        path: '/bookrack',
+        name: 'bookrack',
+        component: () => import('@/components/bookrack/bookrack.vue')
       }
     ]
   },
@@ -68,6 +73,11 @@ const routes = [
     path: '/my-set',
     name: 'my-set',
     component: () => import('@/components/my/my-set')
+  },
+  {
+    path: '/search',
+    name: 'search',
+    component: () => import('@/components/search/index.vue')
   }
 
   // 二级书本详情路由

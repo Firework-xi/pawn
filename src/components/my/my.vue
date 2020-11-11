@@ -47,6 +47,9 @@ export default {
       this.$router.push('/my-count')
     },
     async userInfo() {
+      if (!window.localStorage.getItem('coins')) {
+        window.localStorage.setItem('coins', 100)
+      }
       const data = await this.$http.get('http://yuedu/myuser')
       console.log(data)
       this.user = data.data
