@@ -35,7 +35,7 @@
         <template #left-icon> <van-icon name="bag-o" /></template>
       </van-field>
       <div style="margin: 20px 46px 10px">
-        <van-button round block type="info" native-type="toRegister" color="#ffca4f"> 去登陆 </van-button>
+        <van-button round block type="info" native-type="toRegister" color="#ffca4f"> 注册成功 </van-button>
       </div>
     </van-form>
     <!-- /去注册 -->
@@ -116,14 +116,19 @@
        forbidClick: true,
        duration: 0
       })
-      this.$toast.success('进入首页')
+      this.$toast.success('进入书城')
       window.localStorage.setItem('token', true)
        this.$router.push('/my')
     },
     // 注册
     toRegister() {
-         window.localStorage.setItem('register', JSON.stringify({ name: this.username2, password: this.password2 }))
-         this.LoginOrRegister = true
+         window.localStorage.setItem('register', JSON.stringify({ user: this.usermobile, password: this.setpassword }))
+         if (this.confirmpassword === this.setpassword) {
+           this.$toast('注册成功')
+           this.LoginOrRegister = true
+         } else {
+           this.$toast('两次密码不一致')
+         }
     },
     // 返回
     onClickLeft() {
@@ -132,9 +137,6 @@
     // 去注册
     zhuChu() {
       this.LoginOrRegister = false
-      // this.username2 = ''
-      // this.password2 = ''
-      // this.password3 = ''
     },
     // 随便看看
     loginLogin() {
@@ -143,7 +145,7 @@
        forbidClick: true,
        duration: 0
       })
-       this.$toast.success('进入首页')
+       this.$toast.success('进入书城')
       this.$router.push('/my')
       window.localStorage.setItem('token', false)
     }

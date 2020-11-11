@@ -7,10 +7,12 @@
     <div class="login-center">
       <div class="login-img" @click="isone = 1">
         <van-image width="80" :class="isone === 1 ? 'bor' : ''" round fit="cover" height="80" @click="male" :src="require('../../../assets/nan.png')" />
+        <van-icon v-if="isone === 1" name="success" class="sucess" />
         <span class="gender">男生</span><span class="short-essay">热血爽文，酷帅狂拽</span>
       </div>
       <div class="login-img" @click="isone = 2">
         <van-image width="80" :class="isone === 2 ? 'bor' : ''" round fit="cover" @click="female" height="80" :src="require('../../../assets//nv.png')" />
+        <van-icon v-if="isone === 2" name="success" class="sucess" />
         <span class="gender">女生</span><span class="short-essay">总裁王爷，绝不将就</span>
       </div>
     </div>
@@ -39,7 +41,7 @@
   watch: {},
   created () {
     if (window.localStorage.getItem('choice')) {
-      this.$router.push('/login')
+      this.$router.push('/my')
     }
   },
   mounted () {},
@@ -50,13 +52,14 @@
         return this.$toast('请选择性别')
       }
       this.$toast.loading({
-        message: '加载中...',
-         forbidClick: true,
-         duration: 0
-        })
-         window.localStorage.setItem('choice', this.index)
-        this.$router.push('/login')
-        this.$toast.success('进入首页')
+       message: '加载中...',
+       forbidClick: true,
+       duration: 0
+      })
+        window.localStorage.setItem('choice', this.index)
+        window.localStorage.setItem('token', false)
+         this.$toast.success('进入书城')
+        this.$router.push('/my')
     },
     // 男
     male() {
@@ -143,7 +146,13 @@
   .login-center {
     display: flex;
     margin: 260px 0;
-
+    position: relative;
+    .sucess {
+      position: absolute;
+      font-size: 100px;
+      top: 40px;
+      color: #ef8c56;
+    }
     .login-img {
       width: 100;
       flex: 1;

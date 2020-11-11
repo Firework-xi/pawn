@@ -87,7 +87,7 @@
   computed: {},
   watch: {},
   created () {
-    if (window.localStorage.getItem('token')) {
+    if (window.localStorage.getItem('token') === true) {
     this.$router.push('/my')
     }
   },
@@ -106,8 +106,9 @@
       })
       this.showShare = false
       window.localStorage.setItem('disanfangs', JSON.stringify({ name: 18707482845, password: 123456 }))
+      
       this.$router.push('/my')
-      this.$toast.success('进入首页')
+      this.$toast.success('进入我的')
     },
     // 登陆
      onSubmit(values) {
@@ -116,14 +117,22 @@
        forbidClick: true,
        duration: 0
       })
-      this.$toast.success('进入首页')
+      this.$toast.success('进入我的')
       window.localStorage.setItem('token', true)
+      window.localStorage.setItem('land', JSON.stringify({ user: this.username, password: this.password }))
        this.$router.push('/my')
     },
     // 注册
     toRegister() {
-         window.localStorage.setItem('register', JSON.stringify({ name: this.username2, password: this.password2 }))
-         this.LoginOrRegister = true
+         if (this.confirmpassword === this.setpassword) {
+           this.$toast('注册成功')
+           this.LoginOrRegister = true
+           window.localStorage.setItem('register', JSON.stringify({ user: this.usermobile, password: this.setpassword }))
+         } else {
+           this.$toast('两次密码不一致')
+         }
+         this.username = this.usermobile
+         this.password = this.setpassword
     },
     // 返回
     onClickLeft() {
