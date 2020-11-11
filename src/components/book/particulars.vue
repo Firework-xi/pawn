@@ -1,11 +1,16 @@
 <template>
   <div class="particulars">
     <van-nav-bar left-arrow @click-right="onClickRight" fixed :class="{ borde: altitude }">
-      <template #title v-if="altitude"> 书籍详情</template>
+      <!-- <template #title v-if="altitude"> 书籍详情</template> -->
+      <template #title>
+        <transition name="van-fade">
+          <div v-show="altitude">书籍详情</div>
+        </transition>
+      </template>
     </van-nav-bar>
     <!--  //导航 -->
     <!-- 图书介绍区 -->
-    <div class="box" ref="lost-gome" @change="onchange">
+    <div class="box" ref="lost-gome">
       <div class="introduce">
         <div class="left">
           <van-image fit="cover" src="https://img.yzcdn.cn/vant/cat.jpeg" />
@@ -60,7 +65,7 @@ export default {
   data() {
     return {
       number: 4,
-      altitude: false
+      altitude: false,
     }
   },
   methods: {
@@ -82,9 +87,11 @@ this.$http.get('http://yuedu/details')
   }, 
 mounted () { // 监听器头的事件
  const atraters = this.$refs['lost-gome']
+ console.log(atraters)
     atraters.onscroll = debounce(() => {
        if (atraters.scrollTop > 80) {
          this.altitude = true
+         console.log(this.altitude)
        } else {
          this.altitude = false
        }

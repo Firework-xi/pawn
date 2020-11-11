@@ -9,7 +9,7 @@ Vue.use(VueRouter)
 const routes = [
   {
     // 选择性别
-    path: '/choice',
+    path: '',
     name: 'choice',
     component: () => import('@/components/my/login/login-choice.vue')
   },
@@ -17,7 +17,10 @@ const routes = [
     // 春暖阅读
     path: '/loginland',
     name: 'loginland',
-    component: () => import('@/components/my/login/login-land.vue')
+    component: () => import('@/components/my/login/login-land.vue'),
+    meta: { index: 1 }
+
+
   },
   {
     path: '/name',
@@ -28,11 +31,13 @@ const routes = [
     path: '/',
     name: 'Home',
     component: Home,
+    meta: { index: 2 },
     children: [
       {
         path: '/my',
         name: 'my',
-        component: () => import('@/components/my/my.vue')
+        component: () => import('@/components/my/my.vue'),
+        meta: { index: 2 },
       }
     ]
   },
@@ -40,7 +45,7 @@ const routes = [
   {
     path: '/particulars',
     name: 'particulars',
-    component: () => import('../views/book/particulars.vue')
+    component: () => import('@/components/book/particulars.vue')
   },
   {
     path: '/read',

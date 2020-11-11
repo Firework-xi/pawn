@@ -47,6 +47,7 @@ export default {
   methods: {
     isLoginOutShow() {
       this.show = true
+      this.$router.push('/loginland')
     }
   }
 }
