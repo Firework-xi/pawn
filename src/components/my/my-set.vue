@@ -1,3 +1,4 @@
+import { mapState } from 'vuex';
 <template>
   <!-- 设置页面 -->
   <div class="my-set">
@@ -20,16 +21,17 @@
       <van-cell title="退出登录" class="loginOut" @click="isLoginOutShow" />
     </van-cell-group>
     <!-- 点击退出登录弹出框 -->
-    <van-popup v-model="show" :style="{ height: '15%' }" position="bottom" class="popupBtn" overlay-style="opacity:0.1">
+    <van-popup v-model="show" :style="{ height: '15%' }" position="bottom" class="popupBtn">
       <div class="exitBtn">
-        <van-button type="default" size="large">退出登录</van-button>
-        <van-button type="default" size="large">取消</van-button>
+        <van-button type="default" size="large" @click="loginOut">退出登录</van-button>
+        <van-button type="default" size="large" @click="editLogin">取消</van-button>
       </div>
     </van-popup>
   </div>
 </template>
 
 <script>
+import { mapState } from 'vuex'
 export default {
   name: 'MySet',
   components: {},
@@ -40,13 +42,24 @@ export default {
       show: false
     }
   },
-  computed: {},
+  computed: {
+    ...mapState(['isLogin'])
+  },
   watch: {},
   created() {},
   mounted() {},
   methods: {
     isLoginOutShow() {
       this.show = true
+    },
+    // 点击取消按钮 隐藏显示框
+    editLogin() {
+      this.show = false
+    },
+    // 点击确认退出按钮
+    loginOut() {
+      this.$store.commit('setIsLogin', '')
+      this.$router.push('/my')
     }
   }
 }

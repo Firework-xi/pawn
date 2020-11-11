@@ -13,10 +13,10 @@
     <!-- 登陆 -->
     <van-form v-if="LoginOrRegister" @submit="onSubmit" class="login-form">
       <van-field v-model="username" name="user" placeholder="请输入用户名" :rules="userFormRules.user" maxlength="11"
-        ><template #left-icon> <van-icon name="friends-o" /></template
+        ><template #left-icon> <van-icon name="friends-o"/></template
       ></van-field>
       <van-field v-model="password" type="password" name="pwd" placeholder="请输入密码" :rules="userFormRules.pwd" maxlength="6">
-        <template #left-icon> <van-icon name="bag-o" /></template>
+        <template #left-icon> <van-icon name="bag-o"/></template>
       </van-field>
       <div style="margin: 20px 46px 10px">
         <van-button round block type="info" native-type="submit" color="#ffca4f"> 立即登陆 </van-button>
@@ -28,13 +28,13 @@
     <!-- 去注册 -->
     <van-form v-else @submit="toRegister" class="login-form">
       <van-field v-model="username2" name="mobile" type="number" placeholder="请输入手机号" :rules="userFormRules.mobile" maxlength="11"
-        ><template #left-icon> <van-icon name="friends-o" /></template
+        ><template #left-icon> <van-icon name="friends-o"/></template
       ></van-field>
       <van-field v-model="value" type="password" name="validator" placeholder="设置新密码" :rules="userFormRules.pwd2" maxlength="6">
-        <template #left-icon> <van-icon name="bag-o" /></template>
+        <template #left-icon> <van-icon name="bag-o"/></template>
       </van-field>
       <van-field v-model="password3" type="password" name="asyncValidator" placeholder="确认密码" :rules="userFormRules.pwd3" maxlength="6">
-        <template #left-icon> <van-icon name="bag-o" /></template>
+        <template #left-icon> <van-icon name="bag-o"/></template>
       </van-field>
       <div style="margin: 20px 46px 10px">
         <van-button round block type="info" native-type="toRegister" color="#ffca4f"> 去登陆 </van-button>
@@ -52,11 +52,11 @@
 </template>
 
 <script>
-  export default {
-    name: 'LoginLand',
-    components: {},
-    props: {},
-    data () {
+export default {
+  name: 'LoginLand',
+  components: {},
+  props: {},
+  data() {
     return {
       // 接收登陆数据
       username: '',
@@ -66,7 +66,7 @@
       value: '',
       password3: '',
       showShare: false,
-       options: [
+      options: [
         { name: '微信', icon: 'wechat' },
         { name: '微博', icon: 'weibo' },
         { name: 'QQ', icon: 'qq' }
@@ -74,34 +74,36 @@
       userFormRules: {
         user: [{ required: true, message: '用户名不能为空' }],
         pwd: [{ required: true, message: '密码不能为空' }],
-         mobile: [{ required: true, message: '手机号不能为空' }, { pattern: /^1[3|5|7|8]\d{9}$/, message: '手机号格式错误' }],
+        mobile: [
+          { required: true, message: '手机号不能为空' },
+          { pattern: /^1[3|5|7|8]\d{9}$/, message: '手机号格式错误' }
+        ],
         validator: [{ required: true, message: '密码不能为空' }],
         asyncValidator: [{ required: true, message: '密码不能为空' }]
       },
       register: {},
       LoginOrRegister: true
-      
     }
   },
   computed: {},
   watch: {},
-  created () {
-    if (window.localStorage.getItem('toke')) {
-    this.$router.push('/my')
+  created() {
+    if (window.localStorage.getItem('token')) {
+      this.$router.push('/my')
     }
   },
-  mounted () {
+  mounted() {
     window.addEventListener('transitionend', function() {
       // 跳转
     })
   },
   methods: {
     // 第三方登陆
-     onSelect(option) {
-       this.$toast.loading({
-       message: '加载中...',
-       forbidClick: true,
-       duration: 0
+    onSelect(option) {
+      this.$toast.loading({
+        message: '加载中...',
+        forbidClick: true,
+        duration: 0
       })
       this.showShare = false
       window.localStorage.setItem('disanfangs', JSON.stringify({ name: 18707482845, password: 123456 }))
@@ -109,20 +111,20 @@
       this.$toast.success('进入首页')
     },
     // 登陆
-     onSubmit(values) {
-       this.$toast.loading({
-       message: '加载中...',
-       forbidClick: true,
-       duration: 0
+    onSubmit(values) {
+      this.$toast.loading({
+        message: '加载中...',
+        forbidClick: true,
+        duration: 0
       })
       this.$toast.success('进入首页')
       window.localStorage.setItem('token', true)
-       this.$router.push('/my')
+      this.$router.push('/my')
     },
     // 注册
     toRegister() {
-         window.localStorage.setItem('register', JSON.stringify({ name: this.username2, password: this.password2 }))
-         this.LoginOrRegister = true
+      window.localStorage.setItem('register', JSON.stringify({ name: this.username2, password: this.password2 }))
+      this.LoginOrRegister = true
     },
     // 返回
     onClickLeft() {
@@ -135,11 +137,8 @@
       // this.password2 = ''
       // this.password3 = ''
     }
-    
-
-
   }
-  }
+}
 </script>
 
 <style lang="scss" scoped>
