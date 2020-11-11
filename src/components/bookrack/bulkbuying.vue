@@ -11,10 +11,12 @@
       </van-cell-group>
     </van-checkbox-group>
     <div v-if="show" class="gmzj">
-      <h3>已选： {{ zjs }} 章节</h3>
-      <p>价格：0 春卷 余额：100 春卷</p>
-      <van-button round type="primary">免费下载</van-button>
-      <div class="cz">
+      <h3>已选： {{ zj }} 章节</h3>
+      <p>价格：{{ jiage }} 春卷 余额：{{ yue }} 春卷</p>
+      <van-button v-if="result.length === 0" round type="primary" color="#ccc" disabled>请选择购买章节</van-button>
+      <!-- <van-button v-else-if="result.length" round type="primary">免费下载</van-button> -->
+      <van-button v-else-if="gman" round type="danger">购买并下载</van-button>
+      <div class="cz" v-if="cz">
         <van-divider>余额不足，充值并购买 </van-divider>
         <van-button type="default">
           <p>1元</p>
@@ -43,19 +45,29 @@ export default {
     return {
       list: [],
       result: [],
-      checkek: true,
       show: true,
-      zj: 0
+      cz: false,
+      gman: false,
+      zj: 0,
+      jiage: 0,
+      yue: 30
     }
   },
   created() {
     this.catalogs()
   },
-  computed: {
-    // eslint-disable-next-line vue/return-in-computed-property
-    zjs: function() {
-      // eslint-disable-next-line vue/no-side-effects-in-computed-properties
-      return (this.zj = this.result.length)
+  computed: {},
+  watch: {
+    result: function(newQuestion, oldQuestion) {
+      this.zj = this.result.length
+      this.jiage = this.result.length * 10
+      if (this.jiage > this.yue) {
+        this.cz = true
+        this.gman = false
+      } else {
+        this.cz = false
+        this.gman = true
+      }
     }
   },
   methods: {
@@ -65,15 +77,12 @@ export default {
     async catalogs() {
       const { data: res } = await this.$http.get('http://yuedu/read')
       this.list = res.data
-      console.log('catalogs -> this.list', this.list)
     },
     onClickRight() {
-      if (this.checkek) {
+      if (this.result.length < this.list.length) {
         this.$refs.checkboxGroup.toggleAll(true)
-        this.checkek = false
       } else {
         this.$refs.checkboxGroup.toggleAll()
-        this.checkek = true
       }
     }
   }
@@ -101,6 +110,7 @@ export default {
   .van-button {
     width: 50%;
     height: 70px;
+    margin-bottom: 20px;
   }
   .cz {
     .van-button {

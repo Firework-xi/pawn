@@ -63,7 +63,7 @@
     <van-popup :close-on-click-overlay="false" v-model="goumai" position="bottom" :style="{ height: '60%' }">
       <div class="goumai">
         <h3>需要购买后阅读！</h3>
-        <p><i>本节价格：10 春卷</i> 余额：100 春卷</p>
+        <p><i>本节价格：10 春卷</i> 余额：30 春卷</p>
         <van-button type="danger" round @click="goumai = false">购买本章</van-button>
         <van-button class="pl" to="/bulkbuying">批量购买章节</van-button>
         <van-checkbox v-model="checked">自动购买下一章</van-checkbox>

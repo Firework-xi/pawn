@@ -35,7 +35,7 @@
           </van-swipe>
           <!-- 内容 -->
           <div class="box-botton">
-            <div class="box" v-for="(item, index) in information" :key="index">
+            <div class="box" v-for="(item, index) in information" :key="index" @click="$router.push('/particulars')">
               <div class="book-cover">
                 <van-image width="100%" :src="item.img" />
               </div>
@@ -100,7 +100,7 @@
         <div class="buttonText"><span class="iconfont icon-shuaxin"></span>换一批</div>
       </div>
       <van-grid :gutter="10">
-        <van-grid-item v-for="value in 8" :key="value" text="诡道传人"  />
+        <van-grid-item v-for="value in 8" :key="value" text="诡道传人" />
       </van-grid>
     </van-popup>
   </div>
@@ -309,8 +309,8 @@ export default {
     justify-content: center;
     align-items: center;
     justify-content: space-between;
-    .character {
-    }
+    // .character {
+    // }
   }
 }
 </style>

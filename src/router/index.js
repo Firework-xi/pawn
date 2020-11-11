@@ -33,6 +33,11 @@ const routes = [
         path: '/my',
         name: 'my',
         component: () => import('@/components/my/my.vue')
+      },
+      {
+        path: '/booktown',
+        name: 'booktown',
+        component: () => import('@/components/booktown/booktown')
       }
     ]
   },
@@ -40,14 +45,16 @@ const routes = [
   {
     path: '/particulars',
     name: 'particulars',
-    component: () => import('../views/book/particulars.vue')
+    component: () => import('../components/book/particulars.vue')
   },
   {
+    // 阅读详情
     path: '/read',
     name: 'read',
     component: read
   },
   {
+    // 批量购买
     path: '/bulkbuying',
     name: 'bulkbuying',
     component: bulkbuying
@@ -61,7 +68,9 @@ const routes = [
     path: '/my-set',
     name: 'my-set',
     component: () => import('@/components/my/my-set')
-  } // 二级书本详情路由
+  }
+
+  // 二级书本详情路由
 
   // {
   //   path: '/about',
