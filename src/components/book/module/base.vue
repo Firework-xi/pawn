@@ -3,7 +3,7 @@
     <div class="box-base">
       <van-row>
         <van-col span="7"><van-button>下载</van-button></van-col>
-        <van-col span="10"><van-button class="colored">免费试读</van-button></van-col>
+        <van-col span="10"><van-button class="colored" to="/read">免费试读</van-button></van-col>
         <van-col span="7"><van-button>加入书架</van-button></van-col>
       </van-row>
     </div>
@@ -11,9 +11,7 @@
 </template>
 
 <script>
-  export default {
-    
-  }
+export default {}
 </script>
 
 <style lang="scss" scoped>

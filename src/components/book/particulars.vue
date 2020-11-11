@@ -30,7 +30,7 @@
         <div class="van-multi-ellipsis--l3">
           <p>命里有时终须有，命里无时要强求。</p>
           <p class="texte-p">
-            这是一个长生果的故事。择是选择。这是一个关于选择的故事。三千世界，满天神魔，手握道卷，掌天下...<span> <van-icon name="arrow-down" /></span>
+            这是一个长生果的故事。择是选择。这是一个关于选择的故事。三千世界，满天神魔，手握道卷，掌天下...<span> <van-icon name="arrow-down"/></span>
           </p>
         </div>
       </div>
@@ -74,10 +74,10 @@ export default {
       console.log(res)
     },
     onClickRight() {
-this.$http.get('http://yuedu/details')
+      this.$http.get('http://yuedu/details')
       // 书籍返回事件
-    } 
-  }, 
+    }
+  },
   components: {
     catalog,
     ofthesameki,
