@@ -41,7 +41,7 @@
   watch: {},
   created () {
     if (window.localStorage.getItem('choice')) {
-      this.$router.push('/my')
+      this.$router.push('/bookrack')
     }
   },
   mounted () {},
@@ -59,7 +59,7 @@
         window.localStorage.setItem('choice', this.index)
         window.localStorage.setItem('token', false)
          this.$toast.success('进入书城')
-        this.$router.push('/my')
+        this.$router.push('/bookrack')
     },
     // 男
     male() {
