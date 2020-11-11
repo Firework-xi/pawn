@@ -13,7 +13,7 @@
 export default {
   data() {
     return {
-      active: 0
+      active: 2
     }
   },
   created() {

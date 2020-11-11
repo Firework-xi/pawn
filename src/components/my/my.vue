@@ -4,6 +4,7 @@
     <div class="my-heard">
       <div class="login-btn">
         <van-image width="100" height="100" fit="cover" round src="https://img.yzcdn.cn/vant/cat.jpeg" />
+        <!-- <span class="text"> {{ user.name ? user.name : '名字' }} </span> -->
         <span class="text"> {{ user.name }} </span>
       </div>
     </div>
@@ -51,7 +52,6 @@ export default {
         window.localStorage.setItem('coins', 100)
       }
       const data = await this.$http.get('http://yuedu/myuser')
-      console.log(data)
       this.user = data.data
     }
   }
@@ -72,6 +72,7 @@ export default {
       justify-content: center;
       align-items: center;
       .text {
+        height: 30 * 2px;
         font-size: 30px;
         padding-top: 15px;
       }
