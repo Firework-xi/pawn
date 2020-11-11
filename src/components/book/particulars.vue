@@ -1,6 +1,6 @@
 <template>
   <div class="particulars">
-    <van-nav-bar left-arrow @click-right="onClickRight" fixed :class="{ borde: altitude }">
+    <van-nav-bar left-arrow @click-right="onClickRight" fixed :class="{ borde: altitude }" @click-left="$router.back()">
       <template #title v-if="altitude"> 书籍详情</template>
     </van-nav-bar>
     <!--  //导航 -->
