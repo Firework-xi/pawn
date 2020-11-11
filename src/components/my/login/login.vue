@@ -1,8 +1,8 @@
 <template>
   <div>
     <!-- <van-image :class="isone ? '' : 'van'" @click="isone = false" width="100" height="100" src="https://img.yzcdn.cn/vant/cat.jpeg" /> -->
-    <van-image  width="100" height="100" @click="isones" src="https://img.yzcdn.cn/vant/cat.jpeg" />
-    <van-image  width="100" height="100" src="https://img.yzcdn.cn/vant/cat.jpeg" />
+    <van-image width="100" height="100" @click="isones" src="https://img.yzcdn.cn/vant/cat.jpeg" />
+    <van-image width="100" height="100" src="https://img.yzcdn.cn/vant/cat.jpeg" />
   </div>
 </template>
 
@@ -25,7 +25,7 @@
   },
   mounted () {},
   methods: { 
-    isones(){} 
+    isones() {} 
   }
     
   }
