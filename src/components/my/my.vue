@@ -3,7 +3,13 @@
     <!-- 用户登录状态 -->
     <div class="my-heard">
       <div class="login-btn">
-        <van-image width="100" height="100" fit="cover" round src="https://img.yzcdn.cn/vant/cat.jpeg" />
+        <van-image
+          width="100"
+          height="100"
+          fit="cover"
+          round
+          src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1605085869203&di=d8544ac7fc3c9f35155b986322b0ed59&imgtype=0&src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201903%2F03%2F20190303000426_llvpp.thumb.400_0.jpeg"
+        />
         <span class="text"> {{ user.name }} </span>
       </div>
     </div>
@@ -59,7 +65,8 @@ export default {
 .my-page {
   .my-heard {
     height: 450px;
-    background-color: pink;
+    background-image: url('https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1605085869203&di=d8544ac7fc3c9f35155b986322b0ed59&imgtype=0&src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201903%2F03%2F20190303000426_llvpp.thumb.400_0.jpeg');
+    background-size: cover;
     display: flex;
     justify-content: center;
     align-items: center;

@@ -1,11 +1,11 @@
 <template>
   <div class="particulars">
-    <van-nav-bar left-arrow @click-right="onClickRight" fixed :class="{ borde: altitude }">
+    <van-nav-bar left-arrow @click-right="onClickRight" fixed :class="{ borde: altitude }" @click-left="$router.back()">
       <template #title v-if="altitude"> 书籍详情</template>
     </van-nav-bar>
     <!--  //导航 -->
     <!-- 图书介绍区 -->
-    <div class="box" ref="lost-gome" @change="onchange">
+    <div class="box" ref="lost-gome">
       <div class="introduce">
         <div class="left">
           <van-image fit="cover" src="https://img.yzcdn.cn/vant/cat.jpeg" />
@@ -25,7 +25,7 @@
         <div class="van-multi-ellipsis--l3">
           <p>命里有时终须有，命里无时要强求。</p>
           <p class="texte-p">
-            这是一个长生果的故事。择是选择。这是一个关于选择的故事。三千世界，满天神魔，手握道卷，掌天下...<span> <van-icon name="arrow-down" /></span>
+            这是一个长生果的故事。择是选择。这是一个关于选择的故事。三千世界，满天神魔，手握道卷，掌天下...<span> <van-icon name="arrow-down"/></span>
           </p>
         </div>
       </div>
@@ -69,25 +69,26 @@ export default {
       console.log(res)
     },
     onClickRight() {
-this.$http.get('http://yuedu/details')
+      this.$http.get('http://yuedu/details')
       // 书籍返回事件
-    } 
-  }, 
+    }
+  },
   components: {
     catalog,
     ofthesameki,
     complete,
     detaile: details,
     basehandle: base
-  }, 
-mounted () { // 监听器头的事件
- const atraters = this.$refs['lost-gome']
+  },
+  mounted() {
+    // 监听器头的事件
+    const atraters = this.$refs['lost-gome']
     atraters.onscroll = debounce(() => {
-       if (atraters.scrollTop > 80) {
-         this.altitude = true
-       } else {
-         this.altitude = false
-       }
+      if (atraters.scrollTop > 80) {
+        this.altitude = true
+      } else {
+        this.altitude = false
+      }
     }, 10)
   }
 }

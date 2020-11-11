@@ -2,7 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import read from '@/components/bookrack/read.vue'
-import bulkbuying from '@/components/bookrack/bulkbuying .vue'
+import bulkbuying from '@/components/bookrack/bulkbuying.vue'
 
 Vue.use(VueRouter)
 
@@ -35,9 +35,9 @@ const routes = [
         component: () => import('@/components/my/my.vue')
       },
       {
-        path: '/BookTown',
+        path: '/booktown',
         name: 'booktown',
-        component: () => import('@/components/booktown/booktown.vue')
+        component: () => import('@/components/booktown/booktown')
       }
     ]
   },
@@ -45,19 +45,19 @@ const routes = [
   {
     path: '/particulars',
     name: 'particulars',
-    component: () => import('../views/book/particulars.vue')
+    component: () => import('../components/book/particulars.vue')
   },
   {
+    // 阅读详情
     path: '/read',
     name: 'read',
-    component: read,
-    children: [
-      {
-        path: '/bulkbuying',
-        name: 'bulkbuying',
-        component: bulkbuying
-      }
-    ]
+    component: read
+  },
+  {
+    // 批量购买
+    path: '/bulkbuying',
+    name: 'bulkbuying',
+    component: bulkbuying
   },
   {
     path: '/my-count',
@@ -68,7 +68,9 @@ const routes = [
     path: '/my-set',
     name: 'my-set',
     component: () => import('@/components/my/my-set')
-  } // 二级书本详情路由
+  }
+
+  // 二级书本详情路由
 
   // {
   //   path: '/about',
