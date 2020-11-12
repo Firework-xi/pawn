@@ -21,9 +21,9 @@ export default {
   },
   methods: {
     getItems() {
-      console.log(window.sessionStorage.getItem('actives'))
+      // console.log(window.sessionStorage.getItem('actives'))
       this.active = parseInt(window.sessionStorage.getItem('actives'))
-      console.log('getItems -> this.active', this.active)
+      // console.log('getItems -> this.active', this.active)
     },
     onChange() {
       window.sessionStorage.setItem('actives', this.active)

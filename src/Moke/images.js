@@ -67,9 +67,119 @@ export default {
       url: 'http://yuedu/title',
       request: 'get',
       manage: options => {
+         const data = [
+           {
+            name: '精选',
+            id: 1, 
+        },
+           {
+            name: '男频',
+            id: 2, 
+        },
+           {
+            name: '女频',
+            id: 3, 
+        },
+           {
+            name: '免费',
+            id: 4, 
+        },
+           {
+            name: '热读',
+            id: 5, 
+        },
+           {
+            name: '新书',
+            id: 6, 
+        },
+           {
+            name: '完本',
+            id: 7, 
+        },
+        {
+            name: '奇幻',
+            id: 8, 
+        },
+        {
+            name: '武侠',
+            id: 9,   
+        },
+        {
+            name: '仙侠',
+            id: 10,   
+        },
+        {
+            name: '都市',
+            id: 11,  
+        },
+        {
+            name: '职场',
+            id: 12,   
+        },
+        {
+            name: '历史',
+            id: 13,            
+        },
+        {
+            name: '军事',
+            id: 14,   
+        },
+        {
+            name: '游戏',
+            id: 15,          
+        },
+        {
+            name: '竞技',
+            id: 16,           
+        },
+        {
+            name: '科幻',
+            id: 17,           
+        },
+        {
+            name: '灵异',
+            id: 18,           
+        },
+        {
+            name: '同人',
+            id: 19,           
+        },
+        {
+            name: '轻小说',
+            id: 20,           
+          },
+        {
+            name: '古代言情',
+            id: 21,          
+        },
+        {
+            name: '现代言情',
+            id: 22,         
+        },
+        {
+            name: '青春校园',
+            id: 23,         
+        },
+        {
+            name: '纯爱',
+            id: 24,         
+        },
+        {
+            name: '玄幻奇幻',
+            id: 25,            
+        },
+        {
+            name: '武侠仙侠',
+            id: 26,            
+        },
+        {
+            name: '科幻',
+            id: 27,           
+          },
+         ]
         return {
           state: 200,
-          data: ['精选', '男频', '女频', '免费', '热读', '新书', '完本']
+         data: data
         }
       }
     },
@@ -164,7 +274,7 @@ export default {
           {
             id: 2,
             booksName: '奇幻',
-            booksNumber: '共191443册'
+            booksNumber: '共19144册'
           },
           {
             id: 3,
@@ -241,12 +351,12 @@ export default {
           {
             id: 1,
             booksName: '古代言情',
-            booksNumber: '共119522册'
+            booksNumber: '共11952册'
           },
           {
             id: 2,
             booksName: '现代言情',
-            booksNumber: '共125280册'
+            booksNumber: '共12528册'
           },
           {
             id: 3,
@@ -291,142 +401,25 @@ export default {
           {
             id: 11,
             booksName: '宫闱宅斗',
-            booksNumber: '共121483册'
+            booksNumber: '共12148册'
           },
           {
             id: 12,
             booksName: '穿越奇情',
-            booksNumber: '共174719册'
+            booksNumber: '共17471册'
           },
           {
             id: 13,
             booksName: '清穿民国',
-            booksNumber: '共166666册'
+            booksNumber: '共16666册'
           },
           {
             id: 14,
             booksName: '青春校园',
-            booksNumber: '共232323册'
+            booksNumber: '共23232册'
           }
         ]
         return {
-          state: 200,
-          data
-        }
-      }
-    }, {
-      url: 'http://yuedu/channel',
-      request: 'get',
-      manage: options => {
-        const data = [
-           {
-            name: '玄幻',
-            bookCount: 193438,
-           
-        },
-        {
-            name: '奇幻',
-            bookCount: 26783,
-            
-        },
-        {
-            name: '武侠',
-            bookCount: 18538,
-            
-        },
-        {
-            name: '仙侠',
-            bookCount: 55804,
-           
-        },
-        {
-            name: '都市',
-            bookCount: 115502,
-           
-        },
-        {
-            name: '职场',
-            bookCount: 4390,
-            
-        },
-        {
-            name: '历史',
-            bookCount: 26271,
-            
-        },
-        {
-            name: '军事',
-            bookCount: 6331,
-           
-        },
-        {
-            name: '游戏',
-            bookCount: 26769,
-           
-        },
-        {
-            name: '竞技',
-            bookCount: 1510,
-           
-        },
-        {
-            name: '科幻',
-            bookCount: 42257,
-           
-        },
-        {
-            name: '灵异',
-            bookCount: 27585,
-           
-        },
-        {
-            name: '同人',
-            bookCount: 4784,
-           
-        },
-        {
-            name: '轻小说',
-            bookCount: 21839,
-           
-          },
-        {
-            name: '古代言情',
-            bookCount: 214879,
-          
-        },
-        {
-            name: '现代言情',
-            bookCount: 248350,
-          
-        },
-        {
-            name: '青春校园',
-            bookCount: 66459,
-         
-        },
-        {
-            name: '纯爱',
-            bookCount: 1302,
-           
-        },
-        {
-            name: '玄幻奇幻',
-            bookCount: 10459,
-            
-        },
-        {
-            name: '武侠仙侠',
-            bookCount: 5596,
-            
-        },
-        {
-            name: '科幻',
-            bookCount: 5350,
-           
-        },
-        
-    ]
-          return {
           state: 200,
           data
         }
