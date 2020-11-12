@@ -36,6 +36,15 @@ export default {
       if (index !== -1) {
         this.text = '取消加入'
       }
+    }, // 加入书架
+    setkeynull(item) {
+      let data = JSON.parse(window.localStorage.getItem('list'))
+      const index = data.findIndex(v => {
+        return v.bookId === item.bookId
+      })
+      if (index === -1) {
+        this.text = '加入书架'
+      }
     },
     clickindex() {
       // 加入书架

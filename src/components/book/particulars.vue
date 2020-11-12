@@ -54,7 +54,7 @@
       <!-- 图书详情 -->
       <detaile></detaile>
     </div>
-    <basehandle />
+    <basehandle ref="myordernum" />
     <van-popup v-model="show" position="bottom" :style="{ height: '100%' }">
       <van-nav-bar title="全部章节" left-text="返回" border @click-left="show = false" />
       <van-list v-model="loading" :finished="finished" finished-text="目录加载完成">
@@ -63,7 +63,6 @@
     </van-popup>
   </div>
 </template>
-
 <script>
 import catalog from './module/catalog' // 目录组件
 import ofthesameki from './module/ofthesamekind' // 同类作品组件
@@ -127,10 +126,12 @@ export default {
     addwhole(v) {
       // 作品页
       this.data = v
+       this.$refs.myordernum.setkeynull(v)
       window.localStorage.setItem('data', JSON.stringify(v))
     },
     classify(v) {
       this.data = v
+       this.$refs.myordernum.setkeynull(v)
       window.localStorage.setItem('data', JSON.stringify(v))
     }
   },

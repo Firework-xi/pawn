@@ -38,12 +38,12 @@
     <van-popup v-model="catalog" @close="gb = false" position="left" :style="{ height: '100%', width: '70%' }">
       <van-cell-group>
         <van-cell type="text" class="biaoti">
-          <p>失控</p>
-          <span>完结 共24章</span>
+          <p>{{ list.author }}</p>
+          <span>{{ list.word }}</span>
         </van-cell>
       </van-cell-group>
-      <van-cell-group v-for="(item, index) in list" :key="index">
-        <van-cell :title="item.zhangjie" @click="getwznr(index)" />
+      <van-cell-group v-for="(item, index) in list.muli" :key="index">
+        <van-cell :title="item" @click="getwznr(index)" />
       </van-cell-group>
     </van-popup>
     <!-- 购买章节 -->
@@ -184,10 +184,11 @@ export default {
         this.catalog = true
         this.show = false
       }
-      const id = window.localStorage.getItem('data')
-      const { data: res } = await this.$http.get(`http://yuedu/details/${id}`)
+      const data = JSON.parse(window.localStorage.getItem('data'))
       // const { data: res } = await this.$http.get('http://yuedu/read')
-      this.list = res.data
+      // console.log('catalogs -> data', data)
+      this.list = data
+      console.log(this.list)
     },
     gmcg() {
       const token = window.localStorage.getItem('token')
