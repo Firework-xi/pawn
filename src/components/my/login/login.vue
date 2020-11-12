@@ -149,9 +149,6 @@
       this.$router.push('/home')
       window.localStorage.setItem('token', false)
     }
-    
-
-
   }
   }
 </script>

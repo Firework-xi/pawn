@@ -60,6 +60,8 @@ export default {
     loginOut() {
       this.$store.commit('setIsLogin', '')
       this.$router.push('/my')
+
+      console.log(window.localStorage.getItem('active'))
     }
   }
 }

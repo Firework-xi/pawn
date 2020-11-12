@@ -116,7 +116,8 @@ export default {
         forbidClick: true,
         duration: 0
       })
-      this.$toast.success('进入我的')
+      window.localStorage.removeItem('active')
+      this.$toast.success('登录成功')
       window.localStorage.setItem('token', true)
       window.localStorage.setItem('land', JSON.stringify({ user: this.username, password: this.password }))
        this.$router.push('/home')
