@@ -94,7 +94,7 @@ props: {
       loading: true, 
 finished: true
     }
-  },
+  }, 
   methods: {
     listpush() {
       this.$router.push('/read')
@@ -150,6 +150,7 @@ classify(v) {
         this.altitude = false
       }
     }, 10)
+    this.$refs.myordernum.addinedx()
   }
 }
 </script>
