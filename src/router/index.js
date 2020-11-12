@@ -3,7 +3,6 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import read from '@/components/bookrack/read.vue'
 import bulkbuying from '@/components/bookrack/bulkbuying.vue'
-
 Vue.use(VueRouter)
 
 const routes = [
@@ -50,10 +49,8 @@ const routes = [
         path: '/booktown',
         name: 'booktown',
         component: () => import('@/components/booktown/booktown'), // 书城
-        meta: { index: 2 },
-
-      },
-
+        meta: { index: 2 }
+      }
     ]
   },
 
