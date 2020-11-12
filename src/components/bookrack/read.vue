@@ -2,7 +2,7 @@
   <div :class="yejian === true ? 'read' : 'read reads'">
     <div class="top-bottom" v-if="gb">
       <van-icon class="sc" name="bookmark-o" />
-      <van-nav-bar left-arrow @click-left="$router.push('/particulars')">
+      <van-nav-bar left-arrow @click-left="$router.back()">
         <template #right>
           <van-icon name="ellipsis" />
         </template>
@@ -183,10 +183,17 @@ export default {
       this.list = res.data
     },
     gmcg() {
-      this.goumai = false
-      window.localStorage.setItem('coins', parseInt(window.localStorage.getItem('coins')) - 100)
-      this.$toast.success('购买成功')
-      window.localStorage.setItem('havebought', 1)
+      const token = window.localStorage.getItem('token')
+      console.log('gmcg -> token', token)
+      if (!token) {
+        this.$toast.fail('请登录后购买')
+        this.$router.push('/loginland')
+      } else {
+        this.goumai = false
+        window.localStorage.setItem('coins', parseInt(window.localStorage.getItem('coins')) - 100)
+        this.$toast.success('购买成功')
+        window.localStorage.setItem('havebought', 1)
+      }
     },
     yjms() {
       if (this.yejian) {
