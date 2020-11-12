@@ -12,10 +12,10 @@
     <!-- /春暖阅读 -->
     <!-- 登陆 -->
     <van-form v-show="LoginOrRegister" @submit="onSubmit" class="login-form" ref="login">
-      <van-field v-model="username" name="user" placeholder="请输入用户名" :rules="onSubmitFormRules.user" maxlength="11"
+      <van-field v-model.trim="username" name="user" type="number" placeholder="请输入手机号" :rules="onSubmitFormRules.user" maxlength="11"
         ><template #left-icon> <van-icon name="friends-o" /></template
       ></van-field>
-      <van-field v-model="password" type="password" name="pwd" placeholder="请输入密码" :rules="onSubmitFormRules.pwd" maxlength="6">
+      <van-field v-model.trim="password" type="password" name="pwd" placeholder="请输入密码" :rules="onSubmitFormRules.pwd" maxlength="10">
         <template #left-icon> <van-icon name="bag-o" /></template>
       </van-field>
       <div style="margin: 20px 46px 10px">
@@ -26,13 +26,13 @@
     <!-- /登陆 -->
     <!-- 去注册 -->
     <van-form v-show="!LoginOrRegister" @submit="toRegister" class="login-form" ref="register">
-      <van-field v-model="usermobile" name="mobile" type="number" placeholder="请输入手机号" :rules="toRegisterFormRules.mobile" maxlength="11"
+      <van-field v-model.trim="usermobile" name="mobile" type="number" placeholder="请输入手机号" :rules="toRegisterFormRules.mobile" maxlength="11"
         ><template #left-icon> <van-icon name="friends-o" /></template
       ></van-field>
-      <van-field v-model="setpassword" type="password" name="setpwd" placeholder="设置新密码" :rules="toRegisterFormRules.setpwd" maxlength="6">
+      <van-field v-model.trim="setpassword" type="password" name="setpwd" placeholder="设置新密码" :rules="toRegisterFormRules.setpwd" maxlength="10">
         <template #left-icon> <van-icon name="bag-o" /></template>
       </van-field>
-      <van-field v-model="confirmpassword" type="password" name="confirmpwd" placeholder="确认密码" :rules="toRegisterFormRules.confirmpwd" maxlength="6">
+      <van-field v-model.trim="confirmpassword" type="password" name="confirmpwd" placeholder="确认密码" :rules="toRegisterFormRules.confirmpwd" maxlength="10">
         <template #left-icon> <van-icon name="bag-o" /></template>
       </van-field>
       <div style="margin: 20px 46px 10px">
@@ -71,22 +71,49 @@ export default {
         { name: 'QQ', icon: 'qq' }
       ],
       onSubmitFormRules: {
-        user: [{ required: true, message: '用户名不能为空' }, {}],
-        pwd: [{ required: true, message: '密码不能为空' }]
+        user: [{ required: true, message: '手机号不能为空' }, { pattern: /^1[3|5|7|8]\d{9}$/, message: '手机号格式错误' }],
+        pwd: [{ required: true, message: '密码不能为空' },
+         {
+ message: '密码长度6-10位之间',
+ validator: (value, rule) => {
+          console.log(value)
+          if (value.length < 6 || value.length > 10) {
+             return false
+          }
+        }
+ }]
       },
       toRegisterFormRules: {
         mobile: [{ required: true, message: '手机号不能为空' }, { pattern: /^1[3|5|7|8]\d{9}$/, message: '手机号格式错误' }],
-        setpwd: [{ required: true, message: '密码不能为空' }],
-        confirmpwd: [{ required: true, message: '密码不能为空' }]
+        setpwd: [{ required: true, message: '密码不能为空' }, {
+ message: '密码长度6-10位之间',
+ validator: (value, rule) => {
+          console.log(value)
+          if (value.length < 6 || value.length > 10) {
+             return false
+          }
+        }
+ }],
+        confirmpwd: [{ required: true, message: '密码不能为空' }, 
+         {
+ message: '密码长度6-10位之间',
+ validator: (value, rule) => {
+          console.log(value)
+          if (value.length < 6 || value.length > 10) {
+             return false
+          }
+        }
+ }]
       },
       register: {},
-      LoginOrRegister: true
+      LoginOrRegister: false
     }
   },
   computed: {},
   watch: {},
   created () {
-    if (window.localStorage.getItem('token') === true) {
+    console.log(window.localStorage.getItem('token'))
+    if (window.localStorage.getItem('token') === 'true') {
     this.$router.push('/home')
     }
   },
@@ -111,7 +138,12 @@ export default {
     },
     // 登陆
     onSubmit(values) {
-      this.$toast.loading({
+      console.log(this.username !== this.usermobile && this.password !== this.setpassword)
+      console.log(this.password !== this.setpassword)
+      if (this.username !== this.usermobile || this.password !== this.setpassword) {
+        return this.$toast('密码或手机号不正确')
+      }
+        this.$toast.loading({
         message: '加载中...',
         forbidClick: true,
         duration: 0
@@ -140,10 +172,7 @@ export default {
     },
     // 去注册
     zhuChu() {
-      this.LoginOrRegister = false
-      // this.username2 = ''
-      // this.password2 = ''
-      // this.password3 = ''
+      this.LoginOrRegister = false 
     }
   }
 }
@@ -157,7 +186,7 @@ export default {
     }
   }
   .login-logo {
-    margin-top: 160px;
+    margin-top: 120px;
     display: flex;
     flex-direction: column;
     align-items: center;
