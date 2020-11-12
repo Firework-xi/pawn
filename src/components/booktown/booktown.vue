@@ -16,6 +16,7 @@
       </van-swipe> -->
     </div>
     <div class="tab-bar">
+       <div class="channelButton"><span class="iconfont icon-arrow-down" @click="onclick"></span></div>
       <van-tabs v-model="active" animated @click="gethuoqu">
         <van-tab v-for="(item, index) in title" :title="item" :key="index">
           <!-- 轮播图 -->
@@ -47,8 +48,10 @@
             </div>
           </div>
         </van-tab>
+         <van-tab></van-tab>
       </van-tabs>
     </div>
+    
     <!-- 分类搜索 -->
     <!-- 弹出层 -->
     <van-popup v-model="classifyShow" position="bottom" :style="{ height: '100%' }">
@@ -196,7 +199,7 @@ export default {
 .book-town {
   .search {
     height: 108px;
-    margin-top: 48px;
+    // margin-top: 48px;
     border-bottom: 4px solid rgb(242, 242, 242);
     display: flex;
     justify-content: space-between;
@@ -256,6 +259,7 @@ export default {
         }
         .content {
           font-size: 30px;
+          color: #969494;
         }
       }
     }
@@ -309,8 +313,20 @@ export default {
     justify-content: center;
     align-items: center;
     justify-content: space-between;
-    // .character {
-    // }
+  }
+  .channelButton{
+   position: fixed;
+    right: 0;
+    width: 70px;
+    height: 80px;
+    background: #fff;
+    // color: #BEBEBE;
+    opacity: .8;
+    display: flex;
+    font-size: 40px;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
   }
 }
 </style>

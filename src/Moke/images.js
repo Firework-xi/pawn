@@ -314,6 +314,123 @@ export default {
           data
         }
       }
+    }, {
+      url: 'http://yuedu/channel',
+      request: 'get',
+      manage: options => {
+        const data = [
+           {
+            name: '玄幻',
+            bookCount: 193438,
+           
+        },
+        {
+            name: '奇幻',
+            bookCount: 26783,
+            
+        },
+        {
+            name: '武侠',
+            bookCount: 18538,
+            
+        },
+        {
+            name: '仙侠',
+            bookCount: 55804,
+           
+        },
+        {
+            name: '都市',
+            bookCount: 115502,
+           
+        },
+        {
+            name: '职场',
+            bookCount: 4390,
+            
+        },
+        {
+            name: '历史',
+            bookCount: 26271,
+            
+        },
+        {
+            name: '军事',
+            bookCount: 6331,
+           
+        },
+        {
+            name: '游戏',
+            bookCount: 26769,
+           
+        },
+        {
+            name: '竞技',
+            bookCount: 1510,
+           
+        },
+        {
+            name: '科幻',
+            bookCount: 42257,
+           
+        },
+        {
+            name: '灵异',
+            bookCount: 27585,
+           
+        },
+        {
+            name: '同人',
+            bookCount: 4784,
+           
+        },
+        {
+            name: '轻小说',
+            bookCount: 21839,
+           
+          },
+        {
+            name: '古代言情',
+            bookCount: 214879,
+          
+        },
+        {
+            name: '现代言情',
+            bookCount: 248350,
+          
+        },
+        {
+            name: '青春校园',
+            bookCount: 66459,
+         
+        },
+        {
+            name: '纯爱',
+            bookCount: 1302,
+           
+        },
+        {
+            name: '玄幻奇幻',
+            bookCount: 10459,
+            
+        },
+        {
+            name: '武侠仙侠',
+            bookCount: 5596,
+            
+        },
+        {
+            name: '科幻',
+            bookCount: 5350,
+           
+        },
+        
+    ]
+          return {
+          state: 200,
+          data
+        }
+      }
     }
   ]
 }
