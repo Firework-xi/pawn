@@ -48,12 +48,19 @@ const routes = [
       {
         path: '/booktown',
         name: 'booktown',
-        component: () => import('@/components/booktown/booktown'), // 书城
-        meta: { index: 2 }
-      }
+        component: () => import('@/components/booktown/booktown'),
+        meta: { index: 2 },
+        props: true,
+        
+      },
+  
     ]
   },
-
+{
+        path: '/reclassify',
+        name: 'reclassify',
+        component: () => import('@/components/booktown/reclassify'),
+         },
   {
     path: '/particulars/:id',
     name: 'particulars',

@@ -29,12 +29,12 @@
           <div class="box-botton">
             <div class="box" v-for="(item, index) in information" :key="index" @click="$router.push(`/particulars/${index}`)">
               <div class="book-cover">
-                <van-image width="100%" :src="item.img" />
+                <van-image :src="item.coverImg" class="cover-img" />
               </div>
               <div class="character">
-                <div class="title">{{ item.book_name }}</div>
-                <div class="artor-name">{{ item.tor_name }}</div>
-                <div class="content van-multi-ellipsis--l3">{{ item.content }}</div>
+                <div class="title">{{ item.title }}</div>
+                <div class="artor-name">{{ item.author }}</div>
+                <div class="content van-multi-ellipsis--l3">{{ item.desc }}</div>
               </div>
             </div>
           </div>
@@ -47,19 +47,25 @@
     <!-- 弹出层 -->
     <van-popup v-model="classifyShow" position="bottom" :style="{ height: '100%' }">
       <!-- 顶部导航栏 -->
-      <van-nav-bar title="全部分类" left-text left-arrow @click-left="classifyShow = false" @click-right="searchRight">
+      <van-nav-bar title="全部分类" left-text left-arrow @click-left="classifyShow = false"
+       @click-right="searchRight" >
         <template #right>
           <van-icon name="search" size="18" />
         </template>
       </van-nav-bar>
       <!-- 性别男 -->
       <div class="boy-icon">
-        <span class="iconfont icon-xingbie-nan"></span>
+        <span class="iconfont icon-xingbienan"></span>
         <span>男生</span>
       </div>
       <!-- 主体 -->
       <van-grid :gutter="10">
-        <van-grid-item v-for="item in boychannel" :key="item.id">
+        <van-grid-item v-for="item in boychannel" :key="item.id" @click="$router.push({
+          path:'/reclassify',
+          query: {
+            item
+          }
+        })">
           <div class="Classification-books">
             <span>{{ item.booksName }}</span>
             <span>{{ item.booksNumber }}</span>
@@ -68,12 +74,17 @@
       </van-grid>
       <!-- 性别女 -->
       <div class="girl-icon">
-        <span class="iconfont icon-xingbie-nv"></span>
+        <span class=" iconfont icon-xingbienv"></span>
         <span>女生</span>
       </div>
       <!-- 主体 -->
       <van-grid :gutter="10">
-        <van-grid-item v-for="value in girlchannel" :key="value.id">
+        <van-grid-item v-for="value in girlchannel" :key="value.id" @click="$router.push({
+          path:'/reclassify',
+          query: {
+            value
+          }
+        })">
           <div class="Classification-books">
             <span>{{ value.booksName }}</span>
             <span>{{ value.booksNumber }}</span>
@@ -82,34 +93,40 @@
       </van-grid>
     </van-popup>
     <!-- 搜索栏 -->
+    
     <van-popup v-model="searchShow" position="right" :style="{ width: '100%', height: '100%' }">
-      <form action="/" class="formBottom">
-        <van-search v-model="searchValue" show-action placeholder="请输入搜索关键词" clearable action-text="搜索">
-          <span slot="left" @click="returnLeft"><van-icon name="arrow-left" class="return-icon" /></span>
-        </van-search>
-      </form>
-      <!-- 推荐搜索 -->
-      <div class="recommend">
-        <div class="character">大家都在搜</div>
-        <div class="buttonText"><span class="iconfont icon-shuaxin"></span>换一批</div>
-      </div>
-      <van-grid :gutter="10">
-        <van-grid-item v-for="value in 8" :key="value" text="诡道传人" />
-      </van-grid>
+      <search @close="searchShow=$event"></search>
     </van-popup>
-    <!-- 频道编辑弹出层 -->
-    <van-popup v-model="isChennelEditShow" closeable close-icon-position="top-right" position="bottom" :style="{ height: '100%' }">
-      <book-edit :my-channels="title"> </book-edit>
+     <!-- 频道编辑弹出层 -->
+    <van-popup
+      v-model="isChennelEditShow"
+      closeable
+      close-icon-position="top-right"
+      position="bottom"
+      :style="{ height: '100%' }"
+    >
+      <book-edit 
+      :my-channels="title" 
+      :active='active'
+      @update-active='onUpdateActive'>
+
+      </book-edit>
     </van-popup>
+<!-- 二级分类 -->
+<!-- <reclassify ></reclassify> -->
   </div>
 </template>
 -
 <script>
 import BookEdit from './book-edit'
+import Search from './search'
+// import Reclassify from './reclassify'
 export default {
   name: 'BookTown',
   components: {
-   BookEdit
+   BookEdit,
+   Search,
+  //  Reclassify
   },
   props: {},
   data() {
@@ -187,13 +204,13 @@ export default {
       this.classifyShow = false
       this.searchShow = true
     },
-    //  // 点击切换频道
-    // onUpdateActive (index, isChennelEditShow = false) {
-    //   // 切换频道
-    //   this.active = index
-    //   // 关闭弹层
-    //   this.isChennelEditShow = isChennelEditShow
-    // }
+     // 点击切换频道
+    onUpdateActive (index, isChennelEditShow = false) {
+      // 切换频道
+      this.active = index
+      // 关闭弹层
+      this.isChennelEditShow = isChennelEditShow
+    }
   }
 }
 </script>
@@ -237,6 +254,11 @@ export default {
     width: 194px;
     height: 260px;
     margin: 48px 20px 0 40px;
+    .cover-img{
+      width: 100%;
+      height: 100%;
+      
+    }
   }
   .box-botton {
     margin-bottom: 90px;
@@ -271,6 +293,9 @@ export default {
     height: 100px;
     line-height: 100px;
     font-size: 30px;
+    .icon-xingbienan{
+      font-size: 40px;
+    }
   }
   .boy-icon span:nth-child(1) {
     color: #65b2fe;
@@ -281,6 +306,9 @@ export default {
     height: 100px;
     line-height: 100px;
     font-size: 30px;
+    .icon-xingbienv{
+      font-size: 40px;
+    }
   }
   .girl-icon span:nth-child(1) {
     color: #fe78a5;
@@ -333,6 +361,7 @@ export default {
   }
   .icon-xiajiantou {
     color: #696868;
+    font-size: 30px;
   }
 }
 </style>
