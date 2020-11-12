@@ -88,7 +88,7 @@
   watch: {},
   created () {
     if (window.localStorage.getItem('token')) {
-    this.$router.push('/my')
+    this.$router.push('/home')
     }
   },
   mounted () {
@@ -106,7 +106,7 @@
       })
       this.showShare = false
       window.localStorage.setItem('disanfangs', JSON.stringify({ name: 18707482845, password: 123456 }))
-      this.$router.push('/my')
+      this.$router.push('/home')
       this.$toast.success('进入首页')
     },
     // 登陆
@@ -118,7 +118,7 @@
       })
       this.$toast.success('进入书城')
       window.localStorage.setItem('token', true)
-       this.$router.push('/my')
+       this.$router.push('/home')
     },
     // 注册
     toRegister() {
@@ -146,12 +146,9 @@
        duration: 0
       })
        this.$toast.success('进入书城')
-      this.$router.push('/my')
+      this.$router.push('/home')
       window.localStorage.setItem('token', false)
     }
-    
-
-
   }
   }
 </script>

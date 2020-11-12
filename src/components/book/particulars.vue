@@ -1,6 +1,6 @@
 <template>
   <div class="particulars">
-    <van-nav-bar left-arrow fixed :class="{ borde: altitude }" @click-left="$router.back()">
+    <van-nav-bar left-arrow fixed :class="{ borde: altitude }" @click-left="$router.push('/booktown')">
       <template #title>
         <transition name="van-fade">
           <div v-show="altitude">书籍详情</div>
@@ -12,24 +12,32 @@
     <div class="box" ref="lost-gome">
       <div class="introduce">
         <div class="left">
-          <van-image fit="cover" src="https://img.yzcdn.cn/vant/cat.jpeg" />
+          <van-image fit="cover" :src="data.coverImg" />
         </div>
         <div class="right">
           <div class="right-box">
-            <div class="right-name">金瓶梅</div>
-            <van-rate class="right-evaluate" v-model="number" color="#999999" void-icon="star" void-color="#88888" /><span class="text">8.4</span>
-            <div class="right-sort">猫腻 | 玄幻</div>
-            <div class="right-number"><span>5春卷/千字</span><span>313万字</span></div>
+            <div class="right-name">{{ data.title }}</div>
+            <van-rate class="right-evaluate" v-model="number" color="#ffca4f" void-icon="star" void-color="#88888" /><span class="text">8.4</span>
+            <div class="right-sort">{{ data.categoryName }}</div>
+            <div class="right-number">
+              <span>5春卷/千字</span> <span>{{ data.word }}</span>
+            </div>
           </div>
         </div>
       </div>
       <!-- 结束 -->
       <!-- 图书预览区 -->
-      <div class="describe">
+      <div class="describe" v-show="describe">
         <div class="van-multi-ellipsis--l3">
-          <p>命里有时终须有，命里无时要强求。</p>
           <p class="texte-p">
-            这是一个长生果的故事。择是选择。这是一个关于选择的故事。三千世界，满天神魔，手握道卷，掌天下...<span> <van-icon name="arrow-down" /></span>
+            {{ data.desc }}<span> <van-icon name="arrow-down" @click="Switch" /></span>
+          </p>
+        </div>
+      </div>
+      <div class="describe" v-show="!describe">
+        <div class="van-multi">
+          <p class="texte-p">
+            {{ data.desc }}<span> <van-icon name="arrow-up" @click="Switch" /></span>
           </p>
         </div>
       </div>
@@ -59,14 +67,38 @@ import base from './module/base' // btn按钮
 import { debounce } from 'lodash'
 export default {
   created() {
+    this.achieve()
   },
+props: {
+  id: {
+    trpe: [Number, String],
+    require: true
+  }
+},
   data() {
     return {
       number: 4,
       altitude: false,
+      describe: true,
+      data: {},
+      list: [],
+      arr: []
     }
   },
   methods: {
+   async achieve() { // 默认渲染
+   console.log(this.id)
+   const { data } = await this.$http.get(`http://yuedu/details/${this.id}`)
+   console.log(data)
+   this.data = data.state
+   this.arr = data.arr
+   this.list = data.data
+   console.log(this.data)
+    },
+    Switch() {
+      this.describe = !this.describe
+    }, 
+
   },
   components: {
     catalog,
@@ -74,17 +106,17 @@ export default {
     complete,
     detaile: details,
     basehandle: base
-  }, 
-mounted () { // 监听器头的事件
- const atraters = this.$refs['lost-gome']
- console.log(atraters)
+  },
+  mounted() {
+    // 监听器头的事件
+    const atraters = this.$refs['lost-gome']
     atraters.onscroll = debounce(() => {
-       if (atraters.scrollTop > 80) {
-         this.altitude = true
-         console.log(this.altitude)
-       } else {
-         this.altitude = false
-       }
+      if (atraters.scrollTop > 80) {
+        this.altitude = true
+        console.log(this.altitude)
+      } else {
+        this.altitude = false
+      }
     }, 10)
   }
 }
@@ -147,7 +179,27 @@ mounted () { // 监听器头的事件
     .van-icon-arrow-down {
       font-size: 18 * 2px;
       position: absolute;
+      top: 214 * 2px;
+      right: 28 * 2px;
       margin-top: 2px;
+    }
+    .texte-p {
+      margin-right: 20 * 2px;
+      line-height: 22 * 2px;
+    }
+    margin: 0 15 * 2px;
+    color: #5a5d5a;
+    font-size: 28px;
+    margin-top: -15px;
+    p {
+      margin: 10px 0;
+    }
+  }
+  .van-multi {
+    .van-icon-arrow-up {
+      font-size: 18 * 2px;
+      position: absolute;
+      margin-top: 8px;
     }
     .texte-p {
       line-height: 22 * 2px;
@@ -161,7 +213,7 @@ mounted () { // 监听器头的事件
     }
   }
   .describe {
-    height: 92 * 2px;
+    margin-bottom: 30px;
   }
   .van-nav-bar {
     background: #ffffff;

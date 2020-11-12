@@ -8,14 +8,13 @@
           <span class="nav-t1">春暖阅读</span>
           <span class="nav-t2">面朝大海，春暖花开</span>
           <span class="nav-more iconfont iconmore-horizontal"
-                @click.stop="showNavMenu">
-          </span>
+                @click.stop="showNavMenu"> </span>
           <div class="nav-menu"
-               :style="{display:menuIsShow?'block':'none'}">
+               :style="{ display: menuIsShow ? 'block' : 'none' }">
             <div class="nav-menu-t1"
                  @click="$router.push('/search')"><i class="iconfont iconsousuo"></i>搜索</div>
             <div class="nav-menu-t2"
-                 @click.stop="isSelectShow=!isSelectShow"><i class="iconfont iconzuopin"></i>整理书架</div>
+                 @click.stop="isSelectShow = !isSelectShow"><i class="iconfont iconzuopin"></i>整理书架</div>
           </div>
         </div>
         <!-- 整理书架时展示的顶部 -->
@@ -25,20 +24,20 @@
                 @click="selectAll">全选</span>
           <span v-if="newOrLast"
                 class="arrangement-t2"
-                @click="newOrLast=!newOrLast">最近阅读↑↓</span>
+                @click="newOrLast = !newOrLast">最近阅读↑↓</span>
           <span class="arrangement-tt2"
                 v-else
-                @click="newOrLast=!newOrLast">加入书架时间↑↓</span>
+                @click="newOrLast = !newOrLast">加入书架时间↑↓</span>
           <span class="arrangement-t3"
-                @click="isSelectShow=false">完成</span>
+                @click="isSelectShow = false">完成</span>
         </div>
       </div>
       <div class="det">
         <span>
-          <img :src="showBook.img"
-               alt="">
+          <img :src="showBook.coverImg"
+               alt="" />
         </span>
-        <span class="det-t1">{{showBook.title}}</span>
+        <span class="det-t1">{{ showBook.title }}</span>
         <span class="det-t2">
           已读25%
           <span class="det-triangle"></span>
@@ -52,45 +51,40 @@
       <van-grid :column-num="3"
                 :border="false"
                 :gutter="0">
-        <van-grid-item v-for="(item,index) in showBookList"
+        <van-grid-item v-for="(item, index) in showBookList"
                        :key="index"
-                       @click="showThis(item,index)">
-          <span slot="icon"><img :src="item.img.image"
-                 alt=""></span>
+                       @click="showThis(item, index)">
+          <span slot="icon"><img :src="item.coverImg"
+                 alt="" /></span>
           <span slot="text"
-                class="grid-text">{{item.title}}
-          </span>
+                class="grid-text">{{ item.title }} </span>
           <span slot="icon"
                 v-if="isSelectShow">
             <span class="noSelect"
-                  v-if="selectList.indexOf(index)===-1">
-            </span>
+                  v-if="selectList.indexOf(index) === -1"> </span>
             <span class="isSelect"
                   v-else>
               <i class="iconfont iconselect"></i>
             </span>
           </span>
-
         </van-grid-item>
       </van-grid>
     </div>
     <!-- 底部 -->
     <div class="foot"
          v-if="isFootShow"
-         @click="isSelectDelShow=true">
-      删除所选 ({{selectList.length}})
-    </div>
+         @click="isSelectDelShow = true">删除所选 ({{ selectList.length }})</div>
     <!-- 确认栏 -->
     <div v-if="isSelectDelShow"
          class="selectDel">
       <h4>从书架删除</h4>
-      <h5>确定要删除所选的这{{selectList.length}}本书籍吗？</h5>
+      <h5>确定要删除所选的这{{ selectList.length }}本书籍吗？</h5>
       <van-button class="jgbtn"
                   type="danger"
                   @click="selectBook">删除</van-button>
       <van-button class="qxbtn"
                   type="default"
-                  @click="isSelectDelShow=false">取消</van-button>
+                  @click="isSelectDelShow = false">取消</van-button>
     </div>
   </div>
 </template>
@@ -102,75 +96,25 @@ import axios from 'axios'
     data() {
       return {
         bookList: [
-          {
-            title: '见过没，熙熙有点骚',
-            img: { image: require('@/assets/dcfee6c6962a1e68.jpg') },
-            id: 0
-          },
-          {
-            title: '熙熙被劈了',
-            img: { image: require('@/assets/300.jpg') },
-            id: 1
-          },
-          {
-            title: '熙熙出道了',
-            img: { image: require('@/assets/2.jpg') },
-            id: 2
-          },
-           {
-            title: '熙熙开挂了',
-            img: { image: require('@/assets/4.jpg') },
-            id: 3
-          },
-           {
-            title: '熙熙逛窑子了',
-            img: { image: require('@/assets/9.jpg') },
-            id: 4
-          }, {
-            title: '熙熙败了',
-            img: { image: require('@/assets/1.jpg') },
-            id: 5
-          }
+          
         ],
         showBook: {
-          title: '见过没，熙熙有点骚',
-          img: require('@/assets/dcfee6c6962a1e68.jpg') 
+          author: '汪熙',
+          bookId: 0,
+          categoryName: '玄幻小说',
+          chapterStatus: 'SERIALIZE',
+          coverImg: require('@/assets/dcfee6c6962a1e68.jpg'),
+          desc: ' 伴随着熙熙越来越胖，黑马程序员的汪熙逐渐征服了周边十万公里的外卖，又发现了两片大陆。无数外卖之兽也随着熙熙的猎杀无度走向亡，沉睡无数年的外卖之王在星斗大森林最后的净土苏醒，它要带领仅存的族人，向熙熙复仇！熙熙立志要成为一名强大的拉胯师，可当拉跨之魂觉时，苏醒的，却是……旷世之才，拉跨王之争，      我们的熙熙拉跨传说，将由此开始。 ',
+          title: '熙熙拉跨日记',
+          word: '300万字' 
         },
         menuIsShow: false,
         isSelectShow: false,
         selectList: [],
         isFootShow: false,
         isSelectDelShow: false,
-        lastReading: [
-          {
-            title: '见过没，熙熙有点骚',
-            img: { image: require('@/assets/dcfee6c6962a1e68.jpg') },
-            id: 0
-          },
-          {
-            title: '熙熙被劈了',
-            img: { image: require('@/assets/300.jpg') },
-            id: 1
-          },
-          {
-            title: '熙熙出道了',
-            img: { image: require('@/assets/2.jpg') },
-            id: 2
-          },
-           {
-            title: '熙熙开挂了',
-            img: { image: require('@/assets/4.jpg') },
-            id: 3
-          },
-           {
-            title: '熙熙逛窑子了',
-            img: { image: require('@/assets/9.jpg') },
-            id: 4
-          }, {
-            title: '熙熙败了',
-            img: { image: require('@/assets/1.jpg') },
-            id: 5
-          }
+        lastReading: [        
+         
           ],
         showBookList: [],
         newOrLast: false
@@ -178,7 +122,8 @@ import axios from 'axios'
       }
     },
     async created() {
-      const { data } = await axios({
+      if (window.localStorage.getItem('list') === null || window.localStorage.getItem('list') === undefined) {
+        const { data } = await axios({
         method: 'get',
         url: 'http://123/bookrack'
       })
@@ -186,14 +131,21 @@ import axios from 'axios'
       this.bookList.push(...data.list)
       this.lastReading.push(...data.list)
       this.showBookList = this.lastReading
+      } else {
+        const data = window.localStorage.getItem('list')
+       this.bookList = JSON.parse(data)
+      this.lastReading = JSON.parse(data)
+      this.showBookList = this.lastReading
+      }
     },
     methods: {
       showThis(item, index) {
         if (!this.isSelectShow) {
         this.showBook.title = item.title
-        this.showBook.img = item.img.image
+        this.showBook.img = item.coverImg
         this.lastReading.splice(index, 1)
         this.lastReading.unshift(item)
+        this.$router.push('/read')
         } else {
           const aa = this.selectList.indexOf(index)
           if (aa === -1) {
@@ -248,13 +200,16 @@ import axios from 'axios'
          } else {
            this.showBookList = this.lastReading
          }
+       }, 
+showBookList() {
+         window.localStorage.setItem('list', JSON.stringify(this.showBookList))
        }
     }
     
   }
 </script>
 
-<style lang="less" scoped>
+<style lang="scss" scoped>
 .bookrack-container {
   .bookrack-nav {
     position: relative;
