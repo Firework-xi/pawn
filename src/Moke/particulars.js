@@ -13,10 +13,10 @@ export default {
           if (sex !== i) {
             console.log(sex, i)
             let iq1 = data.findIndex(v => {
-              return v.bookId === sex
+              return v.bookId === (sex - 1)
             })
             if (iq1 === -1) {
-              data.push(list.list[sex === 1 ? 1 : sex - 1])
+              data.push(list.list[sex])
             }
           }
         }
@@ -27,10 +27,10 @@ export default {
           if (index !== i) {
             console.log(i, index)
             const ins = arr.findIndex(v => {
-              return v.bookId === index
+              return v.bookId === (index - 1)
             })
             if (ins === -1) {
-              arr.push(list.list[index === 1 ? 1 : index - 1])
+              arr.push(list.list[index])
             }
           }
         }
