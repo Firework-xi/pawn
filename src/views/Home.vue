@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <router-view />
-    <van-tabbar v-model="active" @change="onChange">
+    <van-tabbar v-model="active" @change="conservev">
       <van-tabbar-item icon="column" to="/bookrack">书架</van-tabbar-item>
       <van-tabbar-item icon="shop-o" to="/booktown">书城</van-tabbar-item>
       <van-tabbar-item icon="contact" to="/my">我的</van-tabbar-item>
@@ -13,21 +13,18 @@
 export default {
   data() {
     return {
-      active: 2
+      active: 0
     }
   },
   created() {
-    this.getItems()
+    this.add()
   },
   methods: {
-    getItems() {
-      console.log(window.sessionStorage.getItem('actives'))
-      this.active = parseInt(window.sessionStorage.getItem('actives'))
-      console.log('getItems -> this.active', this.active)
-    },
-    onChange() {
-      window.sessionStorage.setItem('actives', this.active)
-      console.log(this.active)
+    add() {
+      this.active = window.localStorage.getItem('active') - 0
+    }, 
+conservev() {
+      window.localStorage.setItem('active', this.active)
     }
   }
 }

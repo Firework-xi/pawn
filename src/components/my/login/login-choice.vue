@@ -34,14 +34,13 @@
     return {
       index: null,
       isone: '0'
-
     }
   },
   computed: {},
   watch: {},
   created () {
     if (window.localStorage.getItem('choice')) {
-      this.$router.push('/bookrack')
+      this.$router.push('/home')
     }
   },
   mounted () {},
@@ -58,8 +57,8 @@
       })
         window.localStorage.setItem('choice', this.index)
         window.localStorage.setItem('token', false)
-         this.$toast.success('进入书城')
-        this.$router.push('/bookrack')
+        this.$toast.success('进入书城')
+        this.$router.push('/home')
     },
     // 男
     male() {

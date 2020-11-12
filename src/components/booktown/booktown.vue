@@ -16,26 +16,18 @@
       </van-swipe> -->
     </div>
     <div class="tab-bar">
+      <div class="channelButton"><span class="iconfont icon-xiajiantou" @click="isChennelEditShow = true"></span></div>
       <van-tabs v-model="active" animated @click="gethuoqu">
-        <van-tab v-for="(item, index) in title" :title="item" :key="index">
+        <van-tab v-for="(item, index) in title" :title="item.name" :key="index">
           <!-- 轮播图 -->
           <van-swipe class="my-swipe" :autoplay="3000" indicator-color="white" :lazy-render="true">
             <van-swipe-item v-for="(image, index) in imageList" :key="index">
               <img :src="image" />
             </van-swipe-item>
-            <!-- <van-swipe-item>
-              <img src="../../assets/第一张.jpg" />
-            </van-swipe-item>
-            <van-swipe-item>
-              <img src="../../assets/第二张.jpg" />
-            </van-swipe-item>
-            <van-swipe-item>
-              <img src="../../assets/第三张.jpg" />
-            </van-swipe-item> -->
           </van-swipe>
           <!-- 内容 -->
           <div class="box-botton">
-            <div class="box" v-for="(item, index) in information" :key="index" @click="$router.push('/particulars')">
+            <div class="box" v-for="(item, index) in information" :key="index" @click="$router.push(`/particulars/${index}`)">
               <div class="book-cover">
                 <van-image width="100%" :src="item.img" />
               </div>
@@ -47,8 +39,10 @@
             </div>
           </div>
         </van-tab>
+        <van-tab></van-tab>
       </van-tabs>
     </div>
+
     <!-- 分类搜索 -->
     <!-- 弹出层 -->
     <van-popup v-model="classifyShow" position="bottom" :style="{ height: '100%' }">
@@ -60,7 +54,7 @@
       </van-nav-bar>
       <!-- 性别男 -->
       <div class="boy-icon">
-        <span class=" iconfont icon-xingbie-nan"></span>
+        <span class="iconfont icon-xingbie-nan"></span>
         <span>男生</span>
       </div>
       <!-- 主体 -->
@@ -74,7 +68,7 @@
       </van-grid>
       <!-- 性别女 -->
       <div class="girl-icon">
-        <span class=" iconfont icon-xingbie-nv"></span>
+        <span class="iconfont icon-xingbie-nv"></span>
         <span>女生</span>
       </div>
       <!-- 主体 -->
@@ -91,7 +85,7 @@
     <van-popup v-model="searchShow" position="right" :style="{ width: '100%', height: '100%' }">
       <form action="/" class="formBottom">
         <van-search v-model="searchValue" show-action placeholder="请输入搜索关键词" clearable action-text="搜索">
-          <span slot="left" @click="returnLeft"><van-icon name="arrow-left" class="return-icon"/></span>
+          <span slot="left" @click="returnLeft"><van-icon name="arrow-left" class="return-icon" /></span>
         </van-search>
       </form>
       <!-- 推荐搜索 -->
@@ -103,30 +97,35 @@
         <van-grid-item v-for="value in 8" :key="value" text="诡道传人" />
       </van-grid>
     </van-popup>
+    <!-- 频道编辑弹出层 -->
+    <van-popup v-model="isChennelEditShow" closeable close-icon-position="top-right" position="bottom" :style="{ height: '100%' }">
+      <book-edit :my-channels="title"> </book-edit>
+    </van-popup>
   </div>
 </template>
 -
 <script>
-// import { BookClassify } from './Book-classify'
+import BookEdit from './book-edit'
 export default {
   name: 'BookTown',
   components: {
-    // BookClassify
+   BookEdit
   },
   props: {},
   data() {
     return {
       imageList: [], // 获取到的数据
-      title: [], // 获取到的分类名称
+      title: [], // 获取到的频道数据
       information: [], // 获取到的书籍信息
-      active: 0,
+       active: 0,
       classifyShow: false,
       // 获取到的男生频道的数据
       boychannel: [],
       // 获取到的女生频道的数据
       girlchannel: [],
       searchShow: false, // 控制搜索界面的显示状态
-      searchValue: '' // 搜索框的数据
+      searchValue: '', // 搜索框的数据
+      isChennelEditShow: false// 控制频道编辑的显示状态
     }
   },
   computed: {},
@@ -164,7 +163,7 @@ export default {
       this.getPhoto()
       this.getInformation()
     },
-    // 获取title分类名称
+    // 获取title分类名称  频道列表
     async getTitle() {
       const { data } = await this.$http.get('http://yuedu/title')
       this.title = data.data
@@ -187,7 +186,14 @@ export default {
     searchRight() {
       this.classifyShow = false
       this.searchShow = true
-    }
+    },
+    //  // 点击切换频道
+    // onUpdateActive (index, isChennelEditShow = false) {
+    //   // 切换频道
+    //   this.active = index
+    //   // 关闭弹层
+    //   this.isChennelEditShow = isChennelEditShow
+    // }
   }
 }
 </script>
@@ -196,7 +202,7 @@ export default {
 .book-town {
   .search {
     height: 108px;
-    margin-top: 48px;
+    // margin-top: 48px;
     border-bottom: 4px solid rgb(242, 242, 242);
     display: flex;
     justify-content: space-between;
@@ -256,6 +262,7 @@ export default {
         }
         .content {
           font-size: 30px;
+          color: #969494;
         }
       }
     }
@@ -309,8 +316,23 @@ export default {
     justify-content: center;
     align-items: center;
     justify-content: space-between;
-    // .character {
-    // }
+  }
+  .channelButton {
+    position: absolute;
+    right: 0;
+    width: 70px;
+    height: 80px;
+    background: #fff;
+    // color: #BEBEBE;
+    opacity: 0.8;
+    display: flex;
+    font-size: 40px;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+  }
+  .icon-xiajiantou {
+    color: #696868;
   }
 }
 </style>

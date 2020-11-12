@@ -51,11 +51,11 @@
 </template>
 
 <script>
-  export default {
-    name: 'LoginLand',
-    components: {},
-    props: {},
-    data () {
+export default {
+  name: 'LoginLand',
+  components: {},
+  props: {},
+  data() {
     return {
       // 接收登陆数据
       username: '',
@@ -65,7 +65,7 @@
       setpassword: '',
       confirmpassword: '',
       showShare: false,
-       options: [
+      options: [
         { name: '微信', icon: 'wechat' },
         { name: '微博', icon: 'weibo' },
         { name: 'QQ', icon: 'qq' }
@@ -81,46 +81,46 @@
       },
       register: {},
       LoginOrRegister: true
-      
     }
   },
   computed: {},
   watch: {},
   created () {
     if (window.localStorage.getItem('token') === true) {
-    this.$router.push('/my')
+    this.$router.push('/home')
     }
   },
-  mounted () {
+  mounted() {
     window.addEventListener('transitionend', function() {
       // 跳转
     })
   },
   methods: {
     // 第三方登陆
-     onSelect(option) {
-       this.$toast.loading({
-       message: '加载中...',
-       forbidClick: true,
-       duration: 0
+    onSelect(option) {
+      this.$toast.loading({
+        message: '加载中...',
+        forbidClick: true,
+        duration: 0
       })
       this.showShare = false
       window.localStorage.setItem('disanfangs', JSON.stringify({ name: 18707482845, password: 123456 }))
       
-      this.$router.push('/my')
-      this.$toast.success('进入我的')
+      this.$router.push('/home')
+      this.$toast.success('登录成功')
     },
     // 登陆
-     onSubmit(values) {
-       this.$toast.loading({
-       message: '加载中...',
-       forbidClick: true,
-       duration: 0
+    onSubmit(values) {
+      this.$toast.loading({
+        message: '加载中...',
+        forbidClick: true,
+        duration: 0
       })
-      this.$toast.success('进入我的')
+      window.localStorage.removeItem('active')
+      this.$toast.success('登录成功')
       window.localStorage.setItem('token', true)
       window.localStorage.setItem('land', JSON.stringify({ user: this.username, password: this.password }))
-       this.$router.push('/my')
+       this.$router.push('/home')
     },
     // 注册
     toRegister() {
@@ -145,11 +145,8 @@
       // this.password2 = ''
       // this.password3 = ''
     }
-    
-
-
   }
-  }
+}
 </script>
 
 <style lang="scss" scoped>
