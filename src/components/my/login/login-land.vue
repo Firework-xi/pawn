@@ -71,7 +71,7 @@
         { name: 'QQ', icon: 'qq' }
       ],
       onSubmitFormRules: {
-        user: [{ required: true, message: '用户名不能为空' }],
+        user: [{ required: true, message: '用户名不能为空' }, {}],
         pwd: [{ required: true, message: '密码不能为空' }]
       },
       toRegisterFormRules: {
