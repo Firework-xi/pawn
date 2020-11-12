@@ -51,19 +51,15 @@
           <span>完结 共24章</span>
         </van-cell>
       </van-cell-group>
-      <van-collapse v-model="activeNames" v-for="(item, index) in list" :key="index">
-        <van-collapse-item :title="item.zhangjie" :name="index">
-          <van-cell-group v-for="(v, index) in item.children" :key="index">
-            <van-cell :title="v.erji" />
-          </van-cell-group>
-        </van-collapse-item>
-      </van-collapse>
+      <van-cell-group v-for="(item, index) in list" :key="index">
+        <van-cell :title="item.zhangjie" />
+      </van-cell-group>
     </van-popup>
     <!-- 购买章节 -->
     <van-popup :close-on-click-overlay="false" v-model="goumai" position="bottom" :style="{ height: '60%' }">
       <div class="goumai">
         <h3>需要购买后阅读！</h3>
-        <p><i>本节价格：10 春卷</i> 余额：30 春卷</p>
+        <p><i>本节价格：100 春卷</i> 余额：{{ yue }}春卷</p>
         <van-button type="danger" round @click="goumai = false">购买本章</van-button>
         <van-button class="pl" to="/bulkbuying">批量购买章节</van-button>
         <van-checkbox v-model="checked">自动购买下一章</van-checkbox>
@@ -83,10 +79,18 @@ export default {
       activeNames: ['1'],
       list: [],
       goumai: true,
-      checked: true
+      checked: true,
+      yue: 0
     }
   },
+  created() {
+    this.getyue()
+  },
   methods: {
+    getyue() {
+      this.yue = parseInt(window.localStorage.getItem('coins'))
+      console.log('getyue -> this.yue', this.yue)
+    },
     gbs() {
       if (this.gb) {
         this.show = false
@@ -149,149 +153,152 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.sc {
-  position: fixed;
-  top: 25px;
-  right: 80px;
-  z-index: 2;
-  color: rgb(153, 153, 153);
-  font-size: 40px;
-}
+.read {
+  background: #fae8ce;
+  .sc {
+    position: fixed;
+    top: 25px;
+    right: 80px;
+    z-index: 2;
+    color: rgb(153, 153, 153);
+    font-size: 40px;
+  }
 
-.shezhi {
-  position: fixed;
-  left: 0;
-  bottom: 89px;
-  z-index: 99;
-  background: #fff;
-  width: 100%;
-  height: 200px;
-  span {
-    margin-right: 10px;
-    font-size: 30px;
-  }
-  .liangdu {
-    text-align: center;
-    margin: 5px 0;
-    .van-slider {
-      display: inline-block;
-      margin: 0;
-      width: 400px;
-      margin: 0 10px;
-      margin-bottom: 10px;
-    }
-    .liang {
-      font-size: 35px;
-    }
-    .an {
-      font-size: 25px;
-    }
-  }
-  .ziti {
-    text-align: center;
-    margin: 5px 0;
-    .van-hairline--surround::after {
-      border-width: 0;
-    }
-    .van-button {
-      border: 1px solid #ccc;
-      width: 160px;
-      height: 50px;
-      background: #fff;
-    }
-    .btn-left {
-      border-radius: 40px 0 0 40px;
-    }
-    .btn-right {
-      border-radius: 0 40px 40px 0;
-    }
-  }
-}
-.top-bottom {
-  .van-nav-bar {
+  .shezhi {
     position: fixed;
-    top: 0;
     left: 0;
-    bottom: 0;
-    right: 0;
-    border-bottom: 1px solid rgb(153, 153, 153);
+    bottom: 89px;
+    z-index: 99;
     background: #fff;
-    /deep/.van-icon {
-      color: rgb(153, 153, 153);
-      font-size: 40px;
+    width: 100%;
+    height: 200px;
+    span {
+      margin-right: 10px;
+      font-size: 30px;
     }
-  }
-  /deep/.van-grid {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    border-top: 1px solid rgb(153, 153, 153);
-    .van-grid-item__content {
-      background: #fff;
-      padding: 0;
-      color: rgb(153, 153, 153);
-      .van-grid-item__icon + .van-grid-item__text {
-        color: rgb(153, 153, 153);
+    .liangdu {
+      text-align: center;
+      margin: 5px 0;
+      .van-slider {
+        display: inline-block;
         margin: 0;
+        width: 400px;
+        margin: 0 10px;
+        margin-bottom: 10px;
+      }
+      .liang {
+        font-size: 35px;
+      }
+      .an {
+        font-size: 25px;
+      }
+    }
+    .ziti {
+      text-align: center;
+      margin: 5px 0;
+      .van-hairline--surround::after {
+        border-width: 0;
+      }
+      .van-button {
+        border: 1px solid #ccc;
+        width: 160px;
+        height: 50px;
+        background: #fff;
+      }
+      .btn-left {
+        border-radius: 40px 0 0 40px;
+      }
+      .btn-right {
+        border-radius: 0 40px 40px 0;
       }
     }
   }
-}
+  .top-bottom {
+    .van-nav-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      border-bottom: 1px solid rgb(153, 153, 153);
+      background: #fff;
+      /deep/.van-icon {
+        color: rgb(153, 153, 153);
+        font-size: 40px;
+      }
+    }
+    /deep/.van-grid {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      border-top: 1px solid rgb(153, 153, 153);
+      .van-grid-item__content {
+        background: #fff;
+        padding: 0;
+        color: rgb(153, 153, 153);
+        .van-grid-item__icon + .van-grid-item__text {
+          color: rgb(153, 153, 153);
+          margin: 0;
+        }
+      }
+    }
+  }
 
-.nr {
-  padding: 20px 40px;
-  h1 {
-    font-size: 40px;
-    text-align: center;
-    font-weight: 400;
+  .nr {
+    padding: 20px 40px;
+    h1 {
+      font-size: 40px;
+      text-align: center;
+      font-weight: 400;
+    }
+    p {
+      line-height: 60px;
+      text-indent: 0.7rem;
+      font-size: 29px;
+    }
   }
-  p {
-    line-height: 60px;
-    text-indent: 0.7rem;
-    font-size: 29px;
+  .biaoti {
+    padding: 25px 0 0 30px;
+    p {
+      font-size: 35px;
+      margin: 0;
+    }
+    span {
+      font-size: 24px;
+      color: #999;
+    }
   }
-}
-.biaoti {
-  padding: 25px 0 0 30px;
-  p {
-    font-size: 35px;
-    margin: 0;
-  }
-  span {
-    font-size: 24px;
-    color: #999;
-  }
-}
-.goumai {
-  font-size: 26px;
-  text-align: center;
-  i {
-    color: red;
-    font-style: normal;
-  }
-  h3 {
-    font-weight: 400;
-    margin-bottom: 60px;
-    color: #333;
-  }
-  .van-button {
-    width: 60%;
-    height: 70px;
+  .goumai {
     font-size: 26px;
-  }
-  .van-checkbox {
-    position: absolute;
-    left: 50%;
-    margin-top: 20px;
-    transform: translateX(-50%);
-  }
-  .pl {
-    display: block;
-    left: 50%;
-    transform: translateX(-50%);
-    border: none;
-    width: 30%;
+    text-align: center;
+    i {
+      color: red;
+      font-style: normal;
+    }
+    h3 {
+      font-weight: 400;
+      margin-bottom: 60px;
+      color: #333;
+    }
+    .van-button {
+      width: 60%;
+      height: 70px;
+      font-size: 26px;
+    }
+    .van-checkbox {
+      position: absolute;
+      left: 50%;
+      margin-top: 20px;
+      transform: translateX(-50%);
+    }
+    .pl {
+      display: block;
+      left: 50%;
+      transform: translateX(-50%);
+      border: none;
+      width: 30%;
+    }
   }
 }
 </style>

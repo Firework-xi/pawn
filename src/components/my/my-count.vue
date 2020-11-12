@@ -5,35 +5,36 @@
     <!-- 充值栏信息 用户信息 -->
     <div class="user">
       <van-image class="actar" round fit="cover" src="https://img.yzcdn.cn/vant/cat.jpeg" />
-      <span class="userPhone">{{ user.mobile }}</span>
+      <span class="userPhone">{{ goldCoins }}kk币</span>
     </div>
     <!-- 充值模块 -->
     <div class="buyCoins">
       <van-grid column-num="3" :gutter="10">
-        <van-grid-item
-          ><van-icon name="star-o" color="#f6b53e" /><span class="text">600kk币</span
-          ><van-button type="default" size="mini" round class="coinsBtn" @click="Payshow('¥6.00')">¥6.00</van-button></van-grid-item
+        <van-grid-item v-for="(item, index) in list" :key="index"
+          ><van-icon name="star-o" color="#f6b53e" /><span class="text">{{ item.kb }}kk币</span
+          ><van-button type="default" size="mini" round class="coinsBtn" @click="Payshow(item.price, item.kb)">{{ item.price }}</van-button></van-grid-item
         >
-        <van-grid-item
+        <!-- <van-grid-item
           ><van-icon name="star-o" color="#f6b53e" /><span class="text">1200kk币</span
-          ><van-button type="default" size="mini" round class="coinsBtn" @click="Payshow('¥12.00')">¥12.00</van-button></van-grid-item
+          ><van-button type="default" size="mini" round class="coinsBtn" @click="Payshow('¥12.00', '1200kk币')">¥12.00</van-button></van-grid-item
         >
         <van-grid-item
           ><van-icon name="star-o" color="#f6b53e" /><span class="text">3000kk币</span
-          ><van-button type="default" size="mini" round class="coinsBtn" @click="Payshow('¥30.00')">¥30.00</van-button></van-grid-item
+          ><van-button type="default" size="mini" round class="coinsBtn" @click="Payshow('¥30.00', '3000kk币')">¥30.00</van-button></van-grid-item
         >
         <van-grid-item
           ><van-icon name="star-o" color="#f6b53e" /><span class="text">5000kk币</span
-          ><van-button type="default" size="mini" round class="coinsBtn" @click="Payshow('¥50.00')">¥50.00</van-button></van-grid-item
+          ><van-button type="default" size="mini" round class="coinsBtn" @click="Payshow('¥50.00', '5000kk币')">¥50.00</van-button></van-grid-item
         >
         <van-grid-item
           ><van-icon name="star-o" color="#f6b53e" /><span class="text">9800kk币</span
-          ><van-button type="default" size="mini" round class="coinsBtn" @click="Payshow('¥98.00')">¥98.00</van-button></van-grid-item
+          ><van-button type="default" size="mini" round class="coinsBtn" @click="Payshow('¥98.00', '9800kk币')">¥98.00</van-button></van-grid-item
         >
         <van-grid-item
           ><van-icon name="star-o" color="#f6b53e" /><span class="text">18800kk币</span
-          ><van-button type="default" size="mini" round class="coinsBtn" @click="Payshow('¥188.00')">¥188.00</van-button></van-grid-item
+          ><van-button type="default" size="mini" round class="coinsBtn" @click="Payshow('¥188.00', '18800kk币')">¥188.00</van-button></van-grid-item
         >
+         -->
       </van-grid>
     </div>
     <div class="coinsInstructions">
@@ -59,7 +60,7 @@
         <van-cell title="付款方式" value="花呗" is-link />
       </van-cell-group>
       <!-- 提交按钮 -->
-      <van-button type="default" size="large" round class="confirmBtn">确认支付</van-button>
+      <van-button type="default" size="large" round class="confirmBtn" @click="confirmPay">确认支付</van-button>
     </van-popup>
   </div>
 </template>
@@ -74,13 +75,18 @@ export default {
       // 用户信息
       user: {},
       isPayshow: false,
-      price: 0
+      list: [],
+      // 充值金额
+      price: 0,
+      goldCoins: 0,
+      czye: 0
     }
   },
   computed: {},
   watch: {},
   created() {
     this.userInfo()
+    this.getchongzhi()
   },
   mounted() {},
   methods: {
@@ -88,13 +94,30 @@ export default {
       const data = await this.$http.get('http://yuedu/myuser')
       console.log(data)
       this.user = data.data
+      this.goldCoins = window.localStorage.getItem('coins')
     },
-
+    async getchongzhi() {
+      const { data } = await this.$http.get('http://yuedu/chongzhi')
+      console.log(data)
+      this.list = data.data
+    },
     // 显示充值金额
-    Payshow(e) {
+    Payshow(e, v) {
       this.isPayshow = true
       this.price = e
+      this.czye = v
       console.log(e)
+      console.log(this.czye)
+    },
+    // 将金币进行本地存储
+    confirmPay() {
+      console.log(this.list)
+      const index = window.localStorage.getItem('coins')
+      console.log(index)
+      const a = parseInt(index) + this.czye
+      window.localStorage.setItem('coins', a)
+      this.goldCoins = a
+      this.isPayshow = false
     }
   }
 }

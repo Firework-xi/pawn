@@ -1,6 +1,6 @@
 <template>
   <div class="particulars">
-    <van-nav-bar left-arrow  fixed :class="{ borde: altitude }" @click-left="$router.back()">
+    <van-nav-bar left-arrow fixed :class="{ borde: altitude }" @click-left="$router.back()">
       <template #title>
         <transition name="van-fade">
           <div v-show="altitude">书籍详情</div>
