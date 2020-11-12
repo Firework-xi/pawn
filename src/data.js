@@ -1,20 +1,8 @@
 export default {
   list: [
     {
-      author: '汪熙',
-      bookId: 0,
-      categoryName: '玄幻小说',
-      chapterStatus: 'SERIALIZE',
-      coverImg: require('@/assets/dcfee6c6962a1e68.jpg'),
-      desc:
-        ' 伴随着熙熙越来越胖，黑马程序员的汪熙逐渐征服了周边十万公里的外卖，又发现了两片大陆。无数外卖之兽也随着熙熙的猎杀无度走向灭亡，沉睡无数年的外卖之王在星斗大森林最后的净土苏醒，它要带领仅存的族人，向熙熙复仇！熙熙立志要成为一名强大的拉胯师，可当拉跨之魂觉醒时，苏醒的，却是……旷世之才，拉跨王之争，      我们的熙熙拉跨传说，将由此开始。 ',
-      title: '熙熙拉跨日记',
-      word: '300万字',
-      muli: ['第一章 七宝琉璃VS灵眸', '第二章 国之重器，鼎之震荡', '第三章 仇人？兄弟?', '第四章 默契配合，浩东制胜', '第五章 赌约']
-    },
-    {
       author: '唐家三少',
-      bookId: 1,
+      bookId: 0,
       categoryName: '玄幻小说',
       chapterStatus: 'SERIALIZE',
       coverImg: 'http://yuenov.com:15555/file/group1/book/f5fc281e-9f3f-49b9-931f-05ff62c23da0.jpg',
@@ -26,7 +14,7 @@ export default {
     },
     {
       author: '唐家三少',
-      bookId: 2,
+      bookId: 1,
       categoryName: '玄幻小说',
       chapterStatus: 'END',
       coverImg: 'http://yuenov.com:15555/file/group1/book/d61fdbfe-58b3-4c52-9129-27c7bc5f9c0c.jpg',
@@ -38,7 +26,7 @@ export default {
     },
     {
       author: '唐家三少',
-      bookId: 3,
+      bookId: 2,
       categoryName: '玄幻小说',
       chapterStatus: 'SERIALIZE',
       coverImg: 'http://yuenov.com:15555/file/group1/book/e96701b6-1df1-4a96-9ea9-c93655204078.jpg',
@@ -49,7 +37,7 @@ export default {
     },
     {
       author: '贝戈大',
-      bookId: 4,
+      bookId: 3,
       categoryName: '玄幻小说',
       chapterStatus: 'SERIALIZE',
       coverImg: 'http://yuenov.com:15555/file/group1/book/5718f25e-6e28-45d2-8abe-d7d15dab950e.jpg',
@@ -61,7 +49,7 @@ export default {
     },
     {
       author: '迷惘时代',
-      bookId: 5,
+      bookId: 4,
       categoryName: '网游小说',
       chapterStatus: 'SERIALIZE',
       coverImg: 'http://yuenov.com:15555/file/group1/book/e87c1a03-84e9-498a-a5f7-9196bf22f2eb.jpg',
@@ -72,7 +60,7 @@ export default {
     },
     {
       author: '冰尾星',
-      bookId: 6,
+      bookId: 5,
       categoryName: '玄幻小说',
       chapterStatus: 'SERIALIZE',
       coverImg: 'http://yuenov.com:15555/file/group1/book/beac7bd2-4ac0-40f6-9f49-4d9417670047.jpg',
@@ -83,7 +71,7 @@ export default {
     },
     {
       author: '唐家三少',
-      bookId: 7,
+      bookId: 6,
       categoryName: '玄幻小说',
       chapterStatus: 'SERIALIZE',
       coverImg: 'http://yuenov.com:15555/file/group1/book/a2bc6527-127a-4ce7-96d0-392e6d39c902.jpg',
@@ -95,7 +83,7 @@ export default {
     },
     {
       author: '唐家三少',
-      bookId: 8,
+      bookId: 7,
       categoryName: '玄幻小说',
       chapterStatus: 'SERIALIZE',
       coverImg: 'http://yuenov.com:15555/file/group1/book/2fcef4e6-8a20-4ec7-bddf-b0a55c0bacb7.jpg',
@@ -107,7 +95,7 @@ export default {
     },
     {
       author: '超粉',
-      bookId: 9,
+      bookId: 8,
       categoryName: '网游小说',
       chapterStatus: 'SERIALIZE',
       coverImg: 'http://yuenov.com:15555/file/group1/book/5f6dab35-48d3-4832-9a8c-09e6a1c65b36.jpg',
@@ -119,7 +107,7 @@ export default {
     },
     {
       author: '八九燕来',
-      bookId: 10,
+      bookId: 9,
       categoryName: '科幻灵异',
       chapterStatus: 'SERIALIZE',
       coverImg: 'http://yuenov.com:15555/file/group1/book/b6a96526-04e9-4adf-b477-667f5baf75d8.jpg',
@@ -130,7 +118,7 @@ export default {
     },
     {
       author: '三个小西红柿',
-      bookId: 11,
+      bookId: 10,
       categoryName: '玄幻小说',
       chapterStatus: 'SERIALIZE',
       coverImg: 'http://yuenov.com:15555/file/group1/book/4b37bd71-fb8c-45e1-bb29-22fcb6c4beda.jpg',
@@ -141,7 +129,7 @@ export default {
     },
     {
       author: '云中擒仙鹤',
-      bookId: 12,
+      bookId: 11,
       categoryName: '玄幻小说',
       chapterStatus: 'SERIALIZE',
       coverImg: 'http://yuenov.com:15555/file/group1/book/0f79ebe4-cab7-44c5-a6bf-3d61c508d325.jpg',
@@ -153,7 +141,7 @@ export default {
     },
     {
       author: '梦回夕照',
-      bookId: 13,
+      bookId: 12,
       categoryName: '玄幻小说',
       chapterStatus: 'SERIALIZE',
       coverImg: 'http://yuenov.com:15555/file/group1/book/4af308fc-7c3e-4721-8a3c-651dd5c08fc7.jpg',
@@ -165,7 +153,7 @@ export default {
     },
     {
       author: '烟说从前',
-      bookId: 14,
+      bookId: 13,
       categoryName: '玄幻小说',
       chapterStatus: 'SERIALIZE',
       coverImg: 'http://yuenov.com:15555/file/group1/book/8b42e621-f896-417b-a715-ef94c7b09f53.jpg',
@@ -176,7 +164,7 @@ export default {
     },
     {
       author: '四季如东',
-      bookId: 15,
+      bookId: 14,
       categoryName: '玄幻小说',
       chapterStatus: 'SERIALIZE',
       coverImg: 'http://yuenov.com:15555/file/group1/book/2bef75f7-a69e-4ed9-8dc1-74f9a3b63af1.jpg',
@@ -187,7 +175,7 @@ export default {
     },
     {
       author: '浮白三秋',
-      bookId: 16,
+      bookId: 15,
       categoryName: '言情小说',
       chapterStatus: 'SERIALIZE',
       coverImg: 'http://yuenov.com:15555/file/group1/book/f48f591d-f322-4aee-a8d6-9e461fde3678.jpg',
@@ -199,7 +187,7 @@ export default {
     },
     {
       author: '左右的猫',
-      bookId: 17,
+      bookId: 16,
       categoryName: '历史小说',
       chapterStatus: 'SERIALIZE',
       coverImg: 'http://yuenov.com:15555/file/group1/book/56cd06d9-1209-49e6-ac43-1bf62443bf3c.jpg',
@@ -211,7 +199,7 @@ export default {
     },
     {
       author: '夏竖琴',
-      bookId: 18,
+      bookId: 17,
       categoryName: '玄幻小说',
       chapterStatus: 'SERIALIZE',
       coverImg: 'http://yuenov.com:15555/file/group1/book/8e274613-c28e-470e-b9d2-f657067164aa.jpg',
@@ -223,7 +211,7 @@ export default {
     },
     {
       author: '吃奶的小猪',
-      bookId: 19,
+      bookId: 18,
       categoryName: '玄幻小说',
       chapterStatus: 'SERIALIZE',
       coverImg: 'http://yuenov.com:15555/file/group1/book/9fc712a5-74dc-40c2-9e9a-c13e3c059daa.jpg',
@@ -235,7 +223,7 @@ export default {
     },
     {
       author: '无常元帅',
-      bookId: 20,
+      bookId: 19,
       categoryName: '玄幻小说',
       chapterStatus: 'SERIALIZE',
       coverImg: 'http://yuenov.com:15555/file/group1/book/be486482-6183-4353-bbac-74717207eefb.jpg',
@@ -247,7 +235,7 @@ export default {
     },
     {
       author: '无常元帅',
-      bookId: 21,
+      bookId: 20,
       categoryName: '玄幻小说',
       chapterStatus: 'SERIALIZE',
       coverImg: 'http://yuenov.com:15555/file/group1/book/6f5cf5d2-b951-4ed3-a5cc-b3f9aa7524a0.jpg',
@@ -258,7 +246,7 @@ export default {
     },
     {
       author: '传少',
-      bookId: 22,
+      bookId: 21,
       categoryName: '玄幻小说',
       chapterStatus: 'SERIALIZE',
       coverImg: 'http://yuenov.com:15555/file/group1/book/da5e5a45-3121-4604-b8f0-8bb6c256ce16.jpg',
@@ -269,7 +257,7 @@ export default {
     },
     {
       author: '心魔难裁',
-      bookId: 23,
+      bookId: 22,
       categoryName: '玄幻小说',
       chapterStatus: 'SERIALIZE',
       coverImg: 'http://yuenov.com:15555/file/group1/book/6dd4a16c-3e86-41bb-b628-31c8ed9e5569.jpg',
@@ -281,7 +269,7 @@ export default {
     },
     {
       author: '黑色天蝎',
-      bookId: 24,
+      bookId: 23,
       categoryName: '玄幻小说',
       chapterStatus: 'SERIALIZE',
       coverImg: 'http://yuenov.com:15555/file/group1/book/7e9c0648-1ba9-4aab-9a7c-6c77fa1c57e6.jpg',
@@ -293,7 +281,7 @@ export default {
     },
     {
       author: '北孙肉串',
-      bookId: 25,
+      bookId: 24,
       categoryName: '玄幻小说',
       chapterStatus: 'SERIALIZE',
       coverImg: 'http://yuenov.com:15555/file/group1/book/3b919dda-ecce-4318-9e52-3afce403f7ec.jpg',
@@ -305,7 +293,7 @@ export default {
     },
     {
       author: '聚水滴',
-      bookId: 26,
+      bookId: 25,
       categoryName: '玄幻小说',
       chapterStatus: 'SERIALIZE',
       coverImg: 'http://yuenov.com:15555/file/group1/book/918ab023-0fb6-45ad-9eef-d5c9bc3e1c11.jpg',
@@ -317,7 +305,7 @@ export default {
     },
     {
       author: '祈之夏梦',
-      bookId: 27,
+      bookId: 26,
       categoryName: '玄幻小说',
       chapterStatus: 'SERIALIZE',
       coverImg: 'http://yuenov.com:15555/file/group1/book/a0c10a85-48d3-4727-8797-bcc498a2b952.jpg',
@@ -329,7 +317,7 @@ export default {
     },
     {
       author: '似梦化星辰',
-      bookId: 28,
+      bookId: 27,
       categoryName: '其他小说',
       chapterStatus: 'SERIALIZE',
       coverImg: 'http://yuenov.com:15555/file/group1/book/3f9e5dfc-59f2-488d-a0a4-9a27c4a34051.jpg',
@@ -341,7 +329,7 @@ export default {
     },
     {
       author: '浅水之墨',
-      bookId: 29,
+      bookId: 28,
       categoryName: '玄幻小说',
       chapterStatus: 'SERIALIZE',
       coverImg: 'http://yuenov.com:15555/file/group1/book/6e464af6-2b01-4f77-bd3d-26015936735c.jpg',
@@ -353,7 +341,7 @@ export default {
     },
     {
       author: '思念v卫',
-      bookId: 30,
+      bookId: 29,
       categoryName: '其他小说',
       chapterStatus: 'SERIALIZE',
       coverImg: 'http://yuenov.com:15555/file/group1/book/4e8d8b4f-c425-43ef-a641-a829b830b781.jpg',

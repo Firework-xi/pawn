@@ -97,7 +97,7 @@ import axios from 'axios'
       },
       back() {
         if (this.showWho) {
-          history.go(-1)
+          this.$emit('close', false)
         } else {
           this.showWho = true
           this.searchValue = ''

@@ -67,6 +67,12 @@
 <script>
 import balance from './notsufficientfunds.vue'
 export default {
+  props: {
+    id: {
+      trpe: [Number, String],
+      require: true
+    }
+  },
   components: {
     balance
   },
@@ -101,7 +107,6 @@ export default {
       }
     },
     yue: function() {
-      console.log(852)
       const a = parseInt(window.localStorage.getItem('coins'))
       const b = a + this.yue
       return b
@@ -203,7 +208,6 @@ export default {
       }
     },
     async getwznr(index) {
-      console.log(index)
       if (index === undefined) {
         const id = window.localStorage.getItem('完美世界')
         console.log('getwznr -> id', id)
