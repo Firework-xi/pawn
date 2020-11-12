@@ -6,38 +6,34 @@ export default {
       url: 'http://yuedu/details', // 请求地址
       request: 'get', // 请求类型
       manage: options => {
-        const i = options.url.substr(options.url.lastIndexOf('/') + 1, 2)
+        const i = options.url.substr(options.url.lastIndexOf('/') + 1, 2) - 0
         let data = []
         for (let q = 0; data.length <= 3; q++) { // 同类作品
-          var v = parseInt(Math.random() * (29 - 1 + 1) + 1)
-          console.log(v)
-          if (v !== i) {
+          var sex = parseInt(Math.random() * (29 - 1 + 1) + 1)
+          if (sex !== i) {
+            console.log(sex, i)
             let iq1 = data.findIndex(v => {
-              return v.bookId === v
+              return v.bookId === sex
             })
-            console.log(iq1)
             if (iq1 === -1) {
-              data.push(list.list[v])
+              data.push(list.list[sex === 1 ? 1 : sex - 1])
             }
           }
         }
         let arr = []
-        for (let s = 0; arr.length <= 3; s++) { // 全部作品推荐
+        console.log()
+        for (let v = 0; arr.length <= 3; v++) {
           const index = parseInt(Math.random() * (29 - 1 + 1) + 1)
-          console.log(index)
           if (index !== i) {
-            let Index = arr.findIndex(v => {
+            console.log(i, index)
+            const ins = arr.findIndex(v => {
               return v.bookId === index
             })
-            console.log(Index)
-            if (Index === -1) {
-              arr.push(list.list[index])
-            } else {
-              --s
+            if (ins === -1) {
+              arr.push(list.list[index === 1 ? 1 : index - 1])
             }
           }
         }
-
         return {
           state: list.list[i],
           data,
