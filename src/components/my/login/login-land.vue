@@ -107,7 +107,7 @@ export default {
       window.localStorage.setItem('disanfangs', JSON.stringify({ name: 18707482845, password: 123456 }))
       
       this.$router.push('/home')
-      this.$toast.success('进入我的')
+      this.$toast.success('登录成功')
     },
     // 登陆
     onSubmit(values) {

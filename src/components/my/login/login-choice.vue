@@ -34,7 +34,6 @@
     return {
       index: null,
       isone: '0'
-
     }
   },
   computed: {},
@@ -58,7 +57,7 @@
       })
         window.localStorage.setItem('choice', this.index)
         window.localStorage.setItem('token', false)
-         this.$toast.success('进入书城')
+        this.$toast.success('进入书城')
         this.$router.push('/home')
     },
     // 男

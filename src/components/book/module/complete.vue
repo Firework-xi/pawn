@@ -3,8 +3,9 @@
   <!-- // 全部作品组件 -->
   <div>
     <div class="particulars-hot">
+  
       <van-cell>
-        <template #title>作者其他作品</template> <template #default> <span class="default-text">全部作品</span><van-icon name="arrow" /></template>
+        <template #title>作者其他作品</template> <template #default> <span class="default-text" @click="whole">全部作品</span><van-icon name="arrow" @click="whole" /></template>
       </van-cell>
       <van-row gutter="15" class="recommend">
         <van-col span="6" v-for="(i, index) in list" :key="index">
@@ -21,12 +22,19 @@
       return {
         list: [{ url: 'https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=2226073134,1983258206&fm=15&gp=0.jpg', name: '性感豹纹' }, { url: 'https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=3300862007,3336187684&fm=15&gp=0.jpg.com%2Fpic%2F7%2Fe5%2F37d4517209.jpg', name: '警察OL' }, { url: 'https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=2720108556,3829300189&fm=26&gp=0.jpg', name: '校园春色' }, { url: 'https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=3373011781,3136003611&fm=26&gp=0.jpg', name: '可爱萝莉' }]
       }
+    }, 
+methods: {
+      whole() {
+  console.log(1)
+      this.$router.push('/whole')
+    }
     }
   }
 </script>
 
 <style lang="scss" scoped>
 .particulars-hot {
+ 
   .default-text {
     font-size: 25px;
   }
