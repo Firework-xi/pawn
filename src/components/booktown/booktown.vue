@@ -16,7 +16,7 @@
       </van-swipe> -->
     </div>
     <div class="tab-bar">
-       <div class="channelButton"><span class="iconfont icon-xiajiantou" @click="isChennelEditShow=true"></span></div>
+      <div class="channelButton"><span class="iconfont icon-xiajiantou" @click="isChennelEditShow = true"></span></div>
       <van-tabs v-model="active" animated @click="gethuoqu">
         <van-tab v-for="(item, index) in title" :title="item.name" :key="index">
           <!-- 轮播图 -->
@@ -24,19 +24,10 @@
             <van-swipe-item v-for="(image, index) in imageList" :key="index">
               <img :src="image" />
             </van-swipe-item>
-            <!-- <van-swipe-item>
-              <img src="../../assets/第一张.jpg" />
-            </van-swipe-item>
-            <van-swipe-item>
-              <img src="../../assets/第二张.jpg" />
-            </van-swipe-item>
-            <van-swipe-item>
-              <img src="../../assets/第三张.jpg" />
-            </van-swipe-item> -->
           </van-swipe>
           <!-- 内容 -->
           <div class="box-botton">
-            <div class="box" v-for="(item, index) in information" :key="index" @click="$router.push('/particulars')">
+            <div class="box" v-for="(item, index) in information" :key="index" @click="$router.push(`/particulars/${index}`)">
               <div class="book-cover">
                 <van-image width="100%" :src="item.img" />
               </div>
@@ -48,10 +39,10 @@
             </div>
           </div>
         </van-tab>
-         <van-tab></van-tab>
+        <van-tab></van-tab>
       </van-tabs>
     </div>
-    
+
     <!-- 分类搜索 -->
     <!-- 弹出层 -->
     <van-popup v-model="classifyShow" position="bottom" :style="{ height: '100%' }">
@@ -63,7 +54,7 @@
       </van-nav-bar>
       <!-- 性别男 -->
       <div class="boy-icon">
-        <span class=" iconfont icon-xingbie-nan"></span>
+        <span class="iconfont icon-xingbie-nan"></span>
         <span>男生</span>
       </div>
       <!-- 主体 -->
@@ -77,7 +68,7 @@
       </van-grid>
       <!-- 性别女 -->
       <div class="girl-icon">
-        <span class=" iconfont icon-xingbie-nv"></span>
+        <span class="iconfont icon-xingbie-nv"></span>
         <span>女生</span>
       </div>
       <!-- 主体 -->
@@ -94,7 +85,7 @@
     <van-popup v-model="searchShow" position="right" :style="{ width: '100%', height: '100%' }">
       <form action="/" class="formBottom">
         <van-search v-model="searchValue" show-action placeholder="请输入搜索关键词" clearable action-text="搜索">
-          <span slot="left" @click="returnLeft"><van-icon name="arrow-left" class="return-icon"/></span>
+          <span slot="left" @click="returnLeft"><van-icon name="arrow-left" class="return-icon" /></span>
         </van-search>
       </form>
       <!-- 推荐搜索 -->
@@ -106,17 +97,9 @@
         <van-grid-item v-for="value in 8" :key="value" text="诡道传人" />
       </van-grid>
     </van-popup>
-     <!-- 频道编辑弹出层 -->
-    <van-popup
-      v-model="isChennelEditShow"
-      closeable
-      close-icon-position="top-right"
-      position="bottom"
-      :style="{ height: '100%' }"
-    >
-      <book-edit  :my-channels="title">
-
-      </book-edit>
+    <!-- 频道编辑弹出层 -->
+    <van-popup v-model="isChennelEditShow" closeable close-icon-position="top-right" position="bottom" :style="{ height: '100%' }">
+      <book-edit :my-channels="title"> </book-edit>
     </van-popup>
   </div>
 </template>
@@ -334,21 +317,21 @@ export default {
     align-items: center;
     justify-content: space-between;
   }
-  .channelButton{
-   position: absolute;;
+  .channelButton {
+    position: absolute;
     right: 0;
     width: 70px;
     height: 80px;
     background: #fff;
     // color: #BEBEBE;
-    opacity: .8;
+    opacity: 0.8;
     display: flex;
     font-size: 40px;
     justify-content: center;
     align-items: center;
     z-index: 1;
   }
-  .icon-xiajiantou{
+  .icon-xiajiantou {
     color: #696868;
   }
 }

@@ -3,7 +3,6 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import read from '@/components/bookrack/read.vue'
 import bulkbuying from '@/components/bookrack/bulkbuying.vue'
-
 Vue.use(VueRouter)
 
 const routes = [
@@ -36,37 +35,44 @@ const routes = [
       {
         path: '/bookrack',
         name: 'bookrack',
-        component: () => import('@/components/bookrack/bookrack.vue'),
+        component: () => import('@/components/bookrack/bookrack.vue'), // 书架
         meta: { index: 1 },
         props: true
       },
       {
         path: '/my',
         name: 'my',
-        component: () => import('@/components/my/my.vue'),
+        component: () => import('@/components/my/my.vue'), // 我的
         meta: { index: 2 }
       },
       {
         path: '/booktown',
         name: 'booktown',
-        component: () => import('@/components/booktown/booktown'),
-        meta: { index: 2 },
-        props: true
+        component: () => import('@/components/booktown/booktown'), // 书城
+        meta: { index: 2 }
       }
     ]
   },
 
   {
-    path: '/particulars',
+    path: '/particulars/:id',
     name: 'particulars',
     component: () => import('@/components/book/particulars.vue'),
-    meta: { index: 3 }
+    meta: { index: 3 },
+    props: true
   },
   {
     // 阅读详情
     path: '/read',
     name: 'read',
     component: read,
+    meta: { index: 4 }
+  },
+  {
+    // 全部作品详情
+    path: '/whole',
+    name: 'read',
+    component: () => import('@/components/book/module/whole.vue'),
     meta: { index: 4 }
   },
   {
