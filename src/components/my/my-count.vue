@@ -5,7 +5,7 @@
     <!-- 充值栏信息 用户信息 -->
     <div class="user">
       <van-image class="actar" round fit="cover" src="https://img.yzcdn.cn/vant/cat.jpeg" />
-      <span class="userPhone">{{ goldCoins }}kk币</span>
+      <span class="userPhone">{{ goldCoins }}</span>
     </div>
     <!-- 充值模块 -->
     <div class="buyCoins">
@@ -47,28 +47,21 @@
         5）读书充值卡充值不计入VIP等级，即用户通过读书充值卡充值书币，并不影响VIP状态.<br />
         6）用户可以在个人书房中，看到自己账户中的”读书卡余额.<br />
         7）读书充值卡充值不计入VIP等级，即用户通过读书充值卡充值书币，并不影响VIP状态.<br />
-        7）读书充值卡充值不计入VIP等级，即用户通过读书充值卡充值书币，并不影响VIP状态.<br />
+        8）读书充值卡充值不计入VIP等级，即用户通过读书充值卡充值书币，并不影响VIP状态.<br />
+        9）读书充值卡充值不计入VIP等级，即用户通过读书充值卡充值书币，并不影响VIP状态.<br />
+        10）读书充值卡充值不计入VIP等级，即用户通过读书充值卡.<br />
       </span>
     </div>
+    <pay v-if="isPayshow"></pay>
     <!-- 购买金币弹出框模块 -->
-    <van-popup v-model="isPayshow" closeable close-icon-position="top-left" position="bottom" :style="{ height: '60%' }" class="popup">
-      <div class="price">{{ price }}</div>
-      <van-cell-group>
-        <!-- <van-icon name="cross" size="20px" /> -->
-
-        <van-cell title="订单信息" value="手机充值" is-link />
-        <van-cell title="付款方式" value="花呗" is-link />
-      </van-cell-group>
-      <!-- 提交按钮 -->
-      <van-button type="default" size="large" round class="confirmBtn" @click="confirmPay">确认支付</van-button>
-    </van-popup>
   </div>
 </template>
 
 <script>
+import pay from './pay.vue'
 export default {
   name: 'MyCount',
-  components: {},
+  components: { pay },
   props: {},
   data() {
     return {
@@ -95,30 +88,21 @@ export default {
       console.log(data)
       this.user = data.data
       this.goldCoins = window.localStorage.getItem('coins')
+      console.log(this.goldCoins)
     },
     async getchongzhi() {
       const { data } = await this.$http.get('http://yuedu/chongzhi')
       console.log(data)
       this.list = data.data
-    },
-    // 显示充值金额
+    }, // 显示充值金额
+
     Payshow(e, v) {
       this.isPayshow = true
       this.price = e
       this.czye = v
       console.log(e)
       console.log(this.czye)
-    },
-    // 将金币进行本地存储
-    confirmPay() {
-      console.log(this.list)
-      const index = window.localStorage.getItem('coins')
-      console.log(index)
-      const a = parseInt(index) + this.czye
-      window.localStorage.setItem('coins', a)
-      this.goldCoins = a
-      this.isPayshow = false
-    }
+    } // 将金币进行本地存储
   }
 }
 </script>
@@ -170,21 +154,6 @@ export default {
   .proup-btn {
     width: 100%;
     height: 100%;
-  }
-  .popup {
-    .van-cell-group {
-      margin-top: 80px;
-    }
-    .price {
-      margin-top: 100px;
-      margin-left: 280px;
-    }
-    .confirmBtn {
-      background-color: #1989fa;
-      color: #fff;
-      width: 500px;
-      margin: 80px 115px;
-    }
   }
 }
 </style>
