@@ -15,32 +15,18 @@
       <p>价格：{{ jiage }} kb币 余额：{{ yue }} kb币</p>
       <van-button v-if="result.length === 0" round type="primary" color="#ccc" disabled>请选择购买章节</van-button>
       <!-- <van-button v-else-if="result.length" round type="primary">免费下载</van-button> -->
-      <van-button v-else-if="gman" round type="danger">购买并下载</van-button>
-      <div class="cz" v-if="cz">
-        <van-divider>余额不足，充值并购买 </van-divider>
-        <van-button type="default">
-          <p>1元</p>
-          <span>100kb币</span>
-        </van-button>
-        <van-button type="default">
-          <p>6元</p>
-          <span>600kb币</span>
-        </van-button>
-        <van-button type="default">
-          <p>12元</p>
-          <span>1200kb币</span>
-        </van-button>
-        <van-button type="default">
-          <p>30元</p>
-          <span>3000kb币</span>
-        </van-button>
-      </div>
+      <van-button v-else-if="gman" round type="danger" @click="gmcg">购买并下载</van-button>
+      <balance v-if="cz" @sx="sx"></balance>
     </div>
   </div>
 </template>
 
 <script>
+import balance from './notsufficientfunds.vue'
 export default {
+  components: {
+    balance
+  },
   data() {
     return {
       list: [],
@@ -50,7 +36,7 @@ export default {
       gman: false,
       zj: 0,
       jiage: 0,
-      yue: 30,
+      yue: 0,
       lists: []
     }
   },
@@ -77,7 +63,6 @@ export default {
     },
     async getchongzhi() {
       const { data } = await this.$http.get('http://yuedu/chongzhi')
-      console.log(data)
       this.lists = data.data
     },
     async catalogs() {
@@ -90,6 +75,22 @@ export default {
         this.$refs.checkboxGroup.toggleAll(true)
       } else {
         this.$refs.checkboxGroup.toggleAll()
+      }
+    },
+    gmcg() {
+      this.$toast.success('购买成功')
+      this.$router.push('/read')
+      window.localStorage.setItem('coins', parseInt(window.localStorage.getItem('coins')) - this.jiage)
+      window.localStorage.setItem('havebought', 1)
+    },
+    sx(v) {
+      this.yue = v
+      if (this.jiage > this.yue) {
+        this.gman = false
+        this.cz = true
+      } else {
+        this.gman = true
+        this.cz = false
       }
     }
   }
@@ -118,24 +119,6 @@ export default {
     width: 50%;
     height: 70px;
     margin-bottom: 20px;
-  }
-  .cz {
-    .van-button {
-      margin: 10px;
-      width: 152px;
-      height: 132px;
-      padding: 0;
-      p {
-        margin: 0;
-      }
-      span {
-        font-size: 22px;
-        color: #666;
-      }
-    }
-    .van-divider {
-      font-size: 24px;
-    }
   }
 }
 </style>

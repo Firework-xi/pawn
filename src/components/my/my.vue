@@ -49,7 +49,7 @@ export default {
     },
     async userInfo() {
       if (!window.localStorage.getItem('coins')) {
-        window.localStorage.setItem('coins', 100)
+        window.localStorage.setItem('coins', 0)
       }
       const data = await this.$http.get('http://yuedu/myuser')
       this.user = data.data

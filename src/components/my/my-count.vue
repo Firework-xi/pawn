@@ -54,8 +54,7 @@
     <van-popup v-model="isPayshow" closeable close-icon-position="top-left" position="bottom" :style="{ height: '60%' }" class="popup">
       <div class="price">{{ price }}</div>
       <van-cell-group>
-        <!-- <van-icon name="cross" size="20px" /> -->
-
+        <!--<van-icon name="cross" size="20px" /> -->
         <van-cell title="订单信息" value="手机充值" is-link />
         <van-cell title="付款方式" value="花呗" is-link />
       </van-cell-group>
@@ -68,7 +67,6 @@
 <script>
 export default {
   name: 'MyCount',
-  components: {},
   props: {},
   data() {
     return {
@@ -107,13 +105,11 @@ export default {
       this.price = e
       this.czye = v
       console.log(e)
-      console.log(this.czye)
+      console.log('Payshow ->  this.pays', this.pays)
     },
     // 将金币进行本地存储
     confirmPay() {
-      console.log(this.list)
       const index = window.localStorage.getItem('coins')
-      console.log(index)
       const a = parseInt(index) + this.czye
       window.localStorage.setItem('coins', a)
       this.goldCoins = a

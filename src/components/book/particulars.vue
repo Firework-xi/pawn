@@ -1,6 +1,6 @@
 <template>
   <div class="particulars">
-    <van-nav-bar left-arrow fixed :class="{ borde: altitude }" @click-left="$router.back()">
+    <van-nav-bar left-arrow fixed :class="{ borde: altitude }" @click-left="$router.push('/booktown')">
       <template #title>
         <transition name="van-fade">
           <div v-show="altitude">书籍详情</div>
@@ -29,7 +29,7 @@
         <div class="van-multi-ellipsis--l3">
           <p>命里有时终须有，命里无时要强求。</p>
           <p class="texte-p">
-            这是一个长生果的故事。择是选择。这是一个关于选择的故事。三千世界，满天神魔，手握道卷，掌天下...<span> <van-icon name="arrow-down" /></span>
+            这是一个长生果的故事。择是选择。这是一个关于选择的故事。三千世界，满天神魔，手握道卷，掌天下...<span> <van-icon name="arrow-down"/></span>
           </p>
         </div>
       </div>
@@ -58,33 +58,32 @@ import details from './module/details' // 书籍详情组件
 import base from './module/base' // btn按钮
 import { debounce } from 'lodash'
 export default {
-  created() {
-  },
+  created() {},
   data() {
     return {
       number: 4,
-      altitude: false,
+      altitude: false
     }
   },
-  methods: {
-  },
+  methods: {},
   components: {
     catalog,
     ofthesameki,
     complete,
     detaile: details,
     basehandle: base
-  }, 
-mounted () { // 监听器头的事件
- const atraters = this.$refs['lost-gome']
- console.log(atraters)
+  },
+  mounted() {
+    // 监听器头的事件
+    const atraters = this.$refs['lost-gome']
+    console.log(atraters)
     atraters.onscroll = debounce(() => {
-       if (atraters.scrollTop > 80) {
-         this.altitude = true
-         console.log(this.altitude)
-       } else {
-         this.altitude = false
-       }
+      if (atraters.scrollTop > 80) {
+        this.altitude = true
+        console.log(this.altitude)
+      } else {
+        this.altitude = false
+      }
     }, 10)
   }
 }

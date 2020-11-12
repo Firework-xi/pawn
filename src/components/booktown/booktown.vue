@@ -60,7 +60,7 @@
       </van-nav-bar>
       <!-- 性别男 -->
       <div class="boy-icon">
-        <span class=" iconfont icon-xingbie-nan"></span>
+        <span class=" iconfont icon-xingbienan"></span>
         <span>男生</span>
       </div>
       <!-- 主体 -->

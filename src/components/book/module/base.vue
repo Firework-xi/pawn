@@ -3,7 +3,7 @@
     <div class="box-base">
       <van-row>
         <van-col span="7"><van-button>下载</van-button></van-col>
-        <van-col span="10"><van-button class="colored" to="/read">免费试读</van-button></van-col>
+        <van-col span="10"><van-button class="colored" @click="ydnr()">免费试读</van-button></van-col>
         <van-col span="7"><van-button>加入书架</van-button></van-col>
       </van-row>
     </div>
@@ -11,7 +11,21 @@
 </template>
 
 <script>
-export default {}
+export default {
+  methods: {
+    ydnr() {
+      const id = window.localStorage.getItem('完美世界')
+      if (id === null) {
+        window.localStorage.setItem('完美世界', 0)
+        this.$router.push('/read')
+      }
+      if (!window.localStorage.getItem('coins')) {
+        window.localStorage.setItem('coins', 0)
+      }
+      this.$router.push('/read')
+    }
+  }
+}
 </script>
 
 <style lang="scss" scoped>
