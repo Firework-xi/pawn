@@ -8,7 +8,7 @@ export default new Vuex.Store({
     isLlogin: true
   },
   mutations: {
-    setIsLogin(state, data) {
+    setIsLogin (state, data) {
       state.isLogin = data
       localStorage.setItem('token', data)
     }

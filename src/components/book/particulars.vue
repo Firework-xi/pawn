@@ -1,19 +1,23 @@
 <template>
   <div class="particulars">
-    <van-nav-bar left-arrow @click-right="onClickRight" fixed :class="{ borde: altitude }">
-      <template #title v-if="altitude"> 书籍详情</template>
+    <van-nav-bar left-arrow fixed :class="{ borde: altitude }" @click-left="$router.back()">
+      <template #title>
+        <transition name="van-fade">
+          <div v-show="altitude">书籍详情</div>
+        </transition>
+      </template>
     </van-nav-bar>
     <!--  //导航 -->
     <!-- 图书介绍区 -->
-    <div class="box" ref="lost-gome" @change="onchange">
+    <div class="box" ref="lost-gome">
       <div class="introduce">
         <div class="left">
-          <van-image fit="cover" src="https://img.yzcdn.cn/vant/cat.jpeg" />
+          <van-image fit="cover" src="https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=4255547098,2077529314&fm=11&gp=0.jpg" />
         </div>
         <div class="right">
           <div class="right-box">
             <div class="right-name">金瓶梅</div>
-            <van-rate class="right-evaluate" v-model="number" color="#999999" void-icon="star" void-color="#88888" /><span class="text">8.4</span>
+            <van-rate class="right-evaluate" v-model="number" color="#ffca4f" void-icon="star" void-color="#88888" /><span class="text">8.4</span>
             <div class="right-sort">猫腻 | 玄幻</div>
             <div class="right-number"><span>5春卷/千字</span><span>313万字</span></div>
           </div>
@@ -55,24 +59,15 @@ import base from './module/base' // btn按钮
 import { debounce } from 'lodash'
 export default {
   created() {
-    this.onindex()
   },
   data() {
     return {
       number: 4,
-      altitude: false
+      altitude: false,
     }
   },
   methods: {
-    async onindex() {
-      const res = await this.$http.get('http://yuedu/details')
-      console.log(res)
-    },
-    onClickRight() {
-this.$http.get('http://yuedu/details')
-      // 书籍返回事件
-    } 
-  }, 
+  },
   components: {
     catalog,
     ofthesameki,
@@ -82,9 +77,11 @@ this.$http.get('http://yuedu/details')
   }, 
 mounted () { // 监听器头的事件
  const atraters = this.$refs['lost-gome']
+ console.log(atraters)
     atraters.onscroll = debounce(() => {
        if (atraters.scrollTop > 80) {
          this.altitude = true
+         console.log(this.altitude)
        } else {
          this.altitude = false
        }

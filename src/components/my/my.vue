@@ -96,6 +96,7 @@ export default {
       justify-content: center;
       align-items: center;
       .text {
+        height: 30 * 2px;
         font-size: 30px;
         padding-top: 15px;
         color: #333;
