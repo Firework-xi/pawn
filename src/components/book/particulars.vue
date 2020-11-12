@@ -43,10 +43,10 @@
       </div>
       <!-- 结束 -->
       <!-- 目录 -->
-      <catalog :mulu="mulu"></catalog>
+      <catalog @publish="publish"></catalog>
       <div class="ofthesamekind"></div>
       <!-- 同类作品 -->
-      <ofthesameki :list="list" @addwhole="addwhole"></ofthesameki>
+      <ofthesameki :list="list" @addwhole="addwhole" @changeaddens="changeaddens"></ofthesameki>
       <div class="ofthesamekind"></div>
       <!-- 全部作品 -->
       <complete :arr="arr" @classify="classify"></complete>
@@ -55,6 +55,12 @@
       <detaile></detaile>
     </div>
     <basehandle />
+    <van-popup v-model="show" position="bottom" :style="{ height: '100%' }">
+      <van-nav-bar title="全部章节" left-text="返回" border @click-left="show = false" />
+      <van-list v-model="loading" :finished="finished" finished-text="目录加载完成">
+        <van-cell v-for="(item, i) in mulu" :key="i" :title="item" @click="listpush" />
+      </van-list>
+    </van-popup>
   </div>
 </template>
 
@@ -84,10 +90,23 @@ export default {
       list: [], // 文章列表
       arr: [], // 全部作品
       mulu: [], // 目录
-      faleses: false
+      faleses: false,
+      show: false,
+      loading: true,
+      finished: true
     }
   },
   methods: {
+    listpush() {
+      this.$router.push('/read')
+    },
+    publish() {
+      this.show = true
+    },
+    changeaddens(v) {
+      // 切换
+      this.list = v
+    },
     async achieve() {
       // 默认渲染
       console.log(this.id)
@@ -95,20 +114,24 @@ export default {
       console.log(data)
       this.faleses = true
       this.data = data.state
+      window.localStorage.setItem('data', JSON.stringify(this.data))
       this.arr = data.arr
       this.list = data.data
       this.mulu = data.state.muli
       console.log(this.data)
     },
     Switch() {
+      // 展开页
       this.describe = !this.describe
     },
     addwhole(v) {
+      // 作品页
       this.data = v
+      window.localStorage.setItem('data', JSON.stringify(v))
     },
     classify(v) {
-      console.log(v)
       this.data = v
+      window.localStorage.setItem('data', JSON.stringify(v))
     }
   },
   components: {
@@ -134,6 +157,9 @@ export default {
 </script>
 <style lang="scss" scoped>
 ::v-deep.particulars {
+  .van-nav-bar__text {
+    margin-left: 20px;
+  }
   .borde {
     border-bottom: #5a5d5a 1px solid;
   }

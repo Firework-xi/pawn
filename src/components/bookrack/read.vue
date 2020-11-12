@@ -184,7 +184,9 @@ export default {
         this.catalog = true
         this.show = false
       }
-      const { data: res } = await this.$http.get('http://yuedu/read')
+      const id = window.localStorage.getItem('data')
+      const { data: res } = await this.$http.get(`http://yuedu/details/${id}`)
+      // const { data: res } = await this.$http.get('http://yuedu/read')
       this.list = res.data
     },
     gmcg() {
