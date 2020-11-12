@@ -3,11 +3,12 @@ import { mapState } from 'vuex';
   <div class="my-page">
     <!-- 用户登录状态 -->
     <div class="my-heard" v-if="isLogin">
-      <div class="login-btn">
-        <van-image width="100" height="100" fit="cover" round :src="require('../../assets/bj3.jpg')" />
+      <div class="login-btn" @click="editUserInfo">
+        <van-image width="100" height="100" fit="cover" round :src="require('../../assets/bj3.jpg')"></van-image>
         <span class="text">{{ user.name }} </span>
       </div>
     </div>
+    <!-- 用户未登录状态 -->
     <div v-else class="my-heard">
       <div class="login-btn" @click="denglu">
         <van-image width="100" height="100" fit="cover" round src="https://img.yzcdn.cn/vant/cat.jpeg" />
@@ -50,7 +51,7 @@ export default {
       // 用户信息
       user: {},
       // 用户登录状态
-      isLogin: window.localStorage.getItem('token')
+      isLogin: false
     }
   },
   computed: {
@@ -58,6 +59,11 @@ export default {
   },
   watch: {},
   created() {
+    if (window.localStorage.getItem('token') === 'true') {
+      this.isLogin = true
+    } else {
+      this.isLogin = false
+    }
     this.userInfo()
   },
   mounted() {},
@@ -69,13 +75,17 @@ export default {
       }
     },
     denglu() {
-      console.log(22222)
       this.$router.push('/loginland')
     },
     async userInfo() {
       const data = await this.$http.get('http://yuedu/myuser')
       console.log(data)
       this.user = data.data
+    },
+    // 点击修改用户信息
+    editUserInfo() {
+      console.log('11')
+      this.$router.push('/my-userInfo')
     }
   }
 }

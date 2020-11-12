@@ -52,8 +52,7 @@ const routes = [
         component: () => import('@/components/booktown/booktown'),
         meta: { index: 2 },
         props: true
-      },
-
+      }
     ]
   },
 
@@ -93,6 +92,11 @@ const routes = [
     path: '/search',
     name: 'search',
     component: () => import('@/components/search/index.vue')
+  },
+  {
+    path: '/my-userInfo',
+    name: 'my-userInfo',
+    component: () => import('@/components/my/my-userInfo')
   }
 
   // 二级书本详情路由
