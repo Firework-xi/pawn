@@ -1,7 +1,7 @@
 <template>
   <!-- // 图书目录组件 -->
   <div>
-    <van-cell class="catalogue">
+    <van-cell class="catalogue" @click="publish">
       <template #title> <span>目录</span> <span class="text-time">5月4日 20:00 更新至1238章 </span></template>
       <template #extra> <span class="text-serialize">连载中</span><van-icon name="arrow" /></template>
     </van-cell>
@@ -10,7 +10,12 @@
 
 <script>
   export default {
-    props: ['mulu']
+    props: ['mulu'],
+    methods: {
+      publish() {
+     this.$emit('publish')
+      }
+    }
   }
 </script>
 

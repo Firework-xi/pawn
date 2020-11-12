@@ -3,7 +3,7 @@
   <div>
     <div class="particulars-hot">
       <van-cell>
-        <template #title>同类热门书籍</template> <template #default> <van-icon class="refresh-btn" name="replay" /><span class="refresh">换一换</span></template>
+        <template #title>同类热门书籍</template> <template #default> <van-icon class="refresh-btn" name="replay" /><span class="refresh" @click="changeaddens">换一换</span></template>
       </van-cell>
       <van-row gutter="15" class="recommend">
         <van-col span="6" v-for="(i, index) in list" :key="index" @click="addwhole(i)">
@@ -16,10 +16,19 @@
 
 <script>
   export default {
+    data () {
+      return {
+        arr: []
+      }
+    },
    props: ['list'],
    methods: {
      addwhole(id) {
        this.$emit('addwhole', id)
+     }, 
+      async  changeaddens() {
+       const res = await this.$http.get('http://yuedu/changeadd')
+       this.$emit('changeaddens', res.data.data)
      }
    }
   }

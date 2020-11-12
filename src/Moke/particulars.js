@@ -13,7 +13,7 @@ export default {
           if (sex !== i) {
             console.log(sex, i)
             let iq1 = data.findIndex(v => {
-              return v.bookId === (sex - 1)
+              return v.bookId === sex
             })
             if (iq1 === -1) {
               data.push(list.list[sex])
@@ -21,13 +21,11 @@ export default {
           }
         }
         let arr = []
-        console.log()
         for (let v = 0; arr.length <= 3; v++) {
           const index = parseInt(Math.random() * (29 - 1 + 1) + 1)
           if (index !== i) {
-            console.log(i, index)
             const ins = arr.findIndex(v => {
-              return v.bookId === (index - 1)
+              return v.bookId === index
             })
             if (ins === -1) {
               arr.push(list.list[index])
@@ -47,6 +45,25 @@ export default {
       manage: options => {
         return {
           data: list.list
+        }
+      }
+    },
+    {
+      url: 'http://yuedu/changeadd', // 请求地址
+      request: 'get', // 请求类型
+      manage: options => {
+        let arr = []
+        for (let v = 0; arr.length <= 3; v++) {
+          const index = parseInt(Math.random() * (29 - 1 + 1) + 1)
+          const ins = arr.findIndex(v => {
+            return v.bookId === index
+          })
+          if (ins === -1) {
+            arr.push(list.list[index])
+          }
+        }
+        return {
+          data: arr
         }
       }
     }
