@@ -1,5 +1,5 @@
 <template>
-  <div class="particulars">
+  <div class="particulars" v-show="faleses">
     <van-nav-bar left-arrow fixed :class="{ borde: altitude }" @click-left="$router.push('/booktown')">
       <template #title>
         <transition name="van-fade">
@@ -43,13 +43,13 @@
       </div>
       <!-- 结束 -->
       <!-- 目录 -->
-      <catalog></catalog>
+      <catalog :mulu="mulu"></catalog>
       <div class="ofthesamekind"></div>
       <!-- 同类作品 -->
-      <ofthesameki></ofthesameki>
+      <ofthesameki :list="list" @addwhole="addwhole"></ofthesameki>
       <div class="ofthesamekind"></div>
       <!-- 全部作品 -->
-      <complete></complete>
+      <complete :arr="arr" @classify="classify"></complete>
       <div class="ofthesamekind"></div>
       <!-- 图书详情 -->
       <detaile></detaile>
@@ -80,9 +80,11 @@ export default {
       number: 4,
       altitude: false,
       describe: true,
-      data: {},
-      list: [],
-      arr: []
+      data: {}, // 读书详情
+      list: [], // 文章列表
+      arr: [], // 全部作品
+      mulu: [], // 目录
+      faleses: false
     }
   },
   methods: {
@@ -91,13 +93,22 @@ export default {
       console.log(this.id)
       const { data } = await this.$http.get(`http://yuedu/details/${this.id}`)
       console.log(data)
+      this.faleses = true
       this.data = data.state
       this.arr = data.arr
       this.list = data.data
+      this.mulu = data.state.muli
       console.log(this.data)
     },
     Switch() {
       this.describe = !this.describe
+    },
+    addwhole(v) {
+      this.data = v
+    },
+    classify(v) {
+      console.log(v)
+      this.data = v
     }
   },
   components: {
