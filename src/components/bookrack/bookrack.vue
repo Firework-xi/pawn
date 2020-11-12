@@ -1,44 +1,30 @@
 <template>
-  <div class="bookrack-container"
-       @click="menuClose">
+  <div class="bookrack-container" @click="menuClose">
     <!-- 导航 -->
     <div class="bookrack-nav">
       <div class="nav">
         <div v-if="!isSelectShow">
           <span class="nav-t1">春暖阅读</span>
           <span class="nav-t2">面朝大海，春暖花开</span>
-          <span class="nav-more iconfont iconmore-horizontal"
-                @click.stop="showNavMenu">
-          </span>
-          <div class="nav-menu"
-               :style="{display:menuIsShow?'block':'none'}">
-            <div class="nav-menu-t1"
-                 @click="$router.push('/search')"><i class="iconfont iconsousuo"></i>搜索</div>
-            <div class="nav-menu-t2"
-                 @click.stop="isSelectShow=!isSelectShow"><i class="iconfont iconzuopin"></i>整理书架</div>
+          <span class="nav-more iconfont iconmore-horizontal" @click.stop="showNavMenu"> </span>
+          <div class="nav-menu" :style="{ display: menuIsShow ? 'block' : 'none' }">
+            <div class="nav-menu-t1" @click="$router.push('/search')"><i class="iconfont iconsousuo"></i>搜索</div>
+            <div class="nav-menu-t2" @click.stop="isSelectShow = !isSelectShow"><i class="iconfont iconzuopin"></i>整理书架</div>
           </div>
         </div>
         <!-- 整理书架时展示的顶部 -->
-        <div v-else
-             class="arrangement">
-          <span class="arrangement-t1"
-                @click="selectAll">全选</span>
-          <span v-if="newOrLast"
-                class="arrangement-t2"
-                @click="newOrLast=!newOrLast">最近阅读↑↓</span>
-          <span class="arrangement-tt2"
-                v-else
-                @click="newOrLast=!newOrLast">加入书架时间↑↓</span>
-          <span class="arrangement-t3"
-                @click="isSelectShow=false">完成</span>
+        <div v-else class="arrangement">
+          <span class="arrangement-t1" @click="selectAll">全选</span>
+          <span v-if="newOrLast" class="arrangement-t2" @click="newOrLast = !newOrLast">最近阅读↑↓</span>
+          <span class="arrangement-tt2" v-else @click="newOrLast = !newOrLast">加入书架时间↑↓</span>
+          <span class="arrangement-t3" @click="isSelectShow = false">完成</span>
         </div>
       </div>
       <div class="det">
         <span>
-          <img :src="showBook.img"
-               alt="">
+          <img :src="showBook.img" alt="" />
         </span>
-        <span class="det-t1">{{showBook.title}}</span>
+        <span class="det-t1">{{ showBook.title }}</span>
         <span class="det-t2">
           已读25%
           <span class="det-triangle"></span>
@@ -49,48 +35,27 @@
     <!-- 宫格展示 -->
 
     <div class="bookrack-grid">
-      <van-grid :column-num="3"
-                :border="false"
-                :gutter="0">
-        <van-grid-item v-for="(item,index) in showBookList"
-                       :key="index"
-                       @click="showThis(item,index)">
-          <span slot="icon"><img :src="item.img.image"
-                 alt=""></span>
-          <span slot="text"
-                class="grid-text">{{item.title}}
-          </span>
-          <span slot="icon"
-                v-if="isSelectShow">
-            <span class="noSelect"
-                  v-if="selectList.indexOf(index)===-1">
-            </span>
-            <span class="isSelect"
-                  v-else>
+      <van-grid :column-num="3" :border="false" :gutter="0">
+        <van-grid-item v-for="(item, index) in showBookList" :key="index" @click="showThis(item, index)">
+          <span slot="icon"><img :src="item.img.image" alt="" /></span>
+          <span slot="text" class="grid-text">{{ item.title }} </span>
+          <span slot="icon" v-if="isSelectShow">
+            <span class="noSelect" v-if="selectList.indexOf(index) === -1"> </span>
+            <span class="isSelect" v-else>
               <i class="iconfont iconselect"></i>
             </span>
           </span>
-
         </van-grid-item>
       </van-grid>
     </div>
     <!-- 底部 -->
-    <div class="foot"
-         v-if="isFootShow"
-         @click="isSelectDelShow=true">
-      删除所选 ({{selectList.length}})
-    </div>
+    <div class="foot" v-if="isFootShow" @click="isSelectDelShow = true">删除所选 ({{ selectList.length }})</div>
     <!-- 确认栏 -->
-    <div v-if="isSelectDelShow"
-         class="selectDel">
+    <div v-if="isSelectDelShow" class="selectDel">
       <h4>从书架删除</h4>
-      <h5>确定要删除所选的这{{selectList.length}}本书籍吗？</h5>
-      <van-button class="jgbtn"
-                  type="danger"
-                  @click="selectBook">删除</van-button>
-      <van-button class="qxbtn"
-                  type="default"
-                  @click="isSelectDelShow=false">取消</van-button>
+      <h5>确定要删除所选的这{{ selectList.length }}本书籍吗？</h5>
+      <van-button class="jgbtn" type="danger" @click="selectBook">删除</van-button>
+      <van-button class="qxbtn" type="default" @click="isSelectDelShow = false">取消</van-button>
     </div>
   </div>
 </template>
@@ -178,14 +143,20 @@ import axios from 'axios'
       }
     },
     async created() {
-      const { data } = await axios({
+      if (window.localStorage.getItem('list') === null || window.localStorage.getItem('list') === undefined) {
+        const { data } = await axios({
         method: 'get',
         url: 'http://123/bookrack'
       })
-      
-      this.bookList.push(...data.list)
+       this.bookList.push(...data.list)
       this.lastReading.push(...data.list)
       this.showBookList = this.lastReading
+      } else {
+        const data = window.localStorage.getItem('list')
+       this.bookList = JSON.parse(data)
+      this.lastReading = JSON.parse(data)
+      this.showBookList = this.lastReading
+      }
     },
     methods: {
       showThis(item, index) {
@@ -194,6 +165,7 @@ import axios from 'axios'
         this.showBook.img = item.img.image
         this.lastReading.splice(index, 1)
         this.lastReading.unshift(item)
+        this.$router.push('/read')
         } else {
           const aa = this.selectList.indexOf(index)
           if (aa === -1) {
@@ -248,13 +220,16 @@ import axios from 'axios'
          } else {
            this.showBookList = this.lastReading
          }
+       }, 
+showBookList() {
+         window.localStorage.setItem('list', JSON.stringify(this.showBookList))
        }
     }
     
   }
 </script>
 
-<style lang="less" scoped>
+<style lang="scss" scoped>
 .bookrack-container {
   .bookrack-nav {
     position: relative;
