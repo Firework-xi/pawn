@@ -32,6 +32,15 @@ this.id = JSON.parse(window.localStorage.getItem('data'))
     }
   },
   methods: {
+    setkeynull(item) {
+      let data = JSON.parse(window.localStorage.getItem('list')) 
+      const index = data.findIndex(v => {
+        return v.bookId === item.bookId
+      })
+      if (index === -1) {
+        this.text = '加入书架'
+      }
+    },
     clickindex() { // 加入书架
       if (this.text === '加入书架') {
         let data = JSON.parse(window.localStorage.getItem('list')) 
