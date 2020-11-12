@@ -4,6 +4,12 @@ import Home from '../views/Home.vue'
 import read from '@/components/bookrack/read.vue'
 import bulkbuying from '@/components/bookrack/bulkbuying.vue'
 
+const originalPush = VueRouter.prototype.push
+
+VueRouter.prototype.push = function push(location) {
+  return originalPush.call(this, location).catch(err => err)
+}
+
 Vue.use(VueRouter)
 
 const routes = [
@@ -51,12 +57,17 @@ const routes = [
         name: 'booktown',
         component: () => import('@/components/booktown/booktown'),
         meta: { index: 2 },
-        props: true
+        props: true,
+        
       },
-
+  
     ]
   },
-
+{
+        path: '/reclassify',
+        name: 'reclassify',
+        component: () => import('@/components/booktown/reclassify'),
+         },
   {
     path: '/particulars',
     name: 'particulars',
