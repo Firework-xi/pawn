@@ -1,6 +1,8 @@
 <template>
   <div id="app">
-    <transition :name="direction"> <router-view /></transition>
+    <transition :name="direction">
+      <keep-alive :include="['home']"><router-view /></keep-alive
+    ></transition>
   </div>
 </template>
 <script>
