@@ -58,7 +58,7 @@
     <van-popup v-model="show" position="bottom" :style="{ height: '100%' }">
       <van-nav-bar title="全部章节" left-text="返回" border @click-left="show = false" />
       <van-list v-model="loading" :finished="finished" finished-text="目录加载完成">
-        <van-cell v-for="(item, i) in mulu" :key="i" :title="item" @click="listpush" />
+        <van-cell v-for="(item, i) in mulu" :key="i" :title="item" @click="listpush(i)" />
       </van-list>
     </van-popup>
   </div>
@@ -96,7 +96,9 @@ export default {
     }
   },
   methods: {
-    listpush() {
+    listpush(id) {
+      console.log(id)
+      window.localStorage.setItem('完美世界', id)
       this.$router.push('/read')
     },
     publish() {
@@ -126,12 +128,12 @@ export default {
     addwhole(v) {
       // 作品页
       this.data = v
-       this.$refs.myordernum.setkeynull(v)
+      this.$refs.myordernum.setkeynull(v)
       window.localStorage.setItem('data', JSON.stringify(v))
     },
     classify(v) {
       this.data = v
-       this.$refs.myordernum.setkeynull(v)
+      this.$refs.myordernum.setkeynull(v)
       window.localStorage.setItem('data', JSON.stringify(v))
     }
   },
@@ -153,6 +155,7 @@ export default {
         this.altitude = false
       }
     }, 10)
+    this.$refs.myordernum.addinedx()
   }
 }
 </script>

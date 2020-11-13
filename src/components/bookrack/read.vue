@@ -47,7 +47,7 @@
       </van-cell-group>
     </van-popup>
     <!-- 购买章节 -->
-    <van-popup :close-on-click-overlay="false" @click-overlay="$router.push('/particulars')" v-model="goumai" position="bottom" :style="{ height: '50%' }">
+    <van-popup :close-on-click-overlay="false" @click-overlay="$router.back()" v-model="goumai" position="bottom" :style="{ height: '50%' }">
       <div class="goumai">
         <h3>需要购买后阅读！</h3>
         <p>
@@ -193,7 +193,7 @@ export default {
     gmcg() {
       const token = window.localStorage.getItem('token')
       console.log('gmcg -> token', token)
-      if (!token) {
+      if (token === false) {
         this.$toast.fail('请登录后购买')
         this.$router.push('/loginland')
       } else {

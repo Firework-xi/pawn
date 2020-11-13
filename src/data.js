@@ -5,7 +5,7 @@ export default {
       bookId: 0,
       categoryName: '玄幻小说',
       chapterStatus: 'SERIALIZE',
-      coverImg: 'http://yuenov.com:15555/file/group1/book/f5fc281e-9f3f-49b9-931f-05ff62c23da0.jpg',
+      coverImg: '//bookcover.yuewen.com/qdbimg/349573/3681560/150',
       desc:
         ' 伴随着魂导科技的进步，斗罗大陆上的人类征服了海洋，又发现了两片大陆。魂兽也随着人类魂师的猎杀无度走向灭亡，沉睡无数年的魂兽之王在星斗大森林最后的净土苏醒，它要带领仅存的族人，向人类复仇！唐舞麟立志要成为一名强大的魂师，可当武魂觉醒时，苏醒的，却是……旷世之才，龙王之争，我们的龙王传说，将由此开始。 ',
       title: '斗罗大陆3龙王传说',

@@ -3,13 +3,6 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import read from '@/components/bookrack/read.vue'
 import bulkbuying from '@/components/bookrack/bulkbuying.vue'
-
-const originalPush = VueRouter.prototype.push
-
-VueRouter.prototype.push = function push(location) {
-  return originalPush.call(this, location).catch(err => err)
-}
-
 Vue.use(VueRouter)
 
 const routes = [
@@ -110,6 +103,11 @@ const routes = [
     path: '/search',
     name: 'search',
     component: () => import('@/components/search/index.vue')
+  },
+  {
+    path: '/my-userInfo',
+    name: 'my-userInfo',
+    component: () => import('@/components/my/my-userInfo')
   }
 
   // 二级书本详情路由

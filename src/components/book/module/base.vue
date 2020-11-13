@@ -14,6 +14,23 @@
 
 <script>
 export default {
+  created() {
+    this.id = JSON.parse(window.localStorage.getItem('data'))
+    let data = JSON.parse(window.localStorage.getItem('list'))
+    const index = data.findIndex(v => {
+      return v.bookId === this.id.bookId - 0
+    })
+    console.log(index)
+    if (index !== -1) {
+      this.text = '取消加入'
+    }
+  },
+  data() {
+    return {
+      text: '加入书架',
+      id: null
+    }
+  },
   methods: {
     ydnr() {
       const id = window.localStorage.getItem('完美世界')
@@ -26,17 +43,17 @@ export default {
       }
       this.$router.push('/read')
     },
-    created() {
+    addinedx() {
       this.id = JSON.parse(window.localStorage.getItem('data'))
       let data = JSON.parse(window.localStorage.getItem('list'))
       const index = data.findIndex(v => {
         return v.bookId === this.id.bookId - 0
       })
-      console.log(data)
+      console.log(index)
       if (index !== -1) {
         this.text = '取消加入'
       }
-    }, // 加入书架
+    },
     setkeynull(item) {
       let data = JSON.parse(window.localStorage.getItem('list'))
       const index = data.findIndex(v => {
@@ -54,6 +71,7 @@ export default {
           return v.bookId !== this.id.bookId
         })
         res.push(this.id)
+        this.$toast('加入成功')
         window.localStorage.setItem('list', JSON.stringify(res))
         this.text = '取消加入'
       } else {
@@ -61,15 +79,10 @@ export default {
         const res = data.filter(v => {
           return v.bookId !== this.id.bookId
         })
+        this.$toast('取消成功')
         window.localStorage.setItem('list', JSON.stringify(res))
         this.text = '加入书架'
       }
-    }
-  },
-  data() {
-    return {
-      text: '加入书架',
-      id: null
     }
   }
 }

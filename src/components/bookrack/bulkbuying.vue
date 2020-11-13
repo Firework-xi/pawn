@@ -79,7 +79,7 @@ export default {
     },
     gmcg() {
       this.$toast.success('购买成功')
-      this.$router.push('/read')
+      this.$router.back()
       window.localStorage.setItem('coins', parseInt(window.localStorage.getItem('coins')) - this.jiage)
       window.localStorage.setItem('havebought', 1)
     },

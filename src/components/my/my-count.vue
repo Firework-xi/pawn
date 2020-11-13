@@ -52,12 +52,12 @@
         10）读书充值卡充值不计入VIP等级，即用户通过读书充值卡.<br />
       </span>
     </div>
-    <pay v-if="isPayshow"></pay>
     <!-- 购买金币弹出框模块 -->
-    <van-popup v-model="isPayshow" closeable close-icon-position="top-left" position="bottom" :style="{ height: '60%' }" class="popup">
+    <van-popup closeable close-icon-position="top-left" v-model="isPayshow" position="bottom" :style="{ height: '60%' }" class="popup">
       <div class="price">{{ price }}</div>
       <van-cell-group>
-        <!--<van-icon name="cross" size="20px" /> -->
+        <!-- <van-icon name="cross" size="20px" /> -->
+
         <van-cell title="订单信息" value="手机充值" is-link />
         <van-cell title="付款方式" value="花呗" is-link />
       </van-cell-group>
@@ -96,7 +96,6 @@ export default {
       console.log(data)
       this.user = data.data
       this.goldCoins = window.localStorage.getItem('coins')
-      console.log(this.goldCoins)
     },
     async getchongzhi() {
       const { data } = await this.$http.get('http://yuedu/chongzhi')
@@ -113,7 +112,9 @@ export default {
     },
     // 将金币进行本地存储
     confirmPay() {
+      console.log(this.list)
       const index = window.localStorage.getItem('coins')
+      console.log(index)
       const a = parseInt(index) + this.czye
       window.localStorage.setItem('coins', a)
       this.goldCoins = a
@@ -170,6 +171,21 @@ export default {
   .proup-btn {
     width: 100%;
     height: 100%;
+  }
+  .popup {
+    .van-cell-group {
+      margin-top: 80px;
+    }
+    .price {
+      margin-top: 100px;
+      margin-left: 280px;
+    }
+    .confirmBtn {
+      background-color: #1989fa;
+      color: #fff;
+      width: 500px;
+      margin: 80px 115px;
+    }
   }
 }
 </style>

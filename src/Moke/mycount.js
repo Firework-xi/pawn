@@ -8,17 +8,16 @@ export default {
         // 处理函数
         console.log(12312312)
         return {
-          name: '张三',
+          name: '春暖花开',
           mobile: '1582345677',
           state: 200
         }
       }
     },
     {
-      url: 'http://yuedu/chongzhi', // 请求地址
-      request: 'get', // 请求类型
+      url: 'http://yuedu/chongzhi',
+      request: 'get',
       manage: options => {
-        // 处理函数
         return {
           status: 201,
           data: [
