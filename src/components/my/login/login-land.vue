@@ -120,6 +120,8 @@ export default {
       this.$toast.success('登录成功')
       window.localStorage.setItem('token', true)
       window.localStorage.setItem('land', JSON.stringify({ user: this.username, password: this.password }))
+      this.$store.commit('delees', 'home')
+      window.sessionStorage.setItem('active', 0)
        this.$router.push('/home')
     },
     // 注册

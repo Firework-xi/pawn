@@ -59,6 +59,7 @@ export default {
     // 点击确认退出按钮
     loginOut() {
       this.$store.commit('setIsLogin', '')
+            this.$store.commit('delees', 'home')
       this.$router.push('/my')
 
       console.log(window.localStorage.getItem('active'))

@@ -1,11 +1,13 @@
+import { mapState } from 'vuex';
 <template>
   <div id="app">
     <transition :name="direction">
-      <keep-alive :include="['home']"><router-view /></keep-alive
+      <keep-alive :include="data"><router-view /></keep-alive
     ></transition>
   </div>
 </template>
 <script>
+import { mapState } from 'vuex'
 export default {
   data() {
     return {
@@ -22,6 +24,9 @@ export default {
         this.direction = ''
       }
     }
+  }, 
+computed: {
+    ...mapState(['data'])
   }
 }
 </script>

@@ -62,6 +62,7 @@ export default {
       const index = window.localStorage.getItem('coins')
       const a = parseInt(index) + this.czye
       window.localStorage.setItem('coins', a)
+      this.$toast.success('充值成功,本次充值' + this.czye)
       this.goldCoins = a
       this.isPayshow = false
       this.$emit('sx', a)

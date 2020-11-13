@@ -31,6 +31,17 @@ export default {
       id: null
     }
   },
+  activated() {
+      this.id = JSON.parse(window.localStorage.getItem('data'))
+    let data = JSON.parse(window.localStorage.getItem('list'))
+    const index = data.findIndex(v => {
+      return v.bookId === this.id.bookId - 0
+    })
+    console.log(index)
+    if (index !== -1) {
+      this.text = '取消加入'
+    }
+  },
   methods: {
     ydnr() {
       const id = window.localStorage.getItem('完美世界')
@@ -44,13 +55,14 @@ export default {
       this.$router.push('/read')
     },
     addinedx() {
-      this.id = JSON.parse(window.localStorage.getItem('data'))
+      const id = JSON.parse(window.localStorage.getItem('data'))
       let data = JSON.parse(window.localStorage.getItem('list'))
       const index = data.findIndex(v => {
-        return v.bookId === this.id.bookId - 0
+        return v.bookId === id.bookId - 0
       })
       console.log(index)
       if (index !== -1) {
+        console.log(1)
         this.text = '取消加入'
       }
     },
@@ -70,7 +82,7 @@ export default {
         const res = data.filter(v => {
           return v.bookId !== this.id.bookId
         })
-        res.push(this.id)
+        res.push(JSON.parse(window.localStorage.getItem('data')))
         this.$toast('加入成功')
         window.localStorage.setItem('list', JSON.stringify(res))
         this.text = '取消加入'

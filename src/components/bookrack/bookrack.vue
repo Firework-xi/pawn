@@ -37,7 +37,7 @@
     <div class="bookrack-grid">
       <van-grid :column-num="3" :border="false" :gutter="0">
         <van-grid-item v-for="(item, index) in showBookList" :key="index" @click="showThis(item, index)">
-          <span slot="icon"><img :src="item.coverImg" alt=""/></span>
+          <span slot="icon"><img :src="item.coverImg" alt="" /></span>
           <span slot="text" class="grid-text">{{ item.title }} </span>
           <span slot="icon" v-if="isSelectShow">
             <span class="noSelect" v-if="selectList.indexOf(index) === -1"> </span>
@@ -72,7 +72,7 @@ export default {
         bookId: 0,
         categoryName: '玄幻小说',
         chapterStatus: 'SERIALIZE',
-        coverImg: 'http://yuenov.com:15555/file/group1/book/f5fc281e-9f3f-49b9-931f-05ff62c23da0.jpg',
+        coverImg: '//bookcover.yuewen.com/qdbimg/349573/3681560/150',
         desc:
           ' 伴随着魂导科技的进步，斗罗大陆上的人类征服了海洋，又发现了两片大陆。魂兽也随着人类魂师的猎杀无度走向灭亡，沉睡无数年的魂兽之王在星斗大森林最后的净土苏醒，它要带领仅存的族人，向人类复仇！唐舞麟立志要成为一名强大的魂师，可当武魂觉醒时，苏醒的，却是……旷世之才，龙王之争，我们的龙王传说，将由此开始。  ',
         title: '斗罗大陆3龙王传说',
@@ -104,12 +104,38 @@ export default {
       this.lastReading = JSON.parse(data)
       this.showBookList = this.lastReading
     }
+  }, 
+  async activated() {
+      const datas = window.localStorage.getItem('list')
+
+      if (datas === null || datas === 'null') {
+        console.log(1)
+         const { data } = await axios({
+        method: 'get',
+        url: 'http://123/bookrack'
+      })
+      console.log(data)
+     this.bookList = data.list
+      this.lastReading = data.list
+      this.showBookList = this.lastReading
+      } else {
+        this.bookList = JSON.parse(datas)
+      this.lastReading = JSON.parse(datas)
+      if (this.newOrLast) {
+        this.showBookList = this.bookList
+      } else {
+        this.showBookList = this.lastReading
+      }
+     }
   },
   methods: {
     showThis(item, index) {
+      if (!window.localStorage.getItem('coins')) {
+        window.localStorage.setItem('coins', 0)
+      }
       if (!this.isSelectShow) {
         this.showBook.title = item.title
-        this.showBook.img = item.coverImg
+        this.showBook.coverImg = item.coverImg
         this.lastReading.splice(index, 1)
         this.lastReading.unshift(item)
         this.$router.push('/read')
