@@ -211,6 +211,11 @@ export default {
       }
     },
     async getwznr(index) {
+      const i = window.localStorage.getItem('完美世界')
+      if (i === null) {
+        window.localStorage.setItem('完美世界', 0)
+      }
+
       if (index === undefined) {
         const id = window.localStorage.getItem('完美世界')
         console.log('getwznr -> id', id)
