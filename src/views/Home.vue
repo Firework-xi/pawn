@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <router-view />
+    <keep-alive> <router-view /></keep-alive>
     <van-tabbar v-model="active" @change="conservev">
       <van-tabbar-item icon="column" to="/bookrack">书架</van-tabbar-item>
       <van-tabbar-item icon="shop-o" to="/booktown">书城</van-tabbar-item>
@@ -11,6 +11,7 @@
 
 <script>
 export default {
+  name: 'home',
   data() {
     return {
       active: 0
